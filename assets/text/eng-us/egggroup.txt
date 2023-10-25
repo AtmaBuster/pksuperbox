@@ -1,0 +1,16 @@
+???
+Monster
+Water 1
+Bug
+Flying
+Field
+Fairy
+Grass
+Human-Like
+Water 3
+Mineral
+Amorphous
+Water 2
+Ditto
+Dragon
+No Eggs Discovered

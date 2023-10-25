@@ -1,0 +1,536 @@
+littleroot@Littleroot Town
+oldale@Oldale Town
+dewford@Dewford Town
+lavaridge@Lavaridge Town
+fallarbor@Fallarbor Town
+verdanturf@Verdanturf Town
+pacifidlog@Pacifidlog Town
+petalburg@Petalburg City
+slateport@Slateport City
+mauville@Mauville City
+rustboro@Rustboro City
+fortree@Fortree City
+lilycove@Lilycove City
+mossdeep@Mossdeep City
+sootopolis@Sootopolis City
+ever_grande@Ever Grande City
+r101@Route 101
+r102@Route 102
+r103@Route 103
+r104@Route 104
+r105@Route 105
+r106@Route 106
+r107@Route 107
+r108@Route 108
+r109@Route 109
+r110@Route 110
+r111@Route 111
+r112@Route 112
+r113@Route 113
+r114@Route 114
+r115@Route 115
+r116@Route 116
+r117@Route 117
+r118@Route 118
+r119@Route 119
+r120@Route 120
+r121@Route 121
+r122@Route 122
+r123@Route 123
+r124@Route 124
+r125@Route 125
+r126@Route 126
+r127@Route 127
+r128@Route 128
+r129@Route 129
+r130@Route 130
+r131@Route 131
+r132@Route 132
+r133@Route 133
+r134@Route 134
+underwater_r124@Underwater
+underwater_r126@Underwater
+underwater_r127@Underwater
+underwater_r128@Underwater
+underwater_sootopolis@Underwater
+granite_cave@Granite Cave
+mt_chimney@Mt. Chimeny
+safari_zone_hoenn@Safari Zone
+battle_frontier@Battle Frontier
+petalburg_woods@Petalburg Woods
+rusturf_tunnel@Rusturf Tunnel
+abandoned_ship@Abandoned Ship
+new_mauville@New Mauville
+meteor_falls@Meteor Falls
+meteor_falls_unused@Meteor Falls
+mt_pyre@Mt. Pyre
+am_hideout@Team Aqua Hideout
+shoal_cave@Shoal Cave
+seafloor_cavern@Seafloor Cavern
+underwater_seafloor_cavern@Underwater
+victory_road_hoenn@Victory Road
+mirage_island@Mirage Island
+cave_of_origin@Cave of Origin
+southern_island@Southern Island
+fiery_path@Fiery Path
+fiery_path_unused@Fiery Path
+jagged_pass@Jagged Pass
+jagged_pass_unused@Jagged Pass
+sealed_chamber@Sealed Chamber
+underwater_r134@Underwater
+scorched_slab@Scorched Slab
+island_cave@Island Cave
+desert_ruins@Desert Ruins
+ancient_tomb@Ancient Tomb
+truck@Inside of Truck
+sky_pillar@Sky Pillar
+secret_base@Secret Base
+ferry@Ferry
+pallet@Pallet Town
+viridian@Viridian City
+pewter@Pewter City
+cerulean@Cerulean City
+lavender@Lavender Town
+vermilion@Vermilion City
+celadon@Celadon City
+fuchsia@Fuchsia City
+cinnabar@Cinnabar Island
+indigo_plateau@Indigo Plateau
+saffron@Saffron City
+r4pmc@Route 4
+r10pmc@Route 10
+r1@Route 1
+r2@Route 2
+r3@Route 3
+r4@Route 4
+r5@Route 5
+r6@Route 6
+r7@Route 7
+r8@Route 8
+r9@Route 9
+r10@Route 10
+r11@Route 11
+r12@Route 12
+r13@Route 13
+r14@Route 14
+r15@Route 15
+r16@Route 16
+r17@Route 17
+r18@Route 18
+r19@Route 19
+r20@Route 20
+r21@Route 21
+r22@Route 22
+r23@Route 23
+r24@Route 24
+r25@Route 25
+viridian_forest@Viridian Forest
+mt_moon@Mt. Moon
+ss_anne@S.S. Anne
+underground_path_5_6@Underground Path
+underground_path_7_8@Underground Path
+digletts_cave@Diglett's Cave
+victory_road_kanto@Victory Road
+rocket_hideout@Rocket Hideout
+silph_co@Silph. Co
+pokemon_mansion@Pok#mon Mansion
+safari_zone_kanto@Safari Zone
+pokemon_league@Pok#mon League
+rock_tunnel@Rock Tunnel
+seafoam_islands@Seafoam Islands
+pokemon_tower@Pok#mon Tower
+cerulean_cave@Cerulean Cave
+power_plant@Power Plant
+one_island@One Island
+two_island@Two Island
+three_island@Three Island
+four_island@Four Island
+five_island@Five Island
+seven_island@Seven Island
+six_island@Six Island
+kindle_road@Kindle Road
+treasure_beach@Treasure Beach
+cape_brink@Cape Brink
+bond_bridge@Bond Bridge
+three_isle_port@Three Isle Port
+sevii_r6@Sevii Isle 6
+sevii_r7@Sevii Isle 7
+sevii_r8@Sevii Isle 8
+sevii_r9@Sevii Isle 9
+resort_gorgeous@Resort Gorgeous
+water_labyrinth@Water Labyrinth
+five_isle_meadow@Five Isle Meadow
+memorial_pillar@Memorial Pillar
+outcast_island@Outcast Island
+green_path@Green Path
+water_path@Water Path
+ruin_valley@Ruin Valley
+trainer_tower_ext@Trainer Tower
+canyon_entrance@Canyon Entrance
+sevault_canyon@Sevault Canyon
+tanoby_ruins@Tanoby Ruins
+sevii_r22@Sevii Isle 22
+sevii_r23@Sevii Isle 23
+sevii_r24@Sevii Isle 24
+navel_rock_kanto@Navel Rock
+mt_ember@Mt. Ember
+berry_forest@Berry Forest
+icefall_cave@Icefall Cave
+rocket_warehouse@Rocket Warehouse
+trainer_tower_int@Trainer Tower
+dotted_hole@Dotted Hole
+lost_cave@Lost Cave
+pattern_bush@Pattern Bush
+altering_cave_kanto@Altering Cave
+tanoby_chambers@Tanoby Chambers
+three_isle_path@Three Isle Path
+tanoby_key@Tanoby Key
+birth_island_hoenn@Birth Island
+monean_chamber@Monean Chamber
+liptoo_chamber@Liptoo Chamber
+weepth_chamber@Weepth Chamber
+dilford_chamber@Dilford Chamber
+scufib_chamber@Scufib Chamber
+rixy_chamber@Rixy Chamber
+viapois_chamber@Viapois Chamber
+ember_spa@Ember Spa
+special_area@Special Area
+aqua_hideout@Aqua Hideout
+magma_hideout@Magma Hideout
+mirage_tower@Mirage Tower
+birth_island_hoenn@Birth Island
+faraway_island@Faraway Island
+artisan_cave@Artisan Cave
+marine_cave@Marine Cave
+underwater_marine_cave@Underwater
+terra_cave@Terra Cave
+underwater_r105@Underwater
+underwater_r125@Underwater
+underwater_r129@Underwater
+desert_underpass@Desert Underpass
+altering_cave_hoenn@Altering Cave
+navel_rock_hoenn@Navel Rock
+trainer_hill@Trainer Hill
+landmark_D5@
+landmark_D6@
+landmark_D7@
+landmark_D8@
+landmark_D9@
+landmark_DA@
+landmark_DB@
+landmark_DC@
+landmark_DD@
+landmark_DE@
+landmark_DF@
+landmark_E0@
+landmark_E1@
+landmark_E2@
+landmark_E3@
+landmark_E4@
+landmark_E5@
+landmark_E6@
+landmark_E7@
+landmark_E8@
+landmark_E9@
+landmark_EA@
+landmark_EB@
+landmark_EC@
+landmark_ED@
+landmark_EE@
+landmark_EF@
+landmark_F0@
+landmark_F1@
+landmark_F2@
+landmark_F3@
+landmark_F4@
+landmark_F5@
+landmark_F6@
+landmark_F7@
+landmark_F8@
+landmark_F9@
+landmark_FA@
+landmark_FB@
+landmark_FC@
+gift_egg@
+in_game_trade@
+fateful_encounter@
+alto_mare@Alto Mare
+wh_hideout@White Hole Hideout
+bh_hideout@Black Hole Hideout
+sphere_ruins@Sphere Ruins
+pokemon_building@Pok#mon Building
+new_bark@New Bark Town
+r29@Route 29
+cherrygrove@Cherrygrove City
+r30@Route 30
+r31@Route 31
+violet@Violet City
+sprout_tower@Sprout Tower
+r32@Route 32
+ruins_of_alph@Ruins of Alph
+union_cave@Union Cave
+r33@Route 33
+azalea@Azalea Town
+slowpoke_well@Slowpoke Well
+ilex_forest@Ilex Forest
+r34@Route 34
+goldenrod@Goldenrod City
+radio_tower@Radio Tower
+r35@Route 35
+national_park@National Park
+r36@Route 36
+r37@Route 37
+ecruteak@Ecruteak City
+tin_tower@Tin Tower
+burned_tower@Burned Tower
+r38@Route 38
+r39@Route 39
+olivine@Olivine City
+lighthouse@Glitter Lighthouse
+battle_tower_johto@Battle Tower
+r40@Route 40
+whirl_islands@Whirl Islands
+r41@Route 41
+cianwood@Cianwood City
+r42@Route 42
+mt_mortar@Mt. Mortar
+mahogany@Mahogany Town
+r43@Route 43
+lake_of_rage@Lake of Rage
+r44@Route 44
+ice_path@Ice Path
+blackthorn@Blackthorn City
+dragons_den@Dragon's Den
+r45@Route 45
+dark_cave@Dark Cave
+r46@Route 46
+silver_cave@Silver Cave
+lavender_radio_tower@Lavender Radio Tower
+r26@Route 26
+r27@Route 27
+tohjo_falls@Tohjo Falls
+r28@Route 28
+fast_ship@Fast Ship
+porcelia@Porcelia Town
+junopsis@Junopsis City
+seafin@Seafin City
+gamboge@Gamboge City
+shamouti@Shamouti Island
+nephrite@Nephrite City
+oprimence@Orpimence City
+lapizula@Lapizula City
+new_island@New Island
+shakudo@Shakudo Island
+ravenplume@Ravenplume City
+r510pmc@Route 510
+r501@Route 501
+r502@Route 502
+r503@Route 503
+r504@Route 504
+r505@Route 505
+r506@Route 506
+r507@Route 507
+r508@Route 508
+r509@Route 509
+r510@Route 510
+r511@Route 511
+r512@Route 512
+r513@Route 513
+r514@Route 514
+r515@Route 515
+r516@Route 516
+r517@Route 517
+r518@Route 518
+r519@Route 519
+r520@Route 520
+r522@Route 522
+r521@Route 521
+r523@Route 523
+porcelia_forest@Porcelia Forest
+mt_snowfall@Mt. Snowfall
+chateau_of_time@Chateau of Time
+fire_island@Fire Island
+lightning_island@Lightning Island
+wisemans_cave@Wiseman’s Cave
+victory_road_tohoak@Victory Road
+dh_hideout@Dark Hole Hideout
+dh_building@Dark Hole Building
+spirit_mansion@Spirit Mansion
+safari_zone_tohoak@Safari Zone
+pokemon_league_tohoak@Pok#mon League
+undersea_tunnel@Undersea Tunnel
+ice_island@Ice Island
+tower_of_darkness@Tower of Darkness
+pokemon_castle@Pok#mon Castle
+perimeter_labs@Perimeter Labs
+distant_island@Distant Island
+sphere_ruins_unused@Sphere Ruins
+silent@Silent Town
+rn101@Route N101
+silent_hills@Silent Hills
+pagota@Pagota City
+brass_tower@Brass Tower
+rn102@Route N102
+westport@Westport City
+radio_tower_nihon@Radio Tower
+rn103@Route N103
+birdon@Birdon Town
+slowpoke_well_nihon@Slowpoke Well
+rn116@Route N116
+rn117@Route N117
+endon_cave@Endon Cave
+sanskrit@Sanskrit Town
+ruins_of_alph_nihon@Ruins Of Alph
+tidal_grotto@Tidal Grotto
+rn118@Route N118
+sunpoint@Sunpoint City
+magma_shaft@Magma Shaft
+sunpoint_docks@Sunpoint Docks
+rn119@Route N119
+boulder_mines@Boulder Mines
+rn120@Route N120
+teknos@Teknos City
+boardwalk@Boardwalk
+rn104@Route N104
+rn105@Route N105
+jade_forest@Jade Forest
+rn106@Route N106
+alloy@Alloy City
+rn107@Route N107
+koban@Koban Island
+dragons_maw@Dragon's Maw
+rn108@Route N108
+rn109@Route N109
+ampare_cavern@Ampare Cavern
+rn110@Route N110
+blue_forest@Blue Forest
+deepwater_passage@Deepwater Passage
+rn111@Route N111
+whirl_island_nihon@Whirl Island
+frostpoint@Frostpoint Town
+rn112@Route N112
+stand@Stand City
+national_park_nihon@National Park
+rn113@Route N113
+rn114@Route N114
+kanto_nihon@Kanto Region
+rn115@Route N115
+crown_pass@Crown Pass
+crown@Crown City
+victory_road_nihon@Victory Road
+nihon_league@Nihon League
+rainbow_island@Rainbow Island
+tropical_island@Tropical Island
+forked_strait@Forked Strait
+iced_cavern@Iced Cavern
+kume@Kume City
+kume_point@Kume Point
+kerama_strait@Kerama Strait
+apple_orchard@Apple Orchard
+daito_ranch@Daito Ranch
+great_east_strait@Great East Strait
+nanjo_forest@Nanjo Forest
+urasoe_trail@Urasoe Trail
+urasoe_park@Urasoe Park
+ryukyu@Ryukyu City
+charred_summit@Charred Summit
+meridian_path@Meridian Path
+castle_mountain@Castle Mountain
+ie_town@Ie Town
+motobu_path@Motobu Path
+nago_village@Nago Village
+isen_strait@Isen Strait
+seaside_path@Seaside Path
+joule_cave@Joule Cave
+kikai_caldera@Kikai Caldera
+kikai@Kikai Village
+kikai_strait@Kikai Strait
+tatsugo_path@Tatsugo Path
+battle_tower_nihon@Battle Tower
+amami@Amami Town
+fast_ship_nihon@Fast Ship
+cliff_edge_gate@Cliff Edge Gate
+route_47@Route 47
+cliff_cave@Cliff Cave
+route_48@Route 48
+safari_zone_Gate@Safari Zone Gate
+safari_zone_johto@Safari Zone
+sunford@Sun Ford Town
+luster@Luster Town
+polaris@Polaris Town
+borora@Borora Town
+selaro@Selaro Town
+veronica@Veronica Town
+downpour@Down Pour Town
+snowsoft@Snow Soft City
+monatami@Monatami City
+destral@Destral City
+rentelbud@Rentelbud City
+greenvalley@Green Valley
+retazo@Retazo City
+morient@Morient Town
+ultimacity@Ultima City
+green_path@Green Path
+pass_path@Pass Path
+sky_path@Sky Path
+sea_path@Sea Path
+silk_path@Silk Path
+fire_cave@Fire Cave
+bike_path@Bike Path
+sand_path@Sand Path
+heat_path@Heat Path
+unown_cave@Unown Cave
+rd_base@R.D. Base
+dark_woods@Dark Woods
+wind_path@Wind Path
+side_path@Side Path
+bee_woods@Bee Woods
+leaf_path@Leaf Path
+ring_path@Ring Path
+lust_path@Lust Path
+pyre_path@Pyre Path
+cyan_path@Cyan Path
+sf_path@S.F. Path
+sun_path@Sun Path
+rd_destiny@Destiny
+hydro_cave@Hydro Cave
+iron_path@Iron Path
+champ_island@Champion Island
+blue_path@Blue Path
+rose_path@Rose Path
+lost_cave@Lost Cave
+underwater_sea_path1@Underwater
+underwater_gento_blank1@Underwater
+underwater_gento_blank2@Underwater
+underwater_sea_path2@Underwater
+underwater_gento_blank3@Underwater
+francia_cave@Francia Cave
+mt_blaze@Mt. Blaze
+safari_zone_gento@Safari Zone
+vermilion_harbor@Kanto Harbor
+bug_forest@Bug Forest
+renica_tunnel@Renica Tunnel
+tabuli@Tabuli Town
+electric_cave@Electric Cave
+ancient_cave@Ancient Cave
+ancient_cave_unused@Ancient Cave
+mt_pyte_gento@Mt. Pyre
+lc_hideout@LC Hideout
+north_cave@North Cave
+seafloor_cavern_gento@Seafloor Cavern
+underwater_seafloor_cavern_gento@Underwater
+victory_road_gento@Victory Road
+mirage_island_gento@Mirage Island
+cave_of_origin_gento@Cave Of Origin
+blue_path_cave@Blue Path Cave
+raleso_town@Raleso Town
+blank1@
+lost_sea@Lost Sea
+lost_sea_unused@Lost Sea
+time_hole@Time Hole
+underwater_gento_blank4@Underwater
+lost_lorina@Lost Lorina
+francia_forest@Francia Forest
+pina_francia@Pina Francia
+thin_forest@Thin Forest
+dark_isle@Dark Isle

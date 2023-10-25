@@ -1,0 +1,25 @@
+This feature is not implemented yet.
+Text speed
+Window frame
+This is what a text box will look like. The farther to the right the text speed selection is, the faster it will appear.
+There is unsaved data.\nSave data?
+Fullscreen
+There is no information available on this Pok#mon.
+Unknown
+{} Pok#mon
+HP
+Attack
+Defense
+Speed
+Sp.Attack
+Sp.Defense
+Abilities
+Height
+Weight
+Total
+{} Form
+Code
+Art
+Music
+Special Thanks
+Pok#mon Super Box Credits

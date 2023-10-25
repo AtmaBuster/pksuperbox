@@ -1,0 +1,455 @@
+No Item@?????@1
+Master Ball@The best Ball that catches a Pok#mon without fail.@2
+Ultra Ball@A better Ball with a higher catch rate than a Great Ball.@2
+Great Ball@A good Ball with a higher catch rate than a Pok# Ball.@2
+Pok# Ball@A tool used for catching wild Pok#mon.@2
+Safari Ball@A special Ball that is used only in the Safari Zone.@2
+Net Ball@A Ball that works well on Water-type and Bug-type Pok#mon.@2
+Dive Ball@A Ball that works better on Pok#mon on the ocean floor.@2
+Nest Ball@A Ball that works better on weaker Pok#mon.@2
+Repeat Ball@A Ball that works better on Pok#mon caught before.@2
+Timer Ball@A Ball that gains power in battles taking many turns.@2
+Luxury Ball@A cozy Ball that makes Pok#mon more friendly.@2
+Premier Ball@A rare Ball made in commemoration of some event.@2
+Potion@Restores the HP of a Pok#mon by 20 points.@1
+Antidote@Heals a poisoned Pok#mon.@1
+Burn Heal@Heals Pok#mon of a burn.@1
+Ice Heal@Defrosts a frozen Pok#mon.@1
+Awakening@Awakens a sleeping Pok#mon.@1
+Paralyze Heal@Heals a paralyzed Pok#mon.@1
+Full Restore@Fully restores the HP and status of a Pok#mon.@1
+Max Potion@Fully restores the HP of a Pok#mon.@1
+Hyper Potion@Restores the HP of a Pok#mon by 200 points.@1
+Super Potion@Restores the HP of a Pok#mon by 50 points.@1
+Full Heal@Heals all the status problems of one Pok#mon.@1
+Revive@Revives a fainted Pok#mon with half its HP.@1
+Max Revive@Revives a fainted Pok#mon with all its HP.@1
+Fresh Water@A mineral water that restores HP by 50 points.@1
+Soda Pop@A fizzy soda drink that restores HP by 60 points.@1
+Lemonade@A very sweet drink that restores HP by 80 points.@1
+Moomoo Milk@A nutritious milk that restores HP by 100 points.@1
+Energy Powder@A bitter powder that restores HP by 50 points.@1
+Energy Root@A bitter root that restores HP by 200 points.@1
+Heal Powder@A bitter powder that heals all status problems.@1
+Revival Herb@A very bitter herb that revives a fainted Pok#mon.@1
+Ether@Restores the PP of a selected move by 10.@1
+Max Ether@Fully restores the PP of a selected move.@1
+Elixir@Restores the PP of all moves by 10.@1
+Max Elixir@Fully restores the PP of a Pok#mon's moves.@1
+Lava Cookie@A local specialty that heals all status problems.@1
+Blue Flute@A glass flute that awakens sleeping Pok#mon.@1
+Yellow Flute@A glass flute that snaps Pok#mon out of confusion.@1
+Red Flute@A glass flute that snaps Pok#mon out of attraction.@1
+Black Flute@A glass flute that keeps away wild Pok#mon.@1
+White Flute@A glass flute that lures wild Pok#mon.@1
+Berry Juice@A 100% pure juice that restores HP by 20 points.@1
+Sacred Ash@Fully revives and restores all fainted Pok#mon.@1
+Shoal Salt@Salt obtained from deep inside the Shoal Cave.@1
+Shoal Shell@A seashell found deep inside the Shoal Cave.@1
+Red Shard@A shard from an ancient item. Can be sold cheaply.@1
+Blue Shard@A shard from an ancient item. Can be sold cheaply.@1
+Yellow Shard@A shard from an ancient item. Can be sold cheaply.@1
+Green Shard@A shard from an ancient item. Can be sold cheaply.@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+HP Up@Raises the base HP of one Pok#mon.@1
+Protein@Raises the base Attack stat of one Pok#mon.@1
+Iron@Raises the base Defense stat of one Pok#mon.@1
+Carbos@Raises the base Speed stat of one Pok#mon.@1
+Calcium@Raises the base Sp. Atk stat of one Pok#mon.@1
+Rare Candy@Raises the level of a Pok#mon by one.@1
+PP Up@Raises the maximum PP of a selected move.@1
+Zinc@Raises the base Sp. Def stat of one Pok#mon.@1
+PP Max@Raises the PP of a move to its maximum points.@1
+????????@?????@1
+Guard Spec.@Prevents stat reduction when used in battle.@1
+Dire Hit@Raises the critical-hit ratio during one battle.@1
+X Attack@Raises the stat Attack during one battle.@1
+X Defense@Raises the stat Defense during one battle.@1
+X Speed@Raises the stat Speed during one battle.@1
+X Accuracy@Raises accuracy of attack moves during one battle.@1
+X Sp. Atk@Raises the stat Sp. Atk during one battle.@1
+Pok# Doll@Use to flee from any battle with a wild Pok#mon.@1
+Fluffy Tail@Use to flee from any battle with a wild Pok#mon.@1
+????????@?????@1
+Super Repel@Repels weak wild Pok#mon for 200 steps.@1
+Max Repel@Repels weak wild Pok#mon for 250 steps.@1
+Escape Rope@Use to escape instantly from a cave or a dungeon.@1
+Repel@Repels weak wild Pok#mon for 100 steps.@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+Sun Stone@Makes certain species of Pok#mon evolve.@1
+Moon Stone@Makes certain species of Pok#mon evolve.@1
+Fire Stone@Makes certain species of Pok#mon evolve.@1
+Thunder Stone@Makes certain species of Pok#mon evolve.@1
+Water Stone@Makes certain species of Pok#mon evolve.@1
+Leaf Stone@Makes certain species of Pok#mon evolve.@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+Tiny Mushroom@A plain mushroom that would sell at a cheap price.@1
+Big Mushroom@A rare mushroom that would sell at a high price.@1
+????????@?????@1
+Pearl@A pretty pearl that would sell at a cheap price.@1
+Big Pearl@A lovely large pearl that would sell at a high price.@1
+Stardust@Beautiful red sand. Can be sold at a high price.@1
+Star Piece@A red gem shard. It would sell for a very high price.@1
+Nugget@A nugget of pure gold. Can be sold at a high price.@1
+Heart Scale@A lovely scale. It is coveted by collectors.@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+Orange Mail@A Zigzagoon-print Mail to be held by a Pok#mon.@1
+Harbor Mail@A Wingull-print Mail to be held by a Pok#mon.@1
+Glitter Mail@A Pikachu-print Mail to be held by a Pok#mon.@1
+Mech Mail@A Magnemite-print Mail to be held by a Pok#mon.@1
+Wood Mail@A Slakoth-print Mail to be held by a Pok#mon.@1
+Wave Mail@A Wailmer-print Mail to be held by a Pok#mon.@1
+Bead Mail@Mail featuring a sketch of the holding Pok#mon.@1
+Shadow Mail@A Duskull-print Mail to be held by a Pok#mon.@1
+Tropic Mail@A Bellossom-print Mail to be held by a Pok#mon.@1
+Dream Mail@Mail featuring a sketch of the holding Pok#mon.@1
+Fab Mail@A gorgeous-print Mail to be held by a Pok#mon.@1
+Retro Mail@Mail featuring the drawings of three Pok#mon.@1
+Cheri Berry@A hold item that heals paralysis in battle.@4
+Chesto Berry@A hold item that awakens Pok#mon in battle.@4
+Pecha Berry@A hold item that heals poisoning in battle.@4
+Rawst Berry@A hold item that heals a burn in battle.@4
+Aspear Berry@A hold item that defrosts Pok#mon in battle.@4
+Leppa Berry@A hold item that restores 10 PP in battle.@4
+Oran Berry@A hold item that restores 10 HP in battle.@4
+Persim Berry@A hold item that heals confusion in battle.@4
+Lum Berry@A hold item that heals any status problem in battle.@4
+Sitrus Berry@A hold item that restores 30 HP in battle.@4
+Figy Berry@A hold item that restores HP but may confuse.@4
+Wiki Berry@A hold item that restores HP but may confuse.@4
+Mago Berry@A hold item that restores HP but may confuse.@4
+Aguav Berry@A hold item that restores HP but may confuse.@4
+Iapapa Berry@A hold item that restores HP but may confuse.@4
+Razz Berry@Pok#block ingredient.@4
+Bluk Berry@Pok#block ingredient.@4
+Nanab Berry@Pok#block ingredient.@4
+Wepear Berry@Pok#block ingredient.@4
+Pinap Berry@Pok#block ingredient.@4
+Pomeg Berry@Makes a Pok#mon friendly but lowers base HP.@4
+Kelpsy Berry@Makes a Pok#mon friendly but lowers base Attack.@4
+Qualot Berry@Makes a Pok#mon friendly but lowers base Defense.@4
+Hondew Berry@Makes a Pok#mon friendly but lowers base Sp. Atk.@4
+Grepa Berry@Makes a Pok#mon friendly but lowers base Sp. Def.@4
+Tamato Berry@Makes a Pok#mon friendly but lowers base Speed.@4
+Cornn Berry@Pok#block ingredient.@4
+Magost Berry@Pok#block ingredient.@4
+Rabuta Berry@Pok#block ingredient.@4
+Nomel Berry@Pok#block ingredient.@4
+Spelon Berry@Pok#block ingredient.@4
+Pamtre Berry@Pok#block ingredient.@4
+Watmel Berry@Pok#block ingredient.@4
+Durin Berry@Pok#block ingredient.@4
+Belue Berry@Pok#block ingredient.@4
+Liechi Berry@A hold item that raises Attack in a pinch.@4
+Ganlon Berry@A hold item that raises Defense in a pinch.@4
+Salac Berry@A hold item that raises Speed in a pinch.@4
+Petaya Berry@A hold item that raises Sp. Atk in a pinch.@4
+Apicot Berry@A hold item that raises Sp. Def in a pinch.@4
+Lansat Berry@A hold item that ups the critical- hit rate in a pinch.@4
+Starf Berry@A hold item that sharply boosts a stat in a pinch.@4
+Enigma Berry@Pok#block ingredient mystery.@4
+????????@?????@1
+????????@?????@1
+????????@?????@1
+Bright Powder@A hold item that casts a glare to reduce accuracy.@1
+White Herb@A hold item that restores any lowered stat.@1
+Macho Brace@A hold item that promotes growth, but reduces Speed.@1
+Exp. Share@A hold item that gets Exp. points from battles.@1
+Quick Claw@A hold item that occasionally allows the first strike.@1
+Soothe Bell@A hold item that calms spirits and fosters friendship.@1
+Mental Herb@A hold item that snaps Pok#mon out of infatuation.@1
+Choice Band@Raises a move's power, but permits only that move.@1
+King's Rock@A hold item that may cause flinching when the foe is hit.@1
+Silver Powder@A hold item that raises the power of Bug-type moves.@1
+Amulet Coin@Doubles money in battle if the holder takes part.@1
+Cleanse Tag@A hold item that helps repel wild Pok#mon.@1
+Soul Dew@Hold item: raises Sp. Atk & Sp. Def of Latios & Latias.@1
+Deep Sea Tooth@A hold item that raises the Sp. Atk of Clamperl.@1
+Deep Sea Scale@A hold item that raises the Sp. Def of Clamperl.@1
+Smoke Ball@A hold item that assures fleeing from wild Pok#mon.@1
+Everstone@A wondrous hold item that prevents evolution.@1
+Focus Band@A hold item that occasionally prevents fainting.@1
+Lucky Egg@A hold item that boosts Exp. points earned in battle.@1
+Scope Lens@A hold item that improves the critical-hit rate.@1
+Metal Coat@A hold item that raises the power of Steel-type moves.@1
+Leftovers@A hold item that gradually restores HP in battle.@1
+Dragon Scale@A strange scale held by Dragon-type Pok#mon.@1
+Light Ball@A hold item that raises the Sp. Atk of PIKACHU.@1
+Soft Sand@A hold item that raises the power of Ground-type moves.@1
+Hard Stone@A hold item that raises the power of Rock-type moves.@1
+Miracle Seed@A hold item that raises the power of Grass-type moves.@1
+Black Glasses@A hold item that raises the power of Dark-type moves.@1
+Black Belt@A hold item that boosts Fighting-type moves.@1
+Magnet@A hold item that boosts Electric-type moves.@1
+Mystic Water@A hold item that raises the power of Water-type moves.@1
+Sharp Beak@A hold item that raises the power of Flying-type moves.@1
+Poison Barb@A hold item that raises the power of Poison-type moves.@1
+Never-Melt Ice@A hold item that raises the power of Ice-type moves.@1
+Spell Tag@A hold item that raises the power of Ghose-type moves.@1
+Twisted Spoon@A hold item that boosts Psychic-type moves.@1
+Charcoal@A hold item that raises the power of Fire-type moves.@1
+Dragon Fang@A hold item that raises the power of Dragon-type moves.@1
+Silk Scarf@A hold item that raises the power of Normal-type moves.@1
+Upgrade@A peculiar box made by Silph Co.@1
+Shell Bell@A hold item that restores HP upon striking the foe.@1
+Sea Incense@A hold item that slightly boosts Water-type moves.@1
+Lax Incense@A hold item that slightly lowers the foe's accuracy.@1
+Lucky Punch@A hold item that raises Chansey's critical-hit rate.@1
+Metal Powder@A hold item that raises Ditto's Defense.@1
+Thick Club@A hold item that  raises Cubone or Marowak's Attack.@1
+Leek@A hold item that raises Farfetch'd's critical-hit ratio.@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+????????@?????@1
+Red Scarf@A hold item that raises Cool in Contests.@1
+Blue Scarf@A hold item that raises Beauty in Contests.@1
+Pink Scarf@A hold item that raises Cute in Contests.@1
+Green Scarf@A hold item that raises Smart in Contests.@1
+Yellow Scarf@A hold item that raises Tough in Contests.@1
+Mach Bike@A folding bicycle that doubles your speed or better.@5
+Coin Case@A case that holds up to 9,999 Coins.@5
+Dowsing Machine@A device that signals an invisible item by sound.@5
+Old Rod@Use by any body of water to fish for wild Pok#mon.@5
+Good Rod@A decent fishing rod for catching wild Pok#mon.@5
+Super Rod@The best fishing rod for catching wild Pok#mon.@5
+S.S. Ticket@The ticket required for sailing on a ferry.@5
+Contest Pass@The pass required for entering Pok#mon Contests.@5
+????????@?????@1
+Wailmer Pail@A tool used for watering Berries and plants.@5
+Devon Parts@A package that contains Devon's machine parts.@5
+Soot Sack@A sack used to gather and hold volcanic ash.@5
+Basement Key@The key for New Mauville beneath Mauville City.@5
+Acro Bike@A folding bicycle capable of jumps and wheelies.@5
+Pok#block Case@A case for holding Pok#blocks made with a Berry Blender.@5
+Letter@A letter to Steven from the President of the Devon Corp.@5
+Eon Ticket@The ticket for a ferry to a distant southern island.@5
+Red Orb@A red, glowing orb said to contain an ancient power.@5
+Blue Orb@A blue, glowing orb said to contain an ancient power.@5
+Scanner@A device found inside the Abandoned Ship.@5
+Go-Goggles@Nifty goggles that protect eyes from desert sandstorms.@5
+Meteorite@A meteorite found at Meteor Falls.@5
+Key to Room 1@A key that opens a door inside the Abandoned Ship.@5
+Key to Room 2@A key that opens a door inside the Abandoned Ship.@5
+Key to Room 4@A key that opens a door inside the Abandoned Ship.@5
+Key to Room 6@A key that opens a door inside the Abandoned Ship.@5
+Storage Key@The key to the storage inside the Abandoned Ship.@5
+Root Fossil@A fossil of an ancient, seafloor- dwelling Pok#mon.@5
+Claw Fossil@A fossil of an ancient, seafloor- dwelling Pok#mon.@5
+Devon Scope@A device by Devon that signals any unseeable Pok#mon.@5
+TM01@-----@3
+TM02@-----@3
+TM03@-----@3
+TM04@-----@3
+TM05@-----@3
+TM06@-----@3
+TM07@-----@3
+TM08@-----@3
+TM09@-----@3
+TM10@-----@3
+TM11@-----@3
+TM12@-----@3
+TM13@-----@3
+TM14@-----@3
+TM15@-----@3
+TM16@-----@3
+TM17@-----@3
+TM18@-----@3
+TM19@-----@3
+TM20@-----@3
+TM21@-----@3
+TM22@-----@3
+TM23@-----@3
+TM24@-----@3
+TM25@-----@3
+TM26@-----@3
+TM27@-----@3
+TM28@-----@3
+TM29@-----@3
+TM30@-----@3
+TM31@-----@3
+TM32@-----@3
+TM33@-----@3
+TM34@-----@3
+TM35@-----@3
+TM36@-----@3
+TM37@-----@3
+TM38@-----@3
+TM39@-----@3
+TM40@-----@3
+TM41@-----@3
+TM42@-----@3
+TM43@-----@3
+TM44@-----@3
+TM45@-----@3
+TM46@-----@3
+TM47@-----@3
+TM48@-----@3
+TM49@-----@3
+TM50@-----@3
+HM01@-----@3
+HM02@-----@3
+HM03@-----@3
+HM04@-----@3
+HM05@-----@3
+HM06@-----@3
+HM07@-----@3
+HM08@-----@3
+????????@?????@1
+????????@?????@1
+Oak's Parcel@A parcel for Prof. Oak from a Pok#mon Mart's clerk.@5
+Pok# Flute@A sweet-sounding flute that awakens Pok#mon.@5
+Secret Key@The key to the Cinnabar Island Gym's entrance.@5
+Bike Voucher@A voucher for obtaining a bicycle from the Bike Shop.@5
+Gold Teeth@Gold dentures lost by the Safari Zone's Warden.@5
+Old Amber@A stone containing the genes of an ancient Pok#mon.@5
+Card Key@A card-type door key used in Silph Co's office.@5
+Lift Key@An elevator key used in Team Rocket's Hideout.@5
+Helix Fossil@A piece of an ancient marine Pok#mon's seashell.@5
+Dome Fossil@A piece of an ancient marine Pok#mon's shell.@5
+Silph Scope@Silph Co's scope makes unseeable Pok#mon visible.@5
+Bicycle@A folding bicycle that is faster than the Running Shoes.@5
+Town Map@Can be viewed anytime. Shows your present location.@5
+Vs. Seeker@A rechargeable unit that flags battle-ready Trainers.@5
+Fame Checker@Stores information on famous people for instant recall.@5
+TM Case@A convenient case  that holds TMs and HMs.@5
+Berry Pouch@A convenient container that holds Berries.@5
+Teachy TV@A TV set tuned to an advice program for Trainers.@5
+Tri-Pass@A pass for ferries between One, Two, and Three Island.@5
+Rainbow Pass@For ferries serving Vermilion and the Sevii Islands.@5
+Tea@A thirst-quenching tea prepared by an old lady.@5
+Mystic Ticket@A ticket required to board the ship to Navel Rock.@5
+Aurora Ticket@A ticket required to board the ship to Birth Island.@5
+Powder Jar@Stores Berry Powder made using a Berry Crusher.@5
+Ruby@An exquisite, red-glowing gem that symbolizes passion.@5
+Sapphire@A brilliant blue gem that symbolizes honesty.@5
+Magma Emblem@A medal-like item in the same shape as Team Magma's mark.@5
+Old Sea Map@A faded sea chart that shows the way to a certain island.@5
+Teru-Sama@?????@1
+Silver Leaf@-----@1
+Red Scale@-----@5
+Secret Potion@-----@5
+Mystery Egg@-----@5
+Clear Bell@-----@5
+Silver Wing@-----@5
+Gold Leaf@-----@1
+Red Apricorn@-----@4
+Blue Apricorn@-----@4
+Yellow Apricorn@-----@4
+Green Apricorn@-----@4
+White Apricorn@-----@4
+Black Apricorn@-----@4
+Pink Apricorn@-----@4
+Slowpoke Tail@-----@1
+Pink Bow@-----@1
+Rage Candy Bar@-----@1
+GS Ball@-----@5
+Blue Card@-----@5
+Machine Part@-----@5
+Egg Ticket@-----@5
+Lost Item@-----@5
+Pass@-----@5
+Berserk Gene@-----@1
+Heavy Ball@-----@2
+Flower Mail@-----@1
+Level Ball@-----@2
+Lure Ball@-----@2
+Fast Ball@-----@2
+Friend Ball@-----@2
+Moon Ball@-----@2
+Love Ball@-----@2
+Normal Box@-----@1
+Gorgeous Box@-----@1
+Polkadot Bow@-----@1
+Squirt Bottle@-----@5
+Park Ball@-----@2
+Rainbow Wing@-----@5
+Brick Piece@-----@1
+Surf Mail@-----@1
+Light Blue Mail@-----@1
+Portrait Mail@-----@1
+Lovely Mail@-----@1
+Eon Mail@-----@1
+Morph Mail@-----@
+Blue Sky Mail@-----@1
+Music Mail@-----@1
+Mirage Mail@-----@1
+Covenant Orb@-----@1
+Poison Stone@-----@1
+Room Pass@-----@5
+Tri-Wing@-----@5
+Long Tongue@-----@1
+Long Vine@-----@1
+Apple@-----@1
+Fuel Line@-----@5
+Dragon Orb@-----@5
+Ship Key@-----@5
+Battle Pass@-----@5
+Snakeskin@-----@1
+Pretty Tail@-----@1
+Earthen Clay@-----@1
+Stimulus Orb@-----@1
+Confuse Claw@-----@1
+Focus Orb@-----@1
+Calm Seed@-----@1
+Water Tail@-----@1
+Fire Tail@-----@1
+Thunder Tail@-----@1
+Wisdom Orb@-----@1
+Detect Orb@-----@1
+Sharp Horns@-----@1
+Heart Stone@-----@1
+Power Wings@-----@1
+Energy Wall@-----@1
+Steel Shell@-----@1
+Skateboard@-----@5

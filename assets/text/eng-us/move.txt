@@ -1,0 +1,981 @@
+-@No move@0
+Pound@Pounds the foe with forelegs or tail.@0
+Karate Chop@A chopping Attack with a high critical-hit ratio.@1
+Doubleslap@Repeatedly slaps the foe 2 to 5 times.@0
+Comet Punch@Repeatedly punches the foe 2 to 5 times.@0
+Mega Punch@A strong punch thrown with incredible power.@0
+Pay Day@Throws coins at the foe. Money is recovered after.@0
+Fire Punch@A fiery punch that may burn the foe.@10
+Ice Punch@An icy punch that may freeze the foe.@15
+Thunder Punch@An electrified punch that may paralyze the foe.@13
+Scratch@Scratches the foe with sharp claws.@0
+Visegrip@Grips the foe with large and powerful pincers.@0
+Guillotine@A powerful pincer Attack that may cause fainting.@0
+Razor Wind@A 2-turn move that strikes the foe on the 2nd turn.@0
+Swords Dance@A fighting dance that sharply raises Attack.@0
+Cut@Cuts the foe with sharp scythes, claws, etc.@0
+Gust@Strikes the foe with a gust of wind whipped up by wings.@2
+Wing Attack@Strikes the foe with wings spread wide.@2
+Whirlwind@Blows away the foe with wind and ends the battle.@0
+Fly@Flies up on the first turn, then strikes the next turn.@2
+Bind@Binds and squeezes the foe for 2 to 5 turns.@0
+Slam@Slams the foe with a long tail, vine, etc.@0
+Vine Whip@Strikes the foe with slender, whiplike vines.@12
+Stomp@Stomps the enemy with a big foot. May cause flinching.@0
+Double Kick@A double-kicking Attack that strikes the foe twice.@1
+Mega Kick@An extremely powerful kick with intense force.@0
+Jump Kick@A strong jumping kick. May miss and hurt the kicker.@1
+Rolling Kick@A fast kick delivered from a rapid spin.@1
+Sand-Attack@Reduces the foe’s accuracy by hurling sand in its face.@4
+Headbutt@A ramming Attack that may cause flinching.@0
+Horn Attack@Jabs the foe with sharp horns.@0
+Fury Attack@Jabs the foe 2 to 5 times with sharp horns, etc.@0
+Horn Drill@A one-hit KO Attack that uses a horn like a drill.@0
+Tackle@Charges the foe with a full- body tackle.@0
+Body Slam@A full-body slam that may cause paralysis.@0
+Wrap@Wraps and squeezes the foe 2 to 5 times with vines, etc.@0
+Take Down@A reckless charge Attack that also hurts the user.@0
+Thrash@A rampage of 2 to 3 turns that confuses the user.@0
+Double-Edge@A life-risking tackle that also hurts the user.@0
+Tail Whip@Wags the tail to lower the foe’s Defense.@0
+Poison Sting@A toxic Attack with barbs, etc., that may poison.@3
+Twineedle@Stingers on the forelegs jab the foe twice.@6
+Pin Missile@Sharp pins are Fired to strike 2 to 5 times.@6
+Leer@Frightens the foe with a leer to lower Defense.@0
+Bite@Bites with vicious fangs. May cause flinching.@17
+Growl@Growls cutely to reduce the foe’s Attack.@0
+Roar@Makes the foe flee to end the battle.@0
+Sing@A soothing song lulls the foe into a deep slumber.@0
+Supersonic@Emits bizarre sound waves that may confuse the foe.@0
+Sonic Boom@Launches shock waves that always inflict 20 HP damage.@0
+Disable@Psychically disables one of the foe’s moves.@0
+Acid@Sprays a hide-melting acid. May lower Defense.@3
+Ember@A weak Fire Attack that may inflict a burn.@10
+Flamethrower@A powerful Fire Attack that may inflict a burn.@10
+Mist@Creates a mist that stops reduction of abilities.@15
+Water Gun@Squirts Water to Attack the foe.@11
+Hydro Pump@Blasts Water at high power to strike the foe.@11
+Surf@Creates a huge wave, then crashes it down on the foe.@11
+Ice Beam@Blasts the foe with an icy beam that may freeze it.@15
+Blizzard@Hits the foe with an icy storm that may freeze it.@15
+Psybeam@Fires a peculiar ray that may confuse the foe.@14
+Bubble Beam@Forcefully sprays bubbles that may lower Speed.@11
+Aurora Beam@Fires a rainbow-colored beam that may lower Attack.@15
+Hyper Beam@Powerful, but leaves the user immobile the next turn.@0
+Peck@Attacks the foe with a jabbing beak, etc.@2
+Drill Peck@A corkscrewing Attack with the beak acting as a drill.@2
+Submission@A reckless body slam that also hurts the user.@1
+Low Kick@A kick that inflicts more damage on heavier foes.@1
+Counter@Retaliates any physical hit with double the power.@1
+Seismic Toss@Inflicts damage identical to the user’s level.@1
+Strength@Builds enormous power, then slams the foe.@0
+Absorb@An Attack that absorbs half the damage inflicted.@12
+Mega Drain@An Attack that absorbs half the damage inflicted.@12
+Leech Seed@Plants a seed on the foe to steal HP on every turn.@12
+Growth@Forces the body to grow and heightens Sp. Atk.@0
+Razor Leaf@Cuts the enemy with leaves. High critical-hit ratio.@12
+Solar Beam@Absorbs light in one turn, then Attacks next turn.@12
+Poison Powder@Scatters a toxic powder that may poison the foe.@3
+Stun Spore@Scatters a powder that may paralyze the foe.@12
+Sleep Powder@Scatters a powder that may cause the foe to sleep.@12
+Petal Dance@A rampage of 2 to 3 turns that confuses the user.@12
+String Shot@Binds the foe with string to reduce its Speed.@6
+Dragon Rage@Launches shock waves that always inflict 40 HP damage.@16
+Fire Spin@Traps the foe in a ring of Fire for 2 to 5 turns.@10
+Thunder Shock@An electrical Attack that may paralyze the foe.@13
+Thunderbolt@A strong electrical Attack that may paralyze the foe.@13
+Thunder Wave@A weak jolt of electricity that paralyzes the foe.@13
+Thunder@A lightning Attack that may cause paralysis.@13
+Rock Throw@Throws small rocks to strike the foe.@5
+Earthquake@A powerful quake, but has no effect on flying foes.@4
+Fissure@A one-hit KO move that drops the foe in a fissure.@4
+Dig@Digs underground the first turn and strikes next turn.@4
+Toxic@Poisons the foe with an intensifying toxin.@3
+Confusion@A psychic Attack that may cause confusion.@14
+Psychic@A powerful psychic Attack that may lower Sp. Def.@14
+Hypnosis@A hypnotizing move that may induce sleep.@14
+Meditate@Meditates in a peaceful fashion to raise Attack.@14
+Agility@Relaxes the body to sharply boost Speed.@14
+Quick Attack@An extremely fast Attack that always strikes first.@0
+Rage@Raises the user’s Attack every time it is hit.@0
+Teleport@A psychic move for fleeing from battle instantly.@14
+Night Shade@Inflicts damage identical to the user’s level.@7
+Mimic@Copies a move used by the foe during one battle.@0
+Screech@Emits a screech to sharply reduce the foe’s Defense.@0
+Double Team@Creates illusory copies to raise evasiveness.@0
+Recover@Recovers up to half the user’s maximum HP.@0
+Harden@Stiffens the body’s  muscles to raise Defense.@0
+Minimize@Minimizes the user’s size to raise evasiveness.@0
+Smokescreen@Lowers the foe’s accuracy using smoke, ink, etc.@0
+Confuse Ray@A sinister ray that confuses the foe.@7
+Withdraw@Withdraws the body into its hard shell to raise Defense.@11
+Defense Curl@Curls up to conceal weak spots and raise Defense.@0
+Barrier@Creates a barrier that sharply raises Defense.@14
+Light Screen@Creates a wall of light that lowers Sp. Atk damage.@14
+Haze@Creates a black haze that eliminates all stat changes.@15
+Reflect@Creates a wall of light that weakens physical Attacks.@14
+Focus Energy@Focuses power to raise the critical-hit ratio.@0
+Bide@Endures Attack for 2 turns to retaliate double.@0
+Metronome@Waggles a finger to use any Pok#mon move at random.@0
+Mirror Move@Counters the foe’s Attack with the same move.@2
+Self-Destruct@Inflicts severe damage but makes the user faint.@0
+Egg Bomb@An egg is forcibly hurled at the foe.@0
+Lick@Licks with a long tongue to injure. May also paralyze.@7
+Smog@An exhaust-gas Attack that may also poison.@3
+Sludge@Sludge is hurled to inflict damage. May also poison.@3
+Bone Club@Clubs the foe with a bone. May cause flinching.@4
+Fire Blast@Incinerates everything it strikes. May cause a burn.@10
+Waterfall@Charges the foe with Speed to climb Waterfalls.@11
+Clamp@Traps and squeezes the foe for 2 to 5 turns.@11
+Swift@Sprays star-shaped rays that never miss.@0
+Skull Bash@Tucks in the head, then Attacks on the next turn.@0
+Spike Cannon@Launches sharp spikes that strike 2 to 5 times.@0
+Constrict@Constricts to inflict pain. May lower Speed.@0
+Amnesia@Forgets about something and sharply raises Sp. Def.@14
+Kinesis@Distracts the foe. May lower accuracy.@14
+Soft-Boiled@Recovers up to half the user’s maximum HP.@0
+High Jump Kick@A jumping knee kick. If it misses, the user is hurt.@1
+Glare@Intimidates and frightens the foe into paralysis.@0
+Dream Eater@Takes one half the damage inflicted on a sleeping foe.@14
+Poison Gas@Envelops the foe in a toxic gas that may poison.@3
+Barrage@Hurls round objects at the foe 2 to 5 times.@0
+Leech Life@An Attack that steals half the damage inflicted.@6
+Lovely Kiss@Demands a kiss with a scary face that induces sleep.@0
+Sky Attack@Searches out weak spots, then strikes the next turn.@2
+Transform@Alters the user’s cells to become a copy of the foe.@0
+Bubble@An Attack using bubbles. May lower the foe’s Speed.@11
+Dizzy Punch@A rhythmic punch that may confuse the foe.@0
+Spore@Scatters a cloud of spores that always induce sleep.@12
+Flash@Looses a powerful blast of light that cuts accuracy.@0
+Psywave@Attacks with a psychic wave of varying intensity.@14
+Splash@It’s just a splash... Has no effect whatsoever.@0
+Acid Armor@Liquifies the user’s body to sharply raise Defense.@3
+Crabhammer@Hammers with a pincer. Has a high critical-hit ratio.@11
+Explosion@Inflicts severe damage but makes the user faint.@0
+Fury Swipes@Rakes the foe with sharp claws, etc., 2 to 5 times.@0
+Bonemerang@Throws a bone boomerang that strikes twice.@4
+Rest@The user sleeps for 2 turns, restoring HP and status.@14
+Rock Slide@Large boulders are hurled. May cause flinching.@5
+Hyper Fang@Attacks with sharp fangs. May cause flinching.@0
+Sharpen@Reduces the polygon count and raises Attack.@0
+Conversion@Changes the user’s type into a known move’s type.@0
+Tri Attack@Fires three types of beams at the same time.@0
+Super Fang@Attacks with sharp fangs and cuts half the foe’s HP.@0
+Slash@Slashes with claws, etc. Has a high critical-hit ratio.@0
+Substitute@Creates a decoy using 1/4 of the user’s maximum HP.@0
+Struggle@Used only if all PP are gone. Also hurts the user a little.@0
+Sketch@Copies the foe’s last move permanently.@0
+Triple Kick@Kicks the foe 3 times in a row with rising intensity.@1
+Thief@While Attacking, it may steal the foe’s held item.@17
+Spider Web@Ensnares the foe to stop it from fleeing or switching.@6
+Mind Reader@Senses the foe’s action to ensure the next move’s hit.@0
+Nightmare@Inflicts 1/4 damage on a sleeping foe every turn.@7
+Flame Wheel@A fiery charge Attack that may inflict a burn.@10
+Snore@A loud Attack that can be used only while asleep.@0
+Curse@A move that functions differently for GHOSTS.@9
+Flail@Inflicts more damage when the user’s HP is down.@0
+Conversion 2@Makes the user resistant to the last Attack’s type.@0
+Aeroblast@Launches a vacuumed blast. High critical-hit ratio.@2
+Cotton Spore@Spores cling to the foe, sharply reducing Speed.@12
+Reversal@Inflicts more damage when the user’s HP is down.@1
+Spite@Spitefully cuts the PP of the foe’s last move.@7
+Powder Snow@Blasts the foe with a snowy gust. May cause freezing.@15
+Protect@Evades Attack, but may fail if used in succession.@0
+Mach Punch@A punch is thrown at wicked Speed to strike first.@1
+Scary Face@Frightens with a scary face to sharply reduce Speed.@0
+Feint Attack@Draws the foe close, then strikes without fail.@17
+Sweet Kiss@Demands a kiss with a cute look. May cause confusion.@0
+Belly Drum@Maximizes Attack while sacrificing HP.@0
+Sludge Bomb@Sludge is hurled to inflict damage. May also poison.@3
+Mud-Slap@Hurls mud in the foe’s face to reduce its accuracy.@4
+Octazooka@Fires a lump of ink to damage and cut accuracy.@11
+Spikes@Sets spikes that hurt a  foe switching in.@4
+Zap Cannon@Powerful and sure to cause paralysis, but inaccurate.@13
+Foresight@Negates the foe’s efforts to heighten evasiveness.@0
+Destiny Bond@If the user faints, the foe is also made to faint.@7
+Perish Song@Any Pok#mon hearing this song faints in 3 turns.@0
+Icy Wind@A chilling Attack that lowers the foe’s Speed.@15
+Detect@Evades Attack, but may fail if used in succession.@1
+Bone Rush@Strikes the foe with a bone in hand 2 to 5 times.@4
+Lock-On@Locks on to the foe to ensure the next move hits.@0
+Outrage@A rampage of 2 to 3 turns that confuses the user.@16
+Sandstorm@Causes a sandstorm that rages for several turns.@5
+Giga Drain@An Attack that steals half the damage inflicted.@12
+Endure@Endures any Attack for 1 turn, leaving at least 1HP.@0
+Charm@Charms the foe and sharply reduces its Attack.@0
+Rollout@An Attack lasting 5 turns with rising intensity.@5
+False Swipe@An Attack that leaves the foe with at least 1 HP.@0
+Swagger@Confuses the foe, but also sharply raises Attack.@0
+Milk Drink@Recovers up to half the user’s maximum HP.@0
+Spark@An electrified tackle that may paralyze the foe.@13
+Fury Cutter@An Attack that intensifies on each successive hit.@6
+Steel Wing@Strikes the foe with hard wings spread wide.@8
+Mean Look@Fixes the foe with a mean look that prevents escape.@0
+Attract@Makes the opposite gender less likely to Attack.@0
+Sleep Talk@Uses an available move randomly while asleep.@0
+Heal Bell@Chimes soothingly to heal all status abnormalities.@0
+Return@An Attack that increases in power with friendship.@0
+Present@A gift in the form of a bomb. May restore HP.@0
+Frustration@An Attack that is stronger if the TRAINER is disliked.@0
+Safeguard@A mystical force prevents all status problems.@0
+Pain Split@Adds the user and foe’s HP, then shares them equally.@0
+Sacred Fire@A mystical Fire Attack that may inflict a burn.@10
+Magnitude@A ground-shaking Attack of random intensity.@4
+Dynamic Punch@Powerful and sure to cause confusion, but inaccurate.@1
+Megahorn@A brutal ramming Attack using out-thrust horns.@6
+Dragon Breath@Strikes the foe with an incredible blast of breath.@16
+Baton Pass@Switches out the user while keeping effects in play.@0
+Encore@Makes the foe repeat its last move over 2 to 6 turns.@0
+Pursuit@Inflicts bad damage if used on a foe switching out.@17
+Rapid Spin@Spins the body at high Speed to strike the foe.@0
+Sweet Scent@Allures the foe to reduce evasiveness.@0
+Iron Tail@Attacks with a rock-hard tail. May lower Defense.@8
+Metal Claw@A claw Attack that may raise the user’s Attack.@8
+Vital Throw@Makes the user’s move last, but it never misses.@1
+Morning Sun@Restores HP. The amount varies with the weather.@0
+Synthesis@Restores HP. The amount varies with the weather.@12
+Moonlight@Restores HP. The amount varies with the weather.@0
+Hidden Power@The effectiveness varies with the user.@0
+Cross Chop@A double-chopping Attack. High critical-hit ratio.@1
+Twister@Whips up a vicious twister to tear at the foe.@16
+Rain Dance@Boosts the power of Water-type moves for 5 turns.@11
+Sunny Day@Boosts the power of Fire-type moves for 5 turns.@10
+Crunch@Crunches with sharp fangs. May lower Sp. Def.@17
+Mirror Coat@Counters the foe’s special Attack at double the power.@14
+Psych Up@Copies the foe’s effect(s) and gives to the user.@0
+Extreme Speed@An extremely fast and powerful Attack.@0
+Ancient Power@An Attack that may raise all stats.@5
+Shadow Ball@Hurls a black blob that may lower the foe’s Sp. Def.@7
+Future Sight@Heightens inner power to strike 2 turns later.@14
+Rock Smash@A rock-crushing Attack that may lower Defense.@1
+Whirlpool@Traps and hurts the foe in a whirlpool for 2 to 5 turns.@11
+Beat Up@Summons party Pok#mon to join in the Attack.@17
+Fake Out@A 1st-turn, 1st-strike move that causes flinching.@0
+Uproar@Causes an uproar for 2 to 5 turns and prevents sleep.@0
+Stockpile@Charges up power for up to 3 turns.@0
+Spit Up@Releases stockpiled power (the more the better).@0
+Swallow@Absorbs stockpiled power and restores HP.@0
+Heat Wave@Exhales a hot breath on the foe. May inflict a burn.@10
+Hail@Summons a hailstorm that strikes every turn.@15
+Torment@Torments the foe and stops successive use of a move.@17
+Flatter@Confuses the foe, but raises its Sp. Atk.@17
+Will-O-Wisp@Inflicts a burn on the foe with intense Fire.@10
+Memento@The user faints and lowers the foe’s abilities.@17
+Facade@Boosts Attack when burned, paralyzed, or poisoned.@0
+Focus Punch@A powerful loyalty Attack. The user flinches if hit.@1
+Smelling Salts@Powerful against paralyzed foes, but also heals them.@0
+Follow Me@Draws attention to make foes Attack only the user.@0
+Nature Power@The type of Attack varies depending on the location.@0
+Charge@Charges power to boost the electric move used next.@13
+Taunt@Taunts the foe into only using Attack moves.@17
+Helping Hand@Boosts the power of the recipient’s moves.@0
+Trick@Tricks the foe into trading held items.@14
+Role Play@Mimics the target and copies its special ability.@14
+Wish@A wish that restores HP. It takes time to work.@0
+Assist@Attacks randomly with one of the partner’s moves.@0
+Ingrain@Lays roots that restore HP. The user can’t switch out.@12
+Superpower@Boosts strength sharply, but lowers abilities.@1
+Magic Coat@Reflects special effects back to the Attacker.@14
+Recycle@Recycles a used item for one more use.@0
+Revenge@An Attack that gains power if injured by the foe.@1
+Brick Break@Destroys barriers such as Reflect and causes damage.@1
+Yawn@Lulls the foe into yawning, then sleeping next turn.@0
+Knock Off@Knocks down the foe’s held item to prevent its use.@17
+Endeavor@Gains power if the user’s HP is lower than the foe’s HP.@0
+Eruption@The higher the user’s HP, the more damage caused.@10
+Skill Swap@The user swaps special abilities with the target.@14
+Imprison@Prevents foes from using moves known by the user.@14
+Refresh@Heals poisoning, paralysis, or a burn.@0
+Grudge@If the user faints, deletes all PP of foe’s last move.@7
+Snatch@Steals the effects of the move the target uses next.@17
+Secret Power@An Attack with effects that vary by location.@0
+Dive@Dives underWater the first turn and strikes next turn.@11
+Arm Thrust@Straight-arm punches that strike the foe 2 to 5 times.@1
+Camouflage@Alters the Pok#mon’s type depending on the location.@0
+Tail Glow@Flashes a light that sharply raises Sp. Atk.@6
+Luster Purge@Attacks with a burst of light. May lower Sp. Def.@14
+Mist Ball@Attacks with a flurry of down. May lower Sp. Atk.@14
+Feather Dance@Envelops the foe with down to sharply reduce Attack.@2
+Teeter Dance@Confuses all Pok#mon on the scene.@0
+Blaze Kick@A kick with a high critical- hit ratio. May cause a burn.@10
+Mud Sport@Covers the user in mud to raise electrical resistance.@4
+Ice Ball@A 5-turn Attack that gains power on successive hits.@15
+Needle Arm@Attacks with thorny arms. May cause flinching.@12
+Slack Off@Slacks off and restores half the maximum HP.@0
+Hyper Voice@A loud Attack that uses sound waves to injure.@0
+Poison Fang@A sharp-fanged Attack. May badly poison the foe.@3
+Crush Claw@Tears at the foe with sharp claws. May lower Defense.@0
+Blast Burn@Powerful, but leaves the user immobile the next turn.@10
+Hydro Cannon@Powerful, but leaves the user immobile the next turn.@11
+Meteor Mash@Fires a meteor-like punch. May raise Attack.@8
+Astonish@An Attack that may shock the foe into flinching.@7
+Weather Ball@The move’s type and power change with the weather.@0
+Aromatherapy@Heals all status problems with a soothing scent.@12
+Fake Tears@Feigns crying to sharply lower the foe’s Sp. Def.@17
+Air Cutter@Hacks with razorlike wind. High critical-hit ratio.@2
+Overheat@Allows a full-power Attack, but sharply lowers Sp. Atk.@10
+Odor Sleuth@Negates the foe’s efforts to heighten evasiveness.@0
+Rock Tomb@Stops the foe from moving with rocks and cuts Speed.@5
+Silver Wind@A powdery Attack that may raise abilities.@6
+Metal Sound@Emits a horrible screech that sharply lowers Sp. Def.@8
+Grass Whistle@Lulls the foe into sleep with a pleasant melody.@12
+Tickle@Makes the foe laugh to lower Attack and Defense.@0
+Cosmic Power@Raises Defense and Sp. Def with a mystic power.@14
+Water Spout@Inflicts more damage if the user’s HP is high.@11
+Signal Beam@A strange beam Attack that may confuse the foe.@6
+Shadow Punch@An unavoidable punch that is thrown from shadows.@7
+Extrasensory@Attacks with a peculiar power. May cause flinching.@14
+Sky Uppercut@An uppercut thrown as if leaping into the sky.@1
+Sand Tomb@Traps and hurts the foe in quicksand for 2 to 5 turns.@4
+Sheer Cold@A chilling Attack that causes fainting if it hits.@15
+Muddy Water@Attacks with muddy Water. May lower accuracy.@11
+Bullet Seed@Shoots 2 to 5 seeds in a row to strike the foe.@12
+Aerial Ace@An extremely Speedy and unavoidable Attack.@2
+Icicle Spear@Attacks the foe by firing 2 to 5 icicles in a row.@15
+Iron Defense@Hardens the body’s surface to sharply raise Defense.@8
+Block@Blocks the foe’s way to prevent escape.@0
+Howl@Howls to raise the spirit and boosts Attack.@0
+Dragon Claw@Slashes the foe with sharp claws.@16
+Frenzy Plant@Powerful, but leaves the user immobile the next turn.@12
+Bulk Up@Bulks up the body to boost both Attack and Defense.@1
+Bounce@Bounces up, then down the next turn. May paralyze.@2
+Mud Shot@Hurls mud at the foe and reduces Speed.@4
+Poison Tail@Has a high critical-hit ratio. May also poison.@3
+Covet@Cutely begs to obtain an item held by the foe.@0
+Volt Tackle@A life-risking tackle that slightly hurts the user.@13
+Magical Leaf@Attacks with a strange leaf that cannot be evaded.@12
+Water Sport@The user becomes soaked to raise resistance to Fire.@11
+Calm Mind@Raises Sp. Atk and Sp. Def by focusing the mind.@14
+Leaf Blade@Slashes with a sharp leaf. High critical-hit ratio.@12
+Dragon Dance@A mystical dance that ups Attack and Speed.@16
+Rock Blast@Hurls boulders at the foe 2 to 5 times in a row.@5
+Shock Wave@A fast and unavoidable electric Attack.@13
+Water Pulse@Attacks with ultrasonic waves. May confuse the foe.@11
+Doom Desire@Summons strong sunlight to Attack 2 turns later.@8
+Psycho Boost@Allows a full-power Attack, but sharply lowers Sp. Atk.@14
+Roost@The user rests its body by landing, restoring its HP by half its full HP.@2
+MOVE 356@-----@0
+MOVE 357@-----@0
+MOVE 358@-----@0
+Hammer Arm@Hits with a heavy fist, but lowers the user’s Speed.@1
+MOVE 360@-----@0
+MOVE 361@-----@0
+MOVE 362@-----@0
+MOVE 363@-----@0
+MOVE 364@-----@0
+MOVE 365@-----@0
+MOVE 366@-----@0
+MOVE 367@-----@0
+MOVE 386@-----@0
+MOVE 369@-----@0
+Close Combat@Fights up close. Lowers the user’s Defense and SpDef.@1
+MOVE 371@-----@0
+MOVE 372@-----@0
+MOVE 373@-----@0
+MOVE 374@-----@0
+MOVE 375@-----@0
+MOVE 376@-----@0
+MOVE 377@-----@0
+MOVE 378@-----@0
+MOVE 379@-----@0
+MOVE 380@-----@0
+MOVE 381@-----@0
+MOVE 382@-----@0
+MOVE 383@-----@0
+MOVE 384@-----@0
+MOVE 385@-----@0
+MOVE 386@-----@0
+MOVE 387@-----@0
+MOVE 388@-----@0
+MOVE 389@-----@0
+MOVE 390@-----@0
+MOVE 391@-----@0
+MOVE 392@-----@0
+MOVE 393@-----@0
+Flare Blitz@Charges while cloaked in fire. Hurts the user too.@10
+Force Palm@Attacks the foe with a shock wave. May also paralyze.@1
+Aura Sphere@Looses an unavoidable blast of aura power from within.@1
+Rock Polish@Polishes the body to reduce drag, sharply raising SPEED.@5
+Poison Jab@Stabs with a poisonous limb. May also poison.@3
+Dark Pulse@An aura of dark thoughts that may cause flinching.@17
+Night Slash@Slashes at the first chance. High critical-hit ratio.@17
+Aqua Tail@The user swings its tail as if it were a vicious wave.@11
+Seed Bomb@Slams a barrage of hard-shelled seeds down from above.@12
+Air Slash@Attacks with a blade of air that may cause flinching.@2
+X-Scissor@Slashes by crossing scythes or claws like scissors.@6
+Bug Buzz@Vibrating wings create sound waves. May lower SP. DEF.@6
+Dragon Pulse@A shock wave generated by the user’s gaping mouth.@16
+Dragon Rush@An overwhelmingly menacing tackle. May cause flinching.@16
+Power Gem@Attacks with a ray of light that sparkles like gems.@5
+Drain Punch@Drains half the damage it inflicted to restore HP.@1
+Vacuum Wave@A pure vacuum made from whirling fists. Always goes first.@1
+Focus Blast@Unleashes the power of mental focus. May lower Sp. Def.@1
+Energy Ball@Fires power drawn from nature. May lower SP. DEF.@12
+Brave Bird@Charges from a low altitude. This also hurts the user.@2
+Earth Power@The ground under the foe erupts. May lower Sp. Def.@4
+Switcheroo@The user trades items with the foe faster than the eye can follow.@17
+Giga Impact@Charges using full power. Requires recharge afterward.@0
+Nasty Plot@The user stimulates its brain with evil thoughts, sharply raising its Sp. Atk.@17
+Bullet Punch@A tough punch as fast as a bullet. Always goes first. @8
+Avalanche@Gains intensity if the target has hurt the user.@15
+Ice Shard@Hurls chunks of ice that always strike first.@15
+Shadow Claw@A claw made from shadows with a high critical-hit ratio.@7
+Thunder Fang@An electrified bite. May also paralyze or cause flinching.@13
+Ice Fang@A deeply cold bite. May also freeze or cause flinching.@15
+Fire Fang@A flame-fed bite. May also burn or cause flinching.@10
+Shadow Sneak@Extends a shadow to attack from behind. Goes first.@7
+Mud Bomb@Launches a hard-packed mud ball. May lower accuracy.@4
+Psycho Cut@Blades formed by psychic power. High critical-hit ratio.@14
+Zen Headbutt@Focuses power in the head and rams. May also flinch.@14
+Mirror Shot@Lets loose a flash of energy that may lower accuracy.@8
+Flash Cannon@Gathers light and then releases it. May lower Sp. Def.@8
+Rock Climb@Tackles the foe with immense force. May also confuse.@0
+Defog@Blows away barriers such as Reflect. Also lowers the foe’s evasiveness.@2
+MOVE 433@-----@0
+Draco Meteor@Sharply reduces the user’s Sp. Atk stat after use.@16
+Discharge@A flare of electricity that may paralyze the foe.@13
+Lava Plume@An inferno of scarlet flames. May also burn.@10
+Leaf Storm@Sharply reduces the user’s Sp. Atk stat after use.@12
+Power Whip@Violently whirls vines or tentacles to lash the foe.@12
+Rock Wrecker@Launches a huge boulder. Requires recharge afterward.@5
+Cross Poison@An attack with a high critical-hit ratio. May poison.@3
+Gunk Shot@Shoots filthy garbage at the foe. May also poison.@3
+Iron Head@A slam with a steel-hard head. May cause flinching.@8
+Magnet Bomb@Launches unavoidable steel bombs that stick to the foe.@8
+Stone Edge@Stabs with sharp stones. Has a high critical-hit ratio.@5
+MOVE 445@-----@0
+MOVE 446@-----@0
+Grass Knot@Trips the foe with grass. Deals damage based on weight.@12
+MOVE 448@-----@0
+MOVE 449@-----@0
+MOVE 450@-----@0
+Charge Beam@Fires a bundle of electricity. May also raise Sp. Atk.@13
+Wood Hammer@Slams the foe with a rugged body. Also hurts the user.@12
+Aqua Jet@A lunge at blinding speed that always goes first.@11
+Attack Order@The user calls out its underlings. High critical-hit ratio.@6
+Defend Order@The user calls out its underlings to raise its Defense and Sp. Def.@6
+Heal Order@The user calls out its underlings to heal up to half of its maximum HP.@6
+MOVE 457@-----@0
+Double Hit@Slams the foe twice with a long tail, a tentacle, or vines.@0
+Roar Of Time@A blast that even distorts time. Needs recharge afterward.@16
+Spacial Rend@Tears space around the foe. Has a high critical-hit ratio.@16
+MOVE 461@-----@0
+MOVE 462@-----@0
+MOVE 463@-----@0
+Dark Void@The foe is dragged into a world of total darkness that puts it to sleep.@17
+MOVE 465@-----@0
+Ominous Wind@Creates a gust of repulsive wind. May raise all stats.@7
+MOVE 467@-----@0
+Hone Claws@The user sharpens its claws to boost its Attack stat and its accuracy.@17
+MOVE 469@-----@0
+MOVE 470@-----@0
+MOVE 471@-----@0
+MOVE 472@-----@0
+MOVE 473@-----@0
+MOVE 474@-----@0
+MOVE 475@-----@0
+MOVE 476@-----@0
+MOVE 477@-----@0
+MOVE 478@-----@0
+MOVE 479@-----@0
+MOVE 480@-----@0
+MOVE 481@-----@0
+Sludge Wave@Swamps the area with a sludge wave. May also poison.@3
+Quiver Dance@A beautiful, mystic dance that raises the user’s Sp. Atk, Sp. Def, and Speed.@6
+MOVE 484@-----@0
+MOVE 485@-----@0
+MOVE 486@-----@0
+MOVE 487@-----@0
+MOVE 488@-----@0
+Coil@The user coils up. This raises its Attack, Defense, and accuracy.@3
+MOVE 490@-----@0
+Acid Spray@Spits a fluid that harshly lowers the foe’s Sp. Def stat.@3
+MOVE 492@-----@0
+MOVE 493@-----@0
+MOVE 494@-----@0
+MOVE 495@-----@0
+MOVE 496@-----@0
+MOVE 497@-----@0
+MOVE 498@-----@0
+MOVE 499@-----@0
+MOVE 500@-----@0
+MOVE 501@-----@0
+MOVE 502@-----@0
+Scald@The user shoots boiling-hot water. May also burn.@11
+Shell Smash@User’s Defense and Sp. Def lower. Its Attack, Sp. Atk, Speed sharply rise.@0
+MOVE 505@-----@0
+MOVE 506@-----@0
+MOVE 507@-----@0
+Shift Gear@The user rotates gears, raising its Attack and sharply raising its Speed.@8
+MOVE 509@-----@0
+MOVE 510@-----@0
+MOVE 511@-----@0
+MOVE 512@-----@0
+MOVE 513@-----@0
+MOVE 514@-----@0
+MOVE 515@-----@0
+MOVE 516@-----@0
+Inferno@Engulfs the foe in an intense fire, causing a burn.@10
+MOVE 518@-----@0
+MOVE 519@-----@0
+MOVE 520@-----@0
+MOVE 521@-----@0
+Struggle Bug@Attacks foes while resisting, lowering their Sp. Atk stat.@6
+Bulldoze@Stomps the ground, lowering the Speed of everyone hit.@4
+MOVE 524@-----@0
+MOVE 525@-----@0
+Work Up@The user is roused, raising its Attack and Sp. Atk stats.@0
+Electroweb@Attacks foes with an electric net that lowers Speed.@13
+Wild Charge@An electricity- shrouded tackle. Hurts the user too.@13
+Drill Run@Tackles the foe while spinning. High critical-hit ratio.@4
+Dual Chop@Attacks the foe with brutal strikes, twice in a row.@16
+Heart Stamp@A vicious blow after acting cute. May also flinch.@14
+MOVE 532@-----@0
+MOVE 533@-----@0
+Razor Shell@Cuts at the foe with sharp shells. May lower Defense.@11
+MOVE 535@-----@0
+Leaf Tornado@Encircles the foe with leaves. May lower accuracy.@12
+Steamroller@Rolls over the foe while curled up. May also flinch.@6
+MOVE 538@-----@0
+MOVE 539@-----@0
+MOVE 540@-----@0
+MOVE 541@-----@0
+MOVE 542@-----@0
+MOVE 543@-----@0
+Gear Grind@The user attacks by throwing steel gears twice.@8
+MOVE 545@-----@0
+MOVE 546@-----@0
+MOVE 547@-----@0
+MOVE 548@-----@0
+MOVE 549@-----@0
+MOVE 550@-----@0
+MOVE 551@-----@0
+MOVE 552@-----@0
+MOVE 553@-----@0
+MOVE 554@-----@0
+MOVE 555@-----@0
+Icicle Crash@Harshly drops large icicles on the foe. May also flinch.@15
+MOVE 557@-----@0
+MOVE 558@-----@0
+MOVE 559@-----@0
+MOVE 560@-----@0
+MOVE 561@-----@0
+MOVE 562@-----@0
+MOVE 563@-----@0
+MOVE 564@-----@0
+MOVE 565@-----@0
+MOVE 566@-----@0
+MOVE 567@-----@0
+MOVE 568@-----@0
+MOVE 569@-----@0
+MOVE 570@-----@0
+MOVE 571@-----@0
+MOVE 572@-----@0
+MOVE 573@-----@0
+MOVE 574@-----@0
+MOVE 575@-----@0
+MOVE 576@-----@0
+Draining Kiss@-----@18
+MOVE 578@-----@0
+MOVE 579@-----@0
+MOVE 580@-----@0
+MOVE 581@-----@0
+MOVE 582@-----@0
+MOVE 583@-----@0
+Fairy Wind@-----@18
+Moonblast@-----@18
+MOVE 586@-----@0
+MOVE 587@-----@0
+MOVE 588@-----@0
+MOVE 589@-----@0
+MOVE 590@-----@0
+MOVE 591@-----@0
+MOVE 592@-----@0
+MOVE 593@-----@0
+MOVE 594@-----@0
+MOVE 595@-----@0
+MOVE 596@-----@0
+MOVE 597@-----@0
+MOVE 598@-----@0
+MOVE 599@-----@0
+MOVE 600@-----@0
+MOVE 601@-----@0
+MOVE 602@-----@0
+MOVE 603@-----@0
+MOVE 604@-----@0
+MOVE 605@-----@0
+MOVE 606@-----@0
+MOVE 607@-----@0
+MOVE 608@-----@0
+MOVE 609@-----@0
+MOVE 610@-----@0
+MOVE 611@-----@0
+MOVE 612@-----@0
+MOVE 613@-----@0
+MOVE 614@-----@0
+MOVE 615@-----@0
+MOVE 616@-----@0
+MOVE 617@-----@0
+MOVE 618@-----@0
+MOVE 619@-----@0
+MOVE 620@-----@0
+MOVE 621@-----@0
+MOVE 622@-----@0
+MOVE 623@-----@0
+MOVE 624@-----@0
+MOVE 625@-----@0
+MOVE 626@-----@0
+MOVE 627@-----@0
+MOVE 628@-----@0
+MOVE 629@-----@0
+MOVE 630@-----@0
+MOVE 631@-----@0
+MOVE 632@-----@0
+MOVE 633@-----@0
+MOVE 634@-----@0
+MOVE 635@-----@0
+MOVE 636@-----@0
+MOVE 637@-----@0
+MOVE 638@-----@0
+MOVE 639@-----@0
+MOVE 640@-----@0
+MOVE 641@-----@0
+MOVE 642@-----@0
+MOVE 643@-----@0
+MOVE 644@-----@0
+MOVE 645@-----@0
+MOVE 646@-----@0
+MOVE 647@-----@0
+MOVE 648@-----@0
+MOVE 649@-----@0
+MOVE 650@-----@0
+MOVE 651@-----@0
+MOVE 652@-----@0
+MOVE 653@-----@0
+MOVE 654@-----@0
+MOVE 655@-----@0
+MOVE 656@-----@0
+MOVE 657@-----@0
+MOVE 658@-----@0
+MOVE 659@-----@0
+MOVE 660@-----@0
+MOVE 661@-----@0
+MOVE 662@-----@0
+MOVE 663@-----@0
+MOVE 664@-----@0
+MOVE 665@-----@0
+MOVE 666@-----@0
+MOVE 667@-----@0
+MOVE 668@-----@0
+MOVE 669@-----@0
+MOVE 670@-----@0
+MOVE 671@-----@0
+MOVE 672@-----@0
+MOVE 673@-----@0
+MOVE 674@-----@0
+MOVE 675@-----@0
+MOVE 676@-----@0
+MOVE 677@-----@0
+MOVE 678@-----@0
+MOVE 679@-----@0
+MOVE 680@-----@0
+MOVE 681@-----@0
+MOVE 682@-----@0
+MOVE 683@-----@0
+MOVE 684@-----@0
+MOVE 685@-----@0
+MOVE 686@-----@0
+MOVE 687@-----@0
+MOVE 688@-----@0
+MOVE 689@-----@0
+MOVE 690@-----@0
+MOVE 691@-----@0
+MOVE 692@-----@0
+MOVE 693@-----@0
+MOVE 694@-----@0
+MOVE 695@-----@0
+MOVE 696@-----@0
+MOVE 697@-----@0
+MOVE 698@-----@0
+MOVE 699@-----@0
+MOVE 700@-----@0
+MOVE 701@-----@0
+MOVE 702@-----@0
+MOVE 703@-----@0
+MOVE 704@-----@0
+MOVE 705@-----@0
+MOVE 706@-----@0
+MOVE 707@-----@0
+MOVE 708@-----@0
+MOVE 709@-----@0
+MOVE 710@-----@0
+MOVE 711@-----@0
+MOVE 712@-----@0
+MOVE 713@-----@0
+MOVE 714@-----@0
+MOVE 715@-----@0
+MOVE 716@-----@0
+MOVE 717@-----@0
+MOVE 718@-----@0
+MOVE 719@-----@0
+MOVE 720@-----@0
+MOVE 721@-----@0
+MOVE 722@-----@0
+MOVE 723@-----@0
+MOVE 724@-----@0
+MOVE 725@-----@0
+MOVE 726@-----@0
+MOVE 727@-----@0
+MOVE 728@-----@0
+MOVE 729@-----@0
+MOVE 730@-----@0
+MOVE 731@-----@0
+MOVE 732@-----@0
+MOVE 733@-----@0
+MOVE 734@-----@0
+MOVE 735@-----@0
+MOVE 736@-----@0
+MOVE 737@-----@0
+MOVE 738@-----@0
+MOVE 739@-----@0
+MOVE 740@-----@0
+MOVE 741@-----@0
+MOVE 742@-----@0
+MOVE 743@-----@0
+MOVE 744@-----@0
+MOVE 745@-----@0
+MOVE 746@-----@0
+MOVE 747@-----@0
+MOVE 748@-----@0
+MOVE 749@-----@0
+MOVE 750@-----@0
+MOVE 751@-----@0
+MOVE 752@-----@0
+MOVE 753@-----@0
+MOVE 754@-----@0
+MOVE 755@-----@0
+MOVE 756@-----@0
+MOVE 757@-----@0
+MOVE 758@-----@0
+MOVE 759@-----@0
+MOVE 760@-----@0
+MOVE 761@-----@0
+MOVE 762@-----@0
+MOVE 763@-----@0
+MOVE 764@-----@0
+MOVE 765@-----@0
+MOVE 766@-----@0
+MOVE 767@-----@0
+MOVE 768@-----@0
+MOVE 769@-----@0
+MOVE 770@-----@0
+MOVE 771@-----@0
+MOVE 772@-----@0
+MOVE 773@-----@0
+MOVE 774@-----@0
+MOVE 775@-----@0
+MOVE 776@-----@0
+MOVE 777@-----@0
+MOVE 778@-----@0
+MOVE 779@-----@0
+MOVE 780@-----@0
+MOVE 781@-----@0
+MOVE 782@-----@0
+MOVE 783@-----@0
+MOVE 784@-----@0
+MOVE 785@-----@0
+MOVE 786@-----@0
+MOVE 787@-----@0
+MOVE 788@-----@0
+MOVE 789@-----@0
+MOVE 790@-----@0
+MOVE 791@-----@0
+MOVE 792@-----@0
+MOVE 793@-----@0
+MOVE 794@-----@0
+MOVE 795@-----@0
+MOVE 796@-----@0
+MOVE 797@-----@0
+MOVE 798@-----@0
+MOVE 799@-----@0
+MOVE 800@-----@0
+MOVE 801@-----@0
+MOVE 802@-----@0
+MOVE 803@-----@0
+MOVE 804@-----@0
+MOVE 805@-----@0
+MOVE 806@-----@0
+MOVE 807@-----@0
+MOVE 808@-----@0
+MOVE 809@-----@0
+MOVE 810@-----@0
+MOVE 811@-----@0
+MOVE 812@-----@0
+MOVE 813@-----@0
+MOVE 814@-----@0
+MOVE 815@-----@0
+MOVE 816@-----@0
+MOVE 817@-----@0
+MOVE 818@-----@0
+MOVE 819@-----@0
+MOVE 820@-----@0
+MOVE 821@-----@0
+MOVE 822@-----@0
+MOVE 823@-----@0
+MOVE 824@-----@0
+MOVE 825@-----@0
+MOVE 826@-----@0
+MOVE 827@-----@0
+MOVE 828@-----@0
+MOVE 829@-----@0
+MOVE 830@-----@0
+MOVE 831@-----@0
+MOVE 832@-----@0
+MOVE 833@-----@0
+MOVE 834@-----@0
+MOVE 835@-----@0
+MOVE 836@-----@0
+MOVE 837@-----@0
+MOVE 838@-----@0
+MOVE 839@-----@0
+MOVE 840@-----@0
+MOVE 841@-----@0
+MOVE 842@-----@0
+MOVE 843@-----@0
+MOVE 844@-----@0
+MOVE 845@-----@0
+MOVE 846@-----@0
+MOVE 847@-----@0
+MOVE 848@-----@0
+MOVE 849@-----@0
+MOVE 850@-----@0
+MOVE 851@-----@0
+MOVE 852@-----@0
+MOVE 853@-----@0
+MOVE 854@-----@0
+MOVE 855@-----@0
+MOVE 856@-----@0
+MOVE 857@-----@0
+MOVE 858@-----@0
+MOVE 859@-----@0
+MOVE 860@-----@0
+MOVE 861@-----@0
+MOVE 862@-----@0
+MOVE 863@-----@0
+MOVE 864@-----@0
+MOVE 865@-----@0
+MOVE 866@-----@0
+MOVE 867@-----@0
+MOVE 868@-----@0
+MOVE 869@-----@0
+MOVE 870@-----@0
+MOVE 871@-----@0
+MOVE 872@-----@0
+MOVE 873@-----@0
+MOVE 874@-----@0
+MOVE 875@-----@0
+MOVE 876@-----@0
+MOVE 877@-----@0
+MOVE 878@-----@0
+MOVE 879@-----@0
+MOVE 880@-----@0
+MOVE 881@-----@0
+MOVE 882@-----@0
+MOVE 883@-----@0
+MOVE 884@-----@0
+MOVE 885@-----@0
+MOVE 886@-----@0
+MOVE 887@-----@0
+MOVE 888@-----@0
+MOVE 889@-----@0
+MOVE 890@-----@0
+MOVE 891@-----@0
+MOVE 892@-----@0
+MOVE 893@-----@0
+MOVE 894@-----@0
+MOVE 895@-----@0
+MOVE 896@-----@0
+MOVE 897@-----@0
+MOVE 898@-----@0
+MOVE 899@-----@0
+MOVE 900@-----@0
+MOVE 901@-----@0
+MOVE 902@-----@0
+MOVE 903@-----@0
+MOVE 904@-----@0
+Icebolt Wave@Attacks the foe with both electric and icy energy.@16
+Stardust@A shower of stars that rains down on the foe.@8
+Raze Earth@An earth-shaking attack that also hurts the user.@4
+Devastate@A furious rampage that may lower the foe’s DEFENSE.@17
+Grandboulder@Buries the foe in rock. May cause flinching.@5
+Possess@Briefly possesses the foe’s body. May cause confusion.@7
+Soul Break@Directly attacks the foe’s soul. May cause confusion.@7
+Metal Blast@Releases stored energy as pure destructive force.@8
+Magma Rush@A charge cloaked in magma. May sharply raise Speed.@10
+Crash Impact@Forcefully smashes itself into the foe. Confuses the user.@0
+Spin Tail@Smacks the foe with a rotating tail. May raise Speed.@0
+Double Spin@A spinning attack that hits twice. May raise Attack.@0
+Tone-Deaf@May lower the foe’s Sp. Def or cause it to become confused.@0
+Dizzy Whirl@Raises Speed and sharply raises evasiveness, but lowers accuracy.@0
+Deep Yawn@The user yawns deeply, causing the foe to fall asleep immediately.@0
+Raging Flame@Channels anger into flames. May also confuse the user.@10
+Magma Ring@Prevents the foe from switching out. Certain to hit.@10
+Wave Splash@Stirs up water and splashes it. May raise evasiveness.@11
+Deluge@Sharply reduces the user’s Sp. Atk stat after use.@11
+Aqua Bolt@Shoots electrically charged water. May also paralyze.@11
+Giga Spark@A high-voltage attack. May sharply lower user’s Def.    @13
+Shine Bomb@An intensely shining explosion that may lower accuracy.@13
+Megashock@An intense shock wave. May sharply lower Defense.@13
+Mach Bolt@A shock delivered at sonic speed. Always goes first.@13
+Energize@The user stores up static electricity, raising the Attack and Sp. Atk stats.@13
+Wild Growth@Attacks with thickly grown plant matter. May lower Speed.@12
+Guardianleaf@Attacks with highly tough plant matter. May raise Defense.@12
+Poison Leaf@Slices with toxin- covered leaves. May also poison.@3
+Rapid Growth@The user grows in size quickly. May raise Sp. Atk.@12
+Dazzlepowder@Covers the foe in a puzzling powder that causes it to become confused.@12
+Starfreeze@Launches many cold, starshaped objects. May also paralyze.@15
+Icicle Punch@Strikes with a fist like an icicle. May lower evasiveness.@15
+Frostbite@Coats the foe in painfully cold ice. May raise Sp. Atk. @15
+Icy Kiss@A cold kiss that may lower Defense. May also freeze.@15
+Magnum Punch@A punch that may also lower Defense or cause flinching.@1
+Double Shot@Hits twice in a row. May also raise the user’s accuracy.@1
+Toxin Spray@Scatters deadly toxins on the foe. May also poison.@3
+Smogscreen@Toxic fumes that may lower accuracy or inflict poison.@3
+Burrow@Strikes from below. May also sharply lower Speed.@4
+Sonic Sand@Fast-moving sand. May also sharply lower Sp. Def.@4
+Sandblast@Blows many fine grains of sand. May lower accuracy.@4
+Glide@The user flies with wings spread wide. May raise accuracy.@2
+Typhoon@May also randomly raise or lower the user’s stats.@2
+Psygatling@Shoots out mental bullets. May also burn the user.@14
+Psycho Punch@Hits the foe using a mysterious power. May also confuse.@14
+Psyburn@Creates flames with a mysterious power. May raise Sp. Def.@14
+Latent Power@Emits energy that sharply raises the foe’s evasiveness.@14
+Hypnopulse@Shoots out a pulse that may cause the foe to fall asleep.@14
+Gravity Wave@Manipulates gravity, dealing damage based on weight.@14
+Bug Noise@Overwhelms the foe with sound. It may paralyze the user.@6
+Angry Swarm@An attack that may confuse the foe or lower its accuracy.@6
+Rock Tumble@A 5-turn rolling attack that becomes stronger each hit.@5
+Diamondblast@A sparkling shock wave. May lower the user’s Sp. Def.@5
+Paleobreath@Breathes out the energy of the past. May raise Sp. Atk.@5
+Shadow Clamp@A persistent bite. May also inflict confusion or sleep.@7
+Cursed Wrath@Becomes more powerful the less HP the user has.@7
+Life Drain@Always leaves the foe with at least 1 HP.@7
+Dragon Beat@A rhythmic attack. May sharply raise the foe’s Attack.@16
+Vengeance@Gains intensity if the target has hurt the user.@17
+Dark Resolve@Infects the foe with darkness, poisoning the user.@17
+Dark Cutter@A sharp wind with a high critical-hit ratio cuts the foe.@17
+Dark Roar@Emits a roar filled with darkness that always goes first.@17
+Dark Hand@The user carefully decides where to aim next, sharply raising accuracy.@17
+Corner@Cuts off all escape routes, trapping the foe. Can’t miss.@17
+Metal Pincer@Slices with limbs made of steel. Hits three times.@8
+Geo Impact@An enormous impact. May sharply raise the foe’s Sp. Atk.@8
+Magnet Force@A magnetic-field attack. May lower Attack or Sp. Atk.@8
+Nova Inferno@Lowers the user’s Defense, Sp. Def, and Speed stats.@16
+Raid@May inflict a status problem depending on the weather.@6
+Sharpshoot@A critical hit will do even more damage than usual.@17
+Cross Cutter@Has a high critical hit ratio.@6
+Coin Hurl@Stronger the more money the owner has.@0
+Megaphone@A loud noise that lowers Sp. Atk.@0
+Rock Head@An attack that may cause flinching.@5
+Dark Beam@A negative ray that lowers the foes' accuracy.@17
+Heaven Beam@A beam of light that cuts the opponent's speed.@0

@@ -1,0 +1,78 @@
+-------@No special ability.
+Stench@Helps repel wild Pok#mon.
+Drizzle@Summons rain in battle.
+Speed Boost@Gradually boosts Speed.
+Battle Armor@Blocks critical hits.
+Sturdy@Negates 1-hit KO Attacks.
+Damp@Prevents self-destruction.
+Limber@Prevents paralysis.
+Sand Veil@Ups evasion in a sandstorm.
+Static@Paralyzes on contact.
+Volt Absorb@Turns electricity into HP.
+Water Absorb@Changes water into HP.
+Oblivious@Prevents attraction.
+Cloud Nine@Negates weather effects.
+Compoundeyes@Raises accuracy.
+Insomnia@Prevents sleep.
+Color Change@Changes type to foe’s move.
+Immunity@Prevents poisoning.
+Flash Fire@Powers up if hit by fire.
+Shield Dust@Prevents added effects.
+Own Tempo@Prevents confusion.
+Suction Cups@Firmly anchors the body.
+Intimidate@Lowers the foe’s Attack.
+Shadow Tag@Prevents the foe’s escape.
+Rough Skin@Hurts to touch.
+Wonder Guard@“Super effective” hits.
+Levitate@Not hit by Ground-type Attacks.
+Effect Spore@Leaves spores on contact.
+Synchronize@Passes on status problems.
+Clear Body@Prevents ability reduction.
+Natural Cure@Heals upon switching out.
+Lightningrod@Draws electrical moves.
+Serene Grace@Promotes added effects.
+Swift Swim@Raises Speed in rain.
+Chlorophyll@Raises Speed in sunshine.
+Illuminate@Encounter rate increases.
+Trace@Copies special ability.
+Huge Power@Raises Attack.
+Poison Point@Poisons foe on contact.
+Inner Focus@Prevents flinching.
+Magma Armor@Prevents freezing.
+Water Veil@Prevents burns.
+Magnet Pull@Traps Steel-type Pok#mon.
+Soundproof@Avoids sound-based moves.
+Rain Dish@Slight HP recovery in rain.
+Sand Stream@Summons a sandstorm.
+Pressure@Raises foe’s PP usage.
+Thick Fat@Heat-and-cold protection.
+Early Bird@Awakens quickly from sleep.
+Flame Body@Burns the foe on contact.
+Run Away@Makes escaping easier.
+Keen Eye@Prevents loss of accuracy.
+Hyper Cutter@Prevents Attack reduction.
+Pickup@May pick up items.
+Truant@Moves only every two turns.
+Hustle@Trades accuracy for power.
+Cute Charm@Infatuates on contact.
+Plus@Powers up with Minus.
+Minus@Powers up with Plus.
+Forecast@Changes with the weather.
+Sticky Hold@Prevents item theft.
+Shed Skin@Heals the body by shedding.
+Guts@Ups Attack if suffering.
+Marvel Scale@Ups Defense if suffering.
+Liquid Ooze@Draining causes injury.
+Overgrow@Ups Grass-type moves in a pinch.
+Blaze@Ups Fire-type moves in a pinch.
+Torrent@Ups Water-type moves in a pinch.
+Swarm@Ups Bug-type moves in a pinch.
+Rock Head@Prevents recoil damage.
+Drought@Summons sunlight in battle.
+Arena Trap@Prevents fleeing.
+Vital Spirit@Prevents sleep.
+White Smoke@Prevents ability reduction.
+Pure Power@Raises Attack.
+Shell Armor@Blocks critical hits.
+Cacophony@Avoids sound-based moves.
+Air Lock@Negates weather effects.
