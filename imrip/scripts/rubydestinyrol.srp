@@ -1,0 +1,46 @@
+@include "std.srp"
+
+set table_front $1E8354
+set table_normal_pal $1EA5B4
+set table_shiny_pal $1EB374
+set table_icon $3BBD20
+set table_icon_pal_i $3BC400
+set table_icon_pals $E966D8
+
+set indhit list{}
+
+for i 1, 387
+	set ind getdata{"nat_dex", "parent"}[i]
+	set ind2 getdata{"nat_dex"}[i]
+	if !ind2 == 0
+		if !checkhit{hitlist, ind2}
+			push indhit ind2
+
+			set sprN_sprS getFrontSprites3{table_front, table_normal_pal, table_shiny_pal, ind}
+			set sprN sprN_sprS[0]
+			set sprS sprN_sprS[1]
+			set sprI getIcon3{table_icon, table_icon_pal_i, table_icon_pals, ind}
+
+			if ind2 < len{flood_coords}
+				set cur_flood flood_coords[ind2]
+			else
+				set cur_flood list{}
+			end
+
+			if len{cur_flood} > 0
+				for j 0, len{cur_flood} / 2
+					set flood_x cur_flood[j * 2]
+					set flood_y cur_flood[j * 2 + 1]
+					set sprN floodtp{sprN, flood_x, flood_y}
+					set sprS floodtp{sprS, flood_x, flood_y}
+				end
+			end
+
+			outim sprN fileout{"mon", ind2, "front_normal.png"}
+			outim sprS fileout{"mon", ind2, "front_shiny.png"}
+			outim sprI fileout{"mon", ind2, "icon.png"}
+		end
+	end
+end
+
+return indhit

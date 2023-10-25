@@ -1,0 +1,8 @@
+set flood_coords list{}
+for i 0, 1048
+	push flood_coords list{}
+end
+push flood_coords list{0, 0}
+
+set reserved_icons list{}
+push reserved_icons 1049

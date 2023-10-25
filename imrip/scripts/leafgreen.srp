@@ -1,0 +1,158 @@
+@include "std.srp"
+
+set tF @3 $128
+set tN @3 $130
+set tS @3 $134
+set tI @3 $138
+set tP @3 $13C
+
+if romcrc{} == $D69C96CC
+	set tL $3D357C
+	set tFP $43F8EC
+else
+	set tL $3D35EC
+	set tFP $43F95C
+end
+
+set indhit list{}
+for i 1, 387
+	set ind getdata{"nat_dex"}[i]
+	if ind == 274
+		set ind 410
+	end
+	if (!checkhit{hitlist, ind}) || (ind == 410)
+		push indhit ind
+
+		set sprN_sprS getFrontSprites3{tF, tN, tS, ind}
+		set sprN sprN_sprS[0]
+		set sprS sprN_sprS[1]
+		set sprI getIcon3{tI, tP, tL, ind}
+		set sprFP getFootprint3{tFP, ind}
+
+		outim sprN fileout{"mon", ind, "front_normal.png"}
+		outim sprS fileout{"mon", ind, "front_shiny.png"}
+		outim sprFP fileout{"mon", ind, "footprint.png"}
+		outim sprI fileout{"mon", ind, "icon.png"}
+		if ind == 410
+			outim sprFP fileout{"mon", 273, "footprint.png"}
+			outim sprFP fileout{"mon", 274, "footprint.png"}
+			outim sprFP fileout{"mon", 275, "footprint.png"}
+		end
+		if ind == 385
+			outim sprI fileout{"mon", 269, "icon.png"}
+			outim sprI fileout{"mon", 270, "icon.png"}
+			outim sprI fileout{"mon", 271, "icon.png"}
+			outim sprFP fileout{"mon", 269, "footprint.png"}
+			outim sprFP fileout{"mon", 270, "footprint.png"}
+			outim sprFP fileout{"mon", 271, "footprint.png"}
+		end
+
+		if ind == 201
+			for ui 0, 28
+				if ui < 26
+					set ltr char{ui + 65}
+				else
+					if ui == 26
+						set ltr "EXC"
+					else
+						set ltr "QUE"
+					end
+				end
+				if ui == 0
+					set unown_ind 201
+				else
+					set unown_ind 412 + ui
+				end
+
+				set sprN_sprS getFrontSprites3{tF, tN, tS, unown_ind}
+				set sprN sprN_sprS[0]
+				set sprS sprN_sprS[1]
+				set sprI getIcon3{tI, tP, tL, unown_ind}
+
+				outim sprN fileout{"unown", ltr, "front_{}_normal.png"}
+				outim sprS fileout{"unown", ltr, "front_{}_shiny.png"}
+				outim sprI fileout{"unown", ltr, "icon_{}.png"}
+
+			end
+		end
+		if ind == 410
+			seek3 tF + (8 * ind)
+			seek3@
+			set datF lz77{}
+			set datF clip{datF, $800, $1000}
+			seek3 tN + (8 * ind)
+			seek3@
+			set datN lz77{}
+			seek3 tS + (8 * ind)
+			seek3@
+			set datS lz77{}
+			set sprSpeedN make3{datF, datN, 8}
+			set sprSpeedS make3{datF, datS, 8}
+			outim sprSpeedN fileout{"mon", 274, "front_normal.png"}
+			outim sprSpeedS fileout{"mon", 274, "front_shiny.png"}
+			push indhit 274
+		
+			seek3 tI + (ind * 4)
+			seek3@
+			set _ fread{$400}
+			set datI fread{$200}
+			seek3 tP + ind
+			set datP int{fread{1}}
+			seek3 tL + (datP * $20)
+			set datL fread{$20}
+			set sprIco make3{datI, datL, 4}
+			outim sprIco fileout{"mon", 274, "icon.png"}
+		end
+		if ind == 385
+			seek3 tF + (8 * ind)
+			seek3@
+			set datF lz77{}
+			set datF_sunny clip{datF, $800, $1000}
+			set datF_rainy clip{datF, $1000, $1800}
+			set datF_snowy clip{datF, $1800, $2000}
+
+			seek3 tN + (8 * ind)
+			seek3@
+			set datN lz77{}
+			set datN_sunny clip{datN, $20, $40}
+			set datN_rainy clip{datN, $40, $60}
+			set datN_snowy clip{datN, $60, $80}
+
+			seek3 tS + (8 * ind)
+			seek3@
+			set datS lz77{}
+			set datS_sunny clip{datS, $20, $40}
+			set datS_rainy clip{datS, $40, $60}
+			set datS_snowy clip{datS, $60, $80}
+
+			set sprN_sunny make3{datF_sunny, datN_sunny, 8}
+			set sprN_rainy make3{datF_rainy, datN_rainy, 8}
+			set sprN_snowy make3{datF_snowy, datN_snowy, 8}
+			set sprS_sunny make3{datF_sunny, datS_sunny, 8}
+			set sprS_rainy make3{datF_rainy, datS_rainy, 8}
+			set sprS_snowy make3{datF_snowy, datS_snowy, 8}
+
+			outim sprN_sunny fileout{"mon", 269, "front_normal.png"}
+			outim sprN_rainy fileout{"mon", 270, "front_normal.png"}
+			outim sprN_snowy fileout{"mon", 271, "front_normal.png"}
+			outim sprS_sunny fileout{"mon", 269, "front_shiny.png"}
+			outim sprS_rainy fileout{"mon", 270, "front_shiny.png"}
+			outim sprS_snowy fileout{"mon", 271, "front_shiny.png"}
+
+			push indhit 269
+			push indhit 270
+			push indhit 271
+		end
+	end
+end
+
+set sprN_sprS getFrontSprites3{tF, tN, tS, 412}
+set sprN sprN_sprS[0]
+set sprS sprN_sprS[1]
+set sprI getIcon3{tI, tP, tL, 412}
+
+outim sprN fileout{"egg", 0, "front_normal.png"}
+outim sprS fileout{"egg", 0, "front_shiny.png"}
+outim sprI fileout{"egg", 0, "icon.png"}
+
+return indhit

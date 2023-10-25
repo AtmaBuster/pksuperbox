@@ -1,0 +1,37 @@
+@include "std.srp"
+
+set indhit list{}
+
+for i 152, 254
+	set parent_data getdata{"nat_dex", "parent"}
+	if i >= len{parent_data}
+		set ind i
+	else
+		set ind parent_data[i]
+	end
+	set ind2 getdata{"nat_dex"}[i]
+	if ind2 != 0
+		if ind != 201
+			if !checkhit{hitlist, ind2}
+				push indhit ind2
+
+				set sprs getFrontSprites2{$120000, $A8D2, $36, $51390, ind}
+
+				set spr_n sprs[0]
+				set spr_s sprs[1]
+
+				set spr_fp getFootprint2{$F8FAA, ind}
+
+				set spr_ico getIcon2{$8D20C, $8D309, ind}
+
+				outim spr_n fileout{"mon", ind2, "front_normal.png"}
+				outim spr_s fileout{"mon", ind2, "front_shiny.png"}
+				outim spr_fp fileout{"mon", ind2, "footprint.png"}
+				outim spr_ico fileout{"mon", ind2, "icon.png"}
+
+			end
+		end
+	end
+end
+
+return indhit

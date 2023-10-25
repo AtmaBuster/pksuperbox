@@ -1,0 +1,178 @@
+@include "std_data.srp"
+
+def getFrontSprites2{table_sprite table_pal bank_offset table_base ind}
+	seek2 table_sprite + (6 * (ind - 1))
+	set dest_bank int{fread{1}}
+	set dest_addr int{fread{2}}
+	set dest_bank dest_bank + bank_offset
+	seek2 dest_bank, dest_addr
+	set data_front lzi{}
+
+	seek2 table_pal + (8 * ind)
+	set data_pal_n bytes{$FF, $7F} + fread{4} + bytes{$00, $00}
+	set data_pal_s bytes{$FF, $7F} + fread{4} + bytes{$00, $00}
+
+	seek2 table_base + (32 * ind) + 17
+	set spr_size int{fread{1}} / $10
+
+	set data_front clip{data_front, spr_size * spr_size * $10}
+
+	set spr_n make2{data_front, data_pal_n, spr_size, 1}
+	set spr_s make2{data_front, data_pal_s, spr_size, 1}
+
+	set spr_n center2{spr_n, spr_size}
+	set spr_s center2{spr_s, spr_size}
+
+	set spr_n floodtp{spr_n, 0, 0}
+	set spr_s floodtp{spr_s, 0, 0}
+
+	return array{spr_n, spr_s}
+
+end
+
+def getFrontSprites3{table_sprite table_pal_n table_pal_s ind}
+
+	seek3 table_sprite + (8 * ind)
+	seek3@
+	set data_front lz77{}
+	set data_front clip{data_front, $800}
+
+	seek3 table_pal_n + (8 * ind)
+	seek3@
+	set data_pal_n lz77{}
+
+	seek3 table_pal_s + (8 * ind)
+	seek3@
+	set data_pal_s lz77{}
+
+	set spr_n make3{data_front, data_pal_n, 8}
+	set spr_s make3{data_front, data_pal_s, 8}
+
+	return array{spr_n, spr_s}
+
+end
+
+def getIcon2{table_sprite_i table_sprite ind}
+
+	seek2 table_sprite_i + (ind - 1)
+	set sprite_ind int{fread{1}}
+
+	seek2 table_sprite + (sprite_ind * 2)
+	seek2@
+
+	set data_icon fread{$40}
+	set data_pal bytes{$FB, $6F, $7F, $2A, $FF, $04, $00, $00}
+	set spr_i make2{data_icon, data_pal, 2, 0}
+
+	set spr_i_f image{32, 32, $6FFB}
+	set spr_i paste{spr_i, 8, 12, spr_i_f}
+
+	set spr_i floodtp{spr_i, 0, 0}
+
+	return spr_i
+
+end
+
+def getIcon3{table_sprite table_pal_i table_pal ind}
+
+	seek3 table_sprite + (ind * 4)
+	seek3@
+	set data_icon fread{$200}
+
+	seek3 table_pal_i + ind
+	set data_pal_i int{fread{1}}
+
+	seek3 table_pal + (data_pal_i * $20)
+	set data_pal fread{$20}
+
+	set spr_i make3{data_icon, data_pal, 4}
+
+	return spr_i
+
+end
+
+def getFootprint2{table_footprint ind}
+
+	set base_loc table_footprint + ((ind - 1) / 8 * $100) + ((ind - 1) % 8 * $10)
+
+	seek2 base_loc
+	set data_print_u fread{$10}
+	seek2 base_loc + $80
+	set data_print_l fread{$10}
+
+	set data_print swapbits{revbits{data_print_u + data_print_l}}
+
+	set datBWPal bytes{0, 0, 0, 0}
+
+	set spr_f make1bpp{data_print, datBWPal, 2}
+
+	return spr_f
+
+end
+
+def getFootprint3{table_footprint ind}
+
+	seek3 table_footprint + (4 * ind)
+	seek3@
+	set data_print fread{$20}
+
+	set datBWPal bytes{0, 0, 0, 0}
+
+	set spr_f make1bpp{data_print, datBWPal, 2}
+
+	return spr_f
+
+end
+
+def iterOverMons3H{addrs num_mons}
+	set table_front addrs[0]
+	set table_normal_pal addrs[1]
+	set table_shiny_pal addrs[2]
+	set table_icon addrs[3]
+	set table_icon_pal_i addrs[4]
+	set table_icon_pals addrs[5]
+	set table_footprint addrs[6]
+
+	set indhit list{}
+
+	for i 1, num_mons + 1
+		set ind getdata{"nat_dex", "parent"}[i]
+		set ind2 getdata{"nat_dex"}[i]
+		if !ind2 == 0
+			if !checkhit{hitlist, ind2}
+				push indhit ind2
+
+				set sprN_sprS getFrontSprites3{table_front, table_normal_pal, table_shiny_pal, ind}
+				set sprN sprN_sprS[0]
+				set sprS sprN_sprS[1]
+				set sprI getIcon3{table_icon, table_icon_pal_i, table_icon_pals, ind}
+				set sprFP getFootprint3{table_footprint, ind}
+
+				if ind2 < len{flood_coords}
+					set cur_flood flood_coords[ind2]
+				else
+					set cur_flood list{}
+				end
+
+				if len{cur_flood} > 0
+					for j 0, len{cur_flood} / 2
+						set flood_x cur_flood[j * 2]
+						set flood_y cur_flood[j * 2 + 1]
+						set sprN floodtp{sprN, flood_x, flood_y}
+						set sprS floodtp{sprS, flood_x, flood_y}
+					end
+				end
+
+				outim sprN fileout{"mon", ind2, "front_normal.png"}
+				outim sprS fileout{"mon", ind2, "front_shiny.png"}
+				if !has{reserved_icons, ind2}
+					outim sprI fileout{"mon", ind2, "icon.png"}
+				end
+				outim sprFP fileout{"mon", ind2, "footprint.png"}
+			end
+		end
+	end
+
+	return indhit
+
+end

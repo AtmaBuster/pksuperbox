@@ -1,0 +1,32 @@
+@include "std.srp"
+
+set tF @3 $128
+set tN @3 $130
+set tS @3 $134
+set tI @3 $138
+set tP @3 $13C
+set tL $DDE1F8
+set tFP $56E694
+set indhit list{}
+
+for i 1, 387
+	set ind getdata{"nat_dex", "parent"}[i]
+	set ind2 getdata{"nat_dex"}[i]
+	if !ind2 == 0
+		if !checkhit{hitlist, ind2}
+			push indhit ind2
+
+			set sprN_sprS getFrontSprites3{tF, tN, tS, ind}
+			set sprN sprN_sprS[0]
+			set sprS sprN_sprS[1]
+			set sprI getIcon3{tI, tP, tL, ind}
+			set sprFP getFootprint3{tFP, ind}
+
+			outim sprN fileout{"mon", ind2, "front_normal.png"}
+			outim sprS fileout{"mon", ind2, "front_shiny.png"}
+			outim sprI fileout{"mon", ind2, "icon.png"}
+			outim sprFP fileout{"mon", ind2, "footprint.png"}
+		end
+	end
+end
+return indhit

@@ -1,2 +1,4 @@
 
 *.pyc
+bank.dat
+settings.json

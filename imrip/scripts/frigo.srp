@@ -1,0 +1,14 @@
+@include "std.srp"
+
+set addrs list{}
+push addrs $1E8354
+push addrs $1EA5B4
+push addrs $1EB374
+push addrs $3BBD20
+push addrs $3BC400
+push addrs $E966D8
+push addrs $3B4EE4
+
+set indhit iterOverMons3H{addrs, 150}
+
+return indhit
