@@ -2,3 +2,5 @@
 *.pyc
 save/bank.dat
 save/settings.json
+save/file_history.json
+textlist.txt

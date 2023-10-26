@@ -1,17 +1,20 @@
-import poke, pokedb, by, pokestr, gamedb, random
+import poke, pokedb, by, pokestr, gamedb, random, os.path
 from zlib import crc32
+
+def getcrc(path):
+	return crc32(open(path, 'rb').read())
 
 sseek = lambda f, a, p: f.seek(p[a[0]] + a[1])
 
 class Save1:
-	def __init__(self, rom_path, sav_path):
+	def __init__(self, rom_path, sav_path, loadfull=True):
 		self.sav_path = sav_path
 		# get rom crc, so we know which game we're targeting
 		rom_f = open(rom_path, 'rb')
 		crc = crc32(rom_f.read())
 		if not crc in gamedb.GAME_CRC.keys():
 			raise Exception(f'Invalid ROM CRC : {crc:0>8X}')
-		self.game, self.is_jpn, self.v_id, self.game_name = gamedb.GAME_CRC[crc]
+		self.game, self.is_jpn, self.v_id, self.game_name, self.game_ico_i = gamedb.GAME_CRC[crc]
 
 		save_f = open(self.sav_path, 'rb')
 		self.valid = True
@@ -30,7 +33,10 @@ class Save1:
 		self.game_data['player_sid'] = poke.name_hash(self.game_data['player_name']) ^ self.game_data['player_tid']
 
 		self.pokedex_data = self.get_pokedex_data(save_f)
-		self.box_data = self.get_box_data(save_f)
+		if loadfull:
+			self.box_data = self.get_box_data(save_f)
+		else:
+			self.box_data = None
 
 	def read_data_from_save(self, save_f, key, typ):
 		addr = gamedb.get_game_info(self.game, 'A_' + key)
@@ -317,14 +323,14 @@ class Save1:
 		return by.eb(mon_ct) + spc + mon_data + ot_names + monnicks
 
 class Save2:
-	def __init__(self, rom_path, sav_path):
+	def __init__(self, rom_path, sav_path, loadfull=True):
 		self.sav_path = sav_path
 		# get rom crc, so we know which game we're targeting
 		rom_f = open(rom_path, 'rb')
 		crc = crc32(rom_f.read())
 		if not crc in gamedb.GAME_CRC.keys():
 			raise Exception(f'Invalid ROM CRC : {crc:0>8X}')
-		self.game, self.is_jpn, self.v_id, self.game_name = gamedb.GAME_CRC[crc]
+		self.game, self.is_jpn, self.v_id, self.game_name, self.game_ico_i = gamedb.GAME_CRC[crc]
 
 		save_f = open(self.sav_path, 'rb')
 		self.valid = True
@@ -347,7 +353,10 @@ class Save2:
 		self.game_data['player_sid'] = poke.name_hash(self.game_data['player_name']) ^ self.game_data['player_tid']
 
 		self.pokedex_data = self.get_pokedex_data(save_f)
-		self.box_data = self.get_box_data(save_f)
+		if loadfull:
+			self.box_data = self.get_box_data(save_f)
+		else:
+			self.box_data = None
 
 	def read_data_from_save(self, save_f, key, typ):
 		addr = gamedb.get_game_info(self.game, 'A_' + key)
@@ -587,14 +596,14 @@ class Save2:
 		return by.eb(mon_ct) + spc + mon_data + ot_names + monnicks
 
 class Save3:
-	def __init__(self, rom_path, sav_path):
+	def __init__(self, rom_path, sav_path, loadfull=True):
 		self.sav_path = sav_path
 		# get rom crc, so we know which game we're targeting
 		rom_f = open(rom_path, 'rb')
 		crc = crc32(rom_f.read())
 		if not crc in gamedb.GAME_CRC.keys():
 			raise Exception(f'Invalid ROM CRC : {crc:0>8X}')
-		self.game, self.is_jpn, self.v_id, self.game_name = gamedb.GAME_CRC[crc]
+		self.game, self.is_jpn, self.v_id, self.game_name, self.game_ico_i = gamedb.GAME_CRC[crc]
 		# figure out if save is initialized, and which slot is the
 		# current one. then get section pointers
 		save_f = open(self.sav_path, 'rb')
@@ -625,7 +634,10 @@ class Save3:
 		if self.pokedex_data is None:
 			self.valid = False
 			return
-		self.box_data = self.get_box_data(save_f)
+		if loadfull:
+			self.box_data = self.get_box_data(save_f)
+		else:
+			self.box_data = None
 
 	def read_data_from_save(self, save_f, key, typ):
 		addr = gamedb.get_game_info(self.game, 'A_' + key)
@@ -1010,32 +1022,35 @@ class Save3:
 		# ~ gift.game_id = 'Emerald'
 		# ~ self.box_data[0][target_slot[0]][target_slot[1]] = gift
 
-def load_save_n(n, path_g, path_s):
+def load_save_n(n, path_g, path_s, loadfull=True):
 	cls = (None, Save1, Save2, Save3)[n]
-	sav = cls(path_g, path_s)
+	sav = cls(path_g, path_s, loadfull)
 	if not sav.valid: return None
 	return sav
 
-load_save3 = lambda g, s: load_save_n(3, g, s)
-load_save2 = lambda g, s: load_save_n(2, g, s)
-load_save1 = lambda g, s: load_save_n(1, g, s)
+load_save3 = lambda g, s, f=True: load_save_n(3, g, s, f)
+load_save2 = lambda g, s, f=True: load_save_n(2, g, s, f)
+load_save1 = lambda g, s, f=True: load_save_n(1, g, s, f)
 
-def load_save(path):
-	# path should be of filetype .sav
-	# and the directory should have the rom file in it
+def get_rom_pair_file(path):
+	# get the corresponding rom file to go with this .sav
 	fn, ext = path.rsplit('.', 1)
-	assert ext == 'sav'
-	# find rom file
 	possible_ext = ('gba', 'gbc', 'gb', 'sgb')
 	for ext_chk in possible_ext:
 		rom_path = '.'.join((fn, ext_chk))
-		try:
-			rom_chk = open(rom_path, 'rb')
-		except:
-			continue
-		break
+		if os.path.exists(rom_path) and os.path.isfile(rom_path):
+			break
 	else:
 		return None
+	return rom_path
+
+def load_save(path, loadfull=True):
+	# path should be of filetype .sav
+	# and the directory should have the rom file in it
+	rom_path = get_rom_pair_file(path)
+	if rom_path is None:
+		return None
+	rom_chk = open(rom_path, 'rb')
 	crc = crc32(rom_chk.read())
 	if not crc in gamedb.GAME_CRC.keys():
 		print(f'{crc:0>8X}')
@@ -1044,11 +1059,11 @@ def load_save(path):
 	game = gamedb.GAME_DATA[game_dat[0]]
 	gen = game['gen']
 	if gen == 3:
-		return load_save3(rom_path, path)
+		return load_save3(rom_path, path, loadfull)
 	elif gen == 2:
-		return load_save2(rom_path, path)
+		return load_save2(rom_path, path, loadfull)
 	elif gen == 1:
-		return load_save1(rom_path, path)
+		return load_save1(rom_path, path, loadfull)
 
 def print_save_profile(sav):
 	# ~ game_name = gamedb.get_game_info(sav.game, 'name')

@@ -1,4 +1,6 @@
 data = (
+	('back',),
+
 	('lang', 24, 0),
 	('down', 3),
 
@@ -37,6 +39,4 @@ data = (
 	('down', 9),
 	('link', 'Patreon', 'https://patreon.com/user?u=103701668&utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link', 0),
 	('down', 1),
-
-	('back',),
 )

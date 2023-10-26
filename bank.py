@@ -11,7 +11,7 @@ import pyperclip
 import pygame, threading, math, webbrowser
 import zlib, json, random, os, os.path, re, time
 import poke, save, argparse
-import pokedb, gamedb, textdb
+import pokedb, gamedb, textdb, by
 import tkinter as tk
 from tkinter import filedialog
 import creditsdata as cred
@@ -47,6 +47,7 @@ class Globals:
 
 		self.missing_asset = pygame.image.load('assets/image/missing.png')
 		self.hover_box_tiles = pygame.image.load('assets/image/hover_box_tiles.png')
+		self.game_icons = pygame.image.load('assets/image/game_icons.png')
 
 		self.show_hidden_button_rects = False
 
@@ -66,6 +67,9 @@ class Globals:
 		if i > 4: x -= 8
 		y = self.window_frame * 8
 		return self.window_frames_surf.subsurface(pygame.Rect(x, y, 8, 8))
+
+	def get_game_icon(self, i):
+		return self.game_icons.subsurface(pygame.Rect(i*32, 0, 32, 32))
 
 	def change_text_speed(self, diff):
 		self.text_speed_ind = min(max(self.text_speed_ind + diff, 0), len(TEXT_SPEEDS) - 1)
@@ -118,6 +122,21 @@ def make_hover_box(txt):
 	s_out.blit(GL.hover_box_tiles, (w-10, h-5), pygame.Rect(10, 5, 10, 5))
 	s_out.fill(HOVER_BOX_COLORS[3], pygame.Rect(10, 5, w-20, h-10))
 	s_out.blit(txt_s, (10, 5))
+	return s_out
+
+def make_game_button_surf(crc):
+	s_out = pygame.Surface((300, 32), pygame.SRCALPHA)
+	game_hdr = gamedb.GAME_CRC[crc]
+	game_dat = gamedb.GAME_DATA[game_hdr[0]]
+	nam = game_hdr[3]
+	ico_i = game_hdr[4]
+	gen = game_dat['gen']
+
+	s_out.blit(GL.get_game_icon(ico_i), (0, 0))
+	s_out.blit(GL.font.render_line(nam, TXT_COL_DARK), (36, 0))
+	s_out.blit(GL.font.render_line(f'Gen {gen}', TXT_COL_DARK), (36, 16))
+	if game_dat['is_hack']:
+		s_out.blit(GL.font.render_line('ROM Hack', TXT_COL_DARK), (128, 16))
 	return s_out
 
 def get_screen_dim():
@@ -963,6 +982,7 @@ class Game:
 		'box_button_sort': 'box/sort_button.png',
 		'dex_scroll_indicator': 'dex/scroll_indicator.png',
 		'pause_symbol': 'pause_sym.png',
+		'load_open_new': 'open_new.png',
 	}
 	def __init__(self):
 		pygame.mixer.init()
@@ -1377,7 +1397,7 @@ class Game:
 			if e.type == pygame.QUIT:
 				return 0
 
-			self.update_temp_offset(e)
+			# ~ self.update_temp_offset(e)
 
 			self.handle_global_keys(e)
 			if self.input_locked: continue
@@ -1467,72 +1487,131 @@ class Game:
 		return 1
 
 	def loadscene_get_history(self):
-		# ~ try:
-			# ~ lst = open('')
-		return []
+		hist_txt = read_file('save/file_history.json')
+		if hist_txt is None:
+			return []
+		lst = json.loads(hist_txt)
+		l_out = []
+		for fdat in lst:
+			fn, _, _ = fdat
+			if os.path.exists(fn) and os.path.isfile(fn):
+				l_out.append(fdat)
+		srt = sorted(l_out, key=lambda x: x[1], reverse=True)
+		if len(srt) > 10:
+			srt = srt[:10]
+		return srt
 
 	def loadscene_save_history(self, lst):
-		pass
+		txt = json.dumps(lst, indent='\t', separators=(',',':'))
+		write_file('save/file_history.json', txt)
 
-	def loadscene_load_game(self, fn):
-		pass
+	def loadscene_load_game(self, _fn):
+		fn = os.path.abspath(_fn)
+		load_time = time.time()
+		for fdat in self['loadhistory']:
+			if fdat[0] == fn:
+				fdat[1] = load_time
+				break
+		else:
+			rom_fil = save.get_rom_pair_file(fn)
+			crc = save.getcrc(rom_fil)
+			self['loadhistory'].append([fn, load_time, crc])
+		self.filename_to_load = fn
+
+	def loadscene_pop_scene(self):
+		self.loadscene_save_history(self['loadhistory'])
+		self.pop_scene()
+
+	def loadscene_load_game_and_open(self, fn):
+		self.loadscene_load_game(fn)
+		self.loadscene_save_history(self['loadhistory'])
+		self.set_scene(SCENE_BOX)
+
+	def loadscene_open_file_dialog_from_button(self):
+		self.input_locked += 1
+		self.file_dialog_dict = ask_file()
 
 	def mainloop_load(self):
-		# ~ if not self.queue_scene_change is None:
-			# ~ return 1
-		# ~ if self.filename_to_load is None:
-			# ~ self.filename_to_load = 'firered/firered_eng1.sav'
-			# ~ self.filename_to_load = 'brown/brown_2014.sav'
-			# ~ self.set_scene(SCENE_BOX)
-			# ~ return 1
-		# ~ else:
-			# ~ self.pop_scene()
-			# ~ return 1
-
-		# ~ if self.scene_init:
-			# ~ self.scene_init = False
-		# ~ for e in pygame.event.get(): pass
-		# ~ self.win.fill(pygame.Color(0, 0, 0))
-		# ~ if not self.queue_scene_change is None:
-			# ~ return 1
-		# ~ if not self.filename_to_load is None:
-			# ~ self.pop_scene()
-			# ~ return 1
-		# ~ if self.file_dialog_dict is None:
-			# ~ self.input_locked += 1
-			# ~ self.file_dialog_dict = ask_file()
-		# ~ else:
-			# ~ if self.file_dialog_dict['done']:
-				# ~ self.file_dialog_dict['thread'].join()
-				# ~ file_path = self.file_dialog_dict['path']
-				# ~ self.filename_to_load = file_path
-				# ~ self.file_dialog_dict = None
-				# ~ self.input_locked -= 1
-				# ~ self.set_scene(SCENE_BOX)
-		# ~ return 1
-
 		if self.scene_init:
 			self.text_boxes.add(TextFrame, 8, 64, 50, 36)
 			self.text_boxes.add(TextFrame, 416, 208, 27, 18)
 
 			self['loadhistory'] = self.loadscene_get_history()
 
+			self['hoverfilename'] = None
+			self['hoverfile'] = None
+
+			self['buttons'] = []
+			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.loadscene_pop_scene()) )
+			self['buttons'].append( Button(56, 4, self.gfx('load_open_new'), lambda: self.loadscene_open_file_dialog_from_button()) )
+
+			for i,fdat in enumerate(self['loadhistory']):
+				fn, _, crc = fdat
+				srf = make_game_button_surf(crc)
+				btn = Button(20, i * 36 + 72, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn))
+				btn.tag = fn
+				self['buttons'].append( btn )
+
 			self.scene_init = False
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				return 0
 
+			self.update_temp_offset(e)
 			self.handle_global_keys(e)
 			if self.input_locked: continue
-			if e.type == pygame.KEYDOWN and e.key == pygame.K_RETURN:
-				self.loadscene_save_history(self['loadhistory'])
-				self.set_scene(SCENE_BOX)
-				return 1
-			elif e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
-				self.pop_scene()
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
+				self.loadscene_pop_scene()
 				return 1
 
+			elif e.type == pygame.MOUSEBUTTONDOWN:
+				if e.button == 1:
+					for btn in self['buttons']:
+						btn.action(self.mouse_pos)
+
+		for btn in self['buttons']:
+			if btn.hover(self.mouse_pos):
+				tgt_fn = btn.tag
+				if tgt_fn is None: continue
+				if tgt_fn != self['hoverfilename']:
+					self['hoverfilename'] = tgt_fn
+					self['hoverfile'] = save.load_save(self['hoverfilename'], False)
+				break
+		else:
+			self['hoverfilename'] = None
+			self['hoverfile'] = None
+
 		self.text_boxes.draw(self.win)
+		for btn in self['buttons']:
+			btn.draw(self.win)
+
+		# ~ 432, 216
+		if not self['hoverfile'] is None:
+			sav = self['hoverfile']
+			self.win.blit(GL.font.render_line(sav.game_name, TXT_COL_DARK), (426, 220))
+			self.win.blit(GL.font.render_text('Player\nID No.\nPlaytime', 16, TXT_COL_DARK), (426, 240))
+			self.win.blit(GL.font.render_line(sav.game_data['player_name'], TXT_COL_DARK), (480, 240))
+			self.win.blit(GL.font.render_line(str(sav.game_data['player_tid']), TXT_COL_DARK), (480, 256))
+			time_hr = sav.game_data['player_playtime'][0]
+			time_mn = sav.game_data['player_playtime'][1]
+			self.win.blit(GL.font.render_line(f'{time_hr}:{time_mn:0>2}', TXT_COL_DARK), (480, 272))
+			self.win.blit(GL.font.render_line('Pokedex', TXT_COL_DARK), (426, 292))
+			self.win.blit(GL.font.render_text('Seen\nOwn', 16, TXT_COL_DARK), (448, 308))
+			self.win.blit(GL.font.render_line(str(by.bitct(sav.pokedex_data[1])), TXT_COL_DARK), (486, 308))
+			self.win.blit(GL.font.render_line(str(by.bitct(sav.pokedex_data[2])), TXT_COL_DARK), (486, 324))
+		elif not self['hoverfilename'] is None:
+			self.win.blit(GL.font.render_line('???', TXT_COL_DARK), (426, 220))
+
+		if not self.queue_scene_change is None:
+			return 1
+		if not self.file_dialog_dict is None:
+			if self.file_dialog_dict['done']:
+				self.file_dialog_dict['thread'].join()
+				file_path = self.file_dialog_dict['path']
+				self.file_dialog_dict = None
+				self.input_locked -= 1
+
+				self.loadscene_load_game_and_open(file_path)
 
 	def get_dex_listing(self, min_i, max_i, hck):
 		lst = []
@@ -2054,7 +2133,7 @@ class Game:
 				self.pop_scene()
 				return 1
 
-			self.update_temp_offset(e)
+			# ~ self.update_temp_offset(e)
 
 			if e.type == pygame.MOUSEBUTTONDOWN:
 				if e.button == 1:
@@ -2349,7 +2428,7 @@ class Game:
 			self.handle_global_keys(e)
 			if self.input_locked: continue
 
-			self.update_temp_offset(e)
+			# ~ self.update_temp_offset(e)
 
 			if e.type == pygame.KEYDOWN:
 				if e.key == pygame.K_ESCAPE:
@@ -2771,7 +2850,8 @@ class Game:
 		self['surfs'].append((surf, pos, btn))
 
 	def credits_scroll(self, amt):
-		for _,pos,_ in self['surfs']:
+		for _,pos,btn in self['surfs']:
+			if not btn is None and btn.tag == 'still': continue
 			pos[1] -= amt
 
 	def credits_get_column_x(self, c):
@@ -2862,6 +2942,7 @@ class Game:
 				rct.bottomright = WIN_SIZE
 				rct.move_ip(-8, -8)
 				btn = Button(rct.x, rct.y, rct.size, lambda: self.pop_scene())
+				btn.tag = 'still'
 				self.credits_add_item(box, rct.x, btn, overridey=rct.y)
 			else:
 				print(f'Unknown command "{cmd}"')
@@ -2876,14 +2957,6 @@ class Game:
 					spd = 1
 				self.credits_scroll(spd)
 				self['downdelay'] -= spd
-
-		# ~ for i in range(len(self['buttons'])):
-			# ~ btn,srf = self['buttons'][i]
-			# ~ if srf[1][0] == -1:
-			# ~ btn.rect.topleft = srf[1]
-			# ~ print(btn.rect, srf)
-		# ~ self['buttons'] = [x for x in self['buttons'] if not x is None]
-		# ~ for btn,srf in self['buttons']:
 
 		self.win.fill(pygame.Color(0, 191, 191))
 		for i in range(len(self['surfs'])):
