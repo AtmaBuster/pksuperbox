@@ -9,7 +9,7 @@
 import pyperclip
 
 import pygame, threading, math, webbrowser
-import zlib, json, random, os, re
+import zlib, json, random, os, os.path, re, time
 import poke, save, argparse
 import pokedb, gamedb, textdb
 import tkinter as tk
@@ -76,6 +76,27 @@ class Globals:
 
 GL = Globals()
 
+def read_file(fn, isbin=False):
+	mode = 'r'
+	if isbin:
+		mode = 'rb'
+	try:
+		f = open(fn, mode)
+	except FileNotFoundError:
+		return None
+	return f.read()
+
+def write_file(fn, dat, isbin=False):
+	mode = 'w'
+	if isbin:
+		mode = 'wb'
+	directory = os.path.dirname(fn)
+	if directory == '':
+		directory = '.'
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+	open(fn, mode).write(dat)
+
 HOVER_BOX_COLORS = (pygame.Color(  0, 248, 152),pygame.Color(  0, 200, 184),pygame.Color(234, 232, 224),pygame.Color(248, 248, 248))
 HOVER_BOX_VCOL = (0, 0, 2, 3, 3)
 HOVER_BOX_HCOL = (0, 0, 1, 1, 1, 1, 2, 3, 3, 3)
@@ -111,21 +132,19 @@ def get_screen_dim():
 		return (-1, -1)
 
 def load_options():
-	try:
-		s = open('settings.json').read()
-		d = json.loads(s)
-		GL.text_speed_ind = d['text_speed']
-		GL.window_frame = d['window_frame']
-		GL.fullscreen = d['fullscreen']
-		GL.muted = d['muted']
-		GL.vol_master = d['vol'][0]
-		GL.vol_music = d['vol'][1]
-		GL.vol_sfx = d['vol'][2]
-		GL.language = d['language']
-		GL.use_shiny_particles = d['shiny_particle']
-	except (FileNotFoundError, json.decoder.JSONDecodeError):
-		GL.text_speed_ind = 4
-		GL.window_frame = 0
+	s = read_file('save/settings.json')
+	if s is None:
+		return
+	d = json.loads(s)
+	GL.text_speed_ind = d['text_speed']
+	GL.window_frame = d['window_frame']
+	GL.fullscreen = d['fullscreen']
+	GL.muted = d['muted']
+	GL.vol_master = d['vol'][0]
+	GL.vol_music = d['vol'][1]
+	GL.vol_sfx = d['vol'][2]
+	GL.language = d['language']
+	GL.use_shiny_particles = d['shiny_particle']
 
 def save_options():
 	d = {}
@@ -137,7 +156,7 @@ def save_options():
 	d['language'] = GL.language
 	d['shiny_particle'] = GL.use_shiny_particles
 	s = json.dumps(d, indent='\t')
-	open('settings.json', 'w').write(s)
+	write_file('save/settings.json', s)
 
 args = None
 
@@ -1144,24 +1163,23 @@ class Game:
 		return data
 
 	def open_bank_save(self):
-		try:
-			f = open('bank.dat', 'rb')
-			raw = f.read()
-			s = zlib.decompress(raw).decode('ascii')
-			data = json.loads(s)
-
-			box_data = self.iterate_over_bank_mons_FIX(data['box'])
-			dex_data = [Dex(), Dex()]
-			dex_data[0].fromlist(data['dex'][0])
-			dex_data[1].fromlist(data['dex'][1])
-
-			return box_data, dex_data
-		except:
+		raw = read_file('save/bank.dat', True)
+		if raw is None:
 			data = []
-			for i in range(1000):
+			for i in range(2000):
 				new_box = [None] * 30
-				data.append((new_box, f'Box {i+1}', 0))
+				data.append((new_box, f'Box {i+1}', i % 16))
 			return data, [Dex(), Dex()]
+
+		s = zlib.decompress(raw).decode('ascii')
+		data = json.loads(s)
+
+		box_data = self.iterate_over_bank_mons_FIX(data['box'])
+		dex_data = [Dex(), Dex()]
+		dex_data[0].fromlist(data['dex'][0])
+		dex_data[1].fromlist(data['dex'][1])
+
+		return box_data, dex_data
 
 	def save_loaded_data(self):
 		if self['loaded_save'] is None:
@@ -1183,7 +1201,7 @@ class Game:
 		}
 		s = json.dumps(d, separators=(',',':'))
 		comp = zlib.compress(s.encode('ascii'))
-		open('bank.dat', 'wb').write(comp)
+		write_file('save/bank.dat', comp, True)
 
 	def save(self):
 		save_options()
@@ -1448,6 +1466,17 @@ class Game:
 
 		return 1
 
+	def loadscene_get_history(self):
+		# ~ try:
+			# ~ lst = open('')
+		return []
+
+	def loadscene_save_history(self, lst):
+		pass
+
+	def loadscene_load_game(self, fn):
+		pass
+
 	def mainloop_load(self):
 		# ~ if not self.queue_scene_change is None:
 			# ~ return 1
@@ -1460,31 +1489,34 @@ class Game:
 			# ~ self.pop_scene()
 			# ~ return 1
 
-		if self.scene_init:
-			self.scene_init = False
-		for e in pygame.event.get(): pass
-		self.win.fill(pygame.Color(0, 0, 0))
-		if not self.queue_scene_change is None:
-			return 1
-		if not self.filename_to_load is None:
-			self.pop_scene()
-			return 1
-		if self.file_dialog_dict is None:
-			self.input_locked += 1
-			self.file_dialog_dict = ask_file()
-		else:
-			if self.file_dialog_dict['done']:
-				self.file_dialog_dict['thread'].join()
-				file_path = self.file_dialog_dict['path']
-				self.filename_to_load = file_path
-				self.file_dialog_dict = None
-				self.input_locked -= 1
-				self.set_scene(SCENE_BOX)
-		return 1
+		# ~ if self.scene_init:
+			# ~ self.scene_init = False
+		# ~ for e in pygame.event.get(): pass
+		# ~ self.win.fill(pygame.Color(0, 0, 0))
+		# ~ if not self.queue_scene_change is None:
+			# ~ return 1
+		# ~ if not self.filename_to_load is None:
+			# ~ self.pop_scene()
+			# ~ return 1
+		# ~ if self.file_dialog_dict is None:
+			# ~ self.input_locked += 1
+			# ~ self.file_dialog_dict = ask_file()
+		# ~ else:
+			# ~ if self.file_dialog_dict['done']:
+				# ~ self.file_dialog_dict['thread'].join()
+				# ~ file_path = self.file_dialog_dict['path']
+				# ~ self.filename_to_load = file_path
+				# ~ self.file_dialog_dict = None
+				# ~ self.input_locked -= 1
+				# ~ self.set_scene(SCENE_BOX)
+		# ~ return 1
 
 		if self.scene_init:
-			self.text_boxes.append(TextFrame, 8, 64, 50, 36)
-			self.text_boxes.append(TextFrame, 416, 208, 27, 18)
+			self.text_boxes.add(TextFrame, 8, 64, 50, 36)
+			self.text_boxes.add(TextFrame, 416, 208, 27, 18)
+
+			self['loadhistory'] = self.loadscene_get_history()
+
 			self.scene_init = False
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
@@ -1493,6 +1525,7 @@ class Game:
 			self.handle_global_keys(e)
 			if self.input_locked: continue
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_RETURN:
+				self.loadscene_save_history(self['loadhistory'])
 				self.set_scene(SCENE_BOX)
 				return 1
 			elif e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:

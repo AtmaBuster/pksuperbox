@@ -1,4 +1,4 @@
 
 *.pyc
-bank.dat
-settings.json
+save/bank.dat
+save/settings.json
