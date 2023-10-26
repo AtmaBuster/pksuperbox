@@ -30,7 +30,7 @@ data = (
 	('lang', 23, 0),
 	('down', 1),
 
-	('text', 'Skippy McDippy', 0),
+	('link', 'Skippy McDippy', 'https://www.youtube.com/watch?v=XJuudqtWLdE', 0),
 	('down', 2),
 
 	('logo', 0),
