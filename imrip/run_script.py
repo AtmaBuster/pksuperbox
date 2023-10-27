@@ -8,6 +8,7 @@ OUT_DIR = '../'
 
 import shutil
 shutil.copyfile('../gamedb.py', './gamedb.py')
+shutil.copyfile('../pokedb.py', './pokedb.py')
 import gamedb
 
 readp = lambda r: struct.unpack('I', r.read(4))[0] - 0x8000000

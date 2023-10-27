@@ -3,7 +3,7 @@ import os
 import os.path
 
 def list_files(path):
-	return [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+	return [path + f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
 
 crcscr = {
 	0x1F1C08FB : ('emerald', 'Pokémon Emerald Version'),
@@ -48,7 +48,7 @@ def try_file(rom, hits):
 	print(f'Done. Got {new_mon_ct} new Pokémon sprites.')
 
 if __name__ == '__main__':
-	fil = list_files('.')
+	fil = list_files('roms/')
 	fil_act = []
 	for filnam in fil:
 		rom = scr.ROMFile(filnam)

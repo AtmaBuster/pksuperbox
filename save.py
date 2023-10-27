@@ -1065,6 +1065,13 @@ def load_save(path, loadfull=True):
 	elif gen == 1:
 		return load_save1(rom_path, path, loadfull)
 
+def is_valid(fn):
+	try:
+		sav = load_save(fn)
+		return not sav is None
+	except:
+		return False
+
 def print_save_profile(sav):
 	# ~ game_name = gamedb.get_game_info(sav.game, 'name')
 	game_name = sav.game_name

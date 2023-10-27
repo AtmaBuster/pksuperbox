@@ -69,7 +69,10 @@ class Globals:
 		return self.window_frames_surf.subsurface(pygame.Rect(x, y, 8, 8))
 
 	def get_game_icon(self, i):
-		return self.game_icons.subsurface(pygame.Rect(i*32, 0, 32, 32))
+		setsizew = self.game_icons.get_rect().size[0] // 32
+		x = i % setsizew
+		y = i // setsizew
+		return self.game_icons.subsurface(pygame.Rect(x*32, y*32, 32, 32))
 
 	def change_text_speed(self, diff):
 		self.text_speed_ind = min(max(self.text_speed_ind + diff, 0), len(TEXT_SPEEDS) - 1)
@@ -125,7 +128,7 @@ def make_hover_box(txt):
 	return s_out
 
 def make_game_button_surf(crc):
-	s_out = pygame.Surface((300, 32), pygame.SRCALPHA)
+	s_out = pygame.Surface((188, 32), pygame.SRCALPHA)
 	game_hdr = gamedb.GAME_CRC[crc]
 	game_dat = gamedb.GAME_DATA[game_hdr[0]]
 	nam = game_hdr[3]
@@ -133,7 +136,7 @@ def make_game_button_surf(crc):
 	gen = game_dat['gen']
 
 	s_out.blit(GL.get_game_icon(ico_i), (0, 0))
-	s_out.blit(GL.font.render_line(nam, TXT_COL_DARK), (36, 0))
+	s_out.blit(GL.font.render_line_trunc(nam, 152, TXT_COL_DARK), (36, 0))
 	s_out.blit(GL.font.render_line(f'Gen {gen}', TXT_COL_DARK), (36, 16))
 	if game_dat['is_hack']:
 		s_out.blit(GL.font.render_line('ROM Hack', TXT_COL_DARK), (128, 16))
@@ -392,6 +395,22 @@ class Font:
 				s.blit(self[c], (x, y))
 				x += self.cw(c)
 		return s
+
+	def render_line_trunc(self, txt, maxw, color=None):
+		w = self.get_line_w(txt)
+		if w <= maxw:
+			return self.render_line(txt, color)
+		elip_w = self.cw('…')
+		new_txt = ''
+		cur_w = 0
+		for c in txt:
+			new_c_w = self.cw(c)
+			if cur_w + new_c_w > maxw - elip_w:
+				break
+			new_txt += c
+			cur_w += new_c_w
+		new_txt += '…'
+		return self.render_line(new_txt, color)
 
 	def render_text(self, txt, linesize, color=None):
 		if not color is None:
@@ -743,10 +762,10 @@ class Button:
 			if GL.show_hidden_button_rects:
 				pygame.draw.rect(win, pygame.Color(127, 127, 127), self.rect, width=1)
 			return
+		if GL.show_hidden_button_rects:
+			pygame.draw.rect(win, pygame.Color(255, 0, 255), self.rect, width=1)
 		if not self.surf is None:
 			win.blit(self.surf, self.rect.topleft)
-		elif GL.show_hidden_button_rects:
-			pygame.draw.rect(win, pygame.Color(255, 0, 255), self.rect, width=1)
 
 	def action(self, pos):
 		if not self.visible: return
@@ -1497,8 +1516,8 @@ class Game:
 			if os.path.exists(fn) and os.path.isfile(fn):
 				l_out.append(fdat)
 		srt = sorted(l_out, key=lambda x: x[1], reverse=True)
-		if len(srt) > 10:
-			srt = srt[:10]
+		if len(srt) > 16:
+			srt = srt[:16]
 		return srt
 
 	def loadscene_save_history(self, lst):
@@ -1507,6 +1526,8 @@ class Game:
 
 	def loadscene_load_game(self, _fn):
 		fn = os.path.abspath(_fn)
+		if not save.is_valid(fn):
+			return False
 		load_time = time.time()
 		for fdat in self['loadhistory']:
 			if fdat[0] == fn:
@@ -1517,15 +1538,16 @@ class Game:
 			crc = save.getcrc(rom_fil)
 			self['loadhistory'].append([fn, load_time, crc])
 		self.filename_to_load = fn
+		return True
 
 	def loadscene_pop_scene(self):
 		self.loadscene_save_history(self['loadhistory'])
 		self.pop_scene()
 
 	def loadscene_load_game_and_open(self, fn):
-		self.loadscene_load_game(fn)
-		self.loadscene_save_history(self['loadhistory'])
-		self.set_scene(SCENE_BOX)
+		if self.loadscene_load_game(fn):
+			self.loadscene_save_history(self['loadhistory'])
+			self.set_scene(SCENE_BOX)
 
 	def loadscene_open_file_dialog_from_button(self):
 		self.input_locked += 1
@@ -1533,8 +1555,13 @@ class Game:
 
 	def mainloop_load(self):
 		if self.scene_init:
-			self.text_boxes.add(TextFrame, 8, 64, 50, 36)
-			self.text_boxes.add(TextFrame, 416, 208, 27, 18)
+			bg_tile = self.gfx('options_bg_tile')
+			self['background'] = self.make_background_surf(bg_tile)
+			self['background_tile_size'] = bg_tile.get_rect().size
+			self['background_offset'] = [0, 0]
+
+			self.text_boxes.add(TextFrame, 8, 48, 50, 38)
+			self.text_boxes.add(TextFrame, 416, 192, 27, 20)
 
 			self['loadhistory'] = self.loadscene_get_history()
 
@@ -1548,7 +1575,9 @@ class Game:
 			for i,fdat in enumerate(self['loadhistory']):
 				fn, _, crc = fdat
 				srf = make_game_button_surf(crc)
-				btn = Button(20, i * 36 + 72, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn))
+				x = (i // 8) * 190 + 20
+				y = (i % 8) * 36 + 56
+				btn = Button(x, y, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn))
 				btn.tag = fn
 				self['buttons'].append( btn )
 
@@ -1581,6 +1610,19 @@ class Game:
 			self['hoverfilename'] = None
 			self['hoverfile'] = None
 
+		if GL.frame_ct & 1:
+			for i in range(2):
+				bg_size = self['background_tile_size'][i]
+				bg_offset = self['background_offset'][i]
+				bg_offset += (-1, 1)[i]
+				while bg_offset > 0:
+					bg_offset -= bg_size
+				while bg_offset < -bg_size:
+					bg_offset += bg_size
+				self['background_offset'][i] = bg_offset
+
+		self.win.blit(self['background'], self['background_offset'])
+
 		self.text_boxes.draw(self.win)
 		for btn in self['buttons']:
 			btn.draw(self.win)
@@ -1588,7 +1630,8 @@ class Game:
 		# ~ 432, 216
 		if not self['hoverfile'] is None:
 			sav = self['hoverfile']
-			self.win.blit(GL.font.render_line(sav.game_name, TXT_COL_DARK), (426, 220))
+			game_name_auto = GL.font.auto_line_text(sav.game_name, 196)
+			self.win.blit(GL.font.render_text(game_name_auto, 16, TXT_COL_DARK), (426, 204))
 			self.win.blit(GL.font.render_text('Player\nID No.\nPlaytime', 16, TXT_COL_DARK), (426, 240))
 			self.win.blit(GL.font.render_line(sav.game_data['player_name'], TXT_COL_DARK), (480, 240))
 			self.win.blit(GL.font.render_line(str(sav.game_data['player_tid']), TXT_COL_DARK), (480, 256))

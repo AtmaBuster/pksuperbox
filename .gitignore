@@ -4,3 +4,7 @@ save/bank.dat
 save/settings.json
 save/file_history.json
 textlist.txt
+*.gba
+imrip/gamedb.py
+imrip/pokedb.py
+icon.xcf
