@@ -1634,7 +1634,7 @@ class Game:
 			self.win.blit(GL.font.render_text(game_name_auto, 16, TXT_COL_DARK), (426, 204))
 			self.win.blit(GL.font.render_text('Player\nID No.\nPlaytime', 16, TXT_COL_DARK), (426, 240))
 			self.win.blit(GL.font.render_line(sav.game_data['player_name'], TXT_COL_DARK), (480, 240))
-			self.win.blit(GL.font.render_line(str(sav.game_data['player_tid']), TXT_COL_DARK), (480, 256))
+			self.win.blit(GL.font.render_line(str(sav.game_data['player_tid']).zfill(5), TXT_COL_DARK), (480, 256))
 			time_hr = sav.game_data['player_playtime'][0]
 			time_mn = sav.game_data['player_playtime'][1]
 			self.win.blit(GL.font.render_line(f'{time_hr}:{time_mn:0>2}', TXT_COL_DARK), (480, 272))
