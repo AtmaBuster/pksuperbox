@@ -8,3 +8,5 @@ textlist.txt
 imrip/gamedb.py
 imrip/pokedb.py
 icon.xcf
+*.gb
+assets/image/mon/*

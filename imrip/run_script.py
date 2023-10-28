@@ -59,6 +59,10 @@ def builtin_lzi(rom, args):
 	assert len(args) == 0
 	return decompress.deLZI(rom.f)
 
+def builtin_compboy(rom, args):
+	assert len(args) == 0
+	return decompress.deCompBoy(rom.f)
+
 def builtin_len(rom, args):
 	assert len(args) == 1
 	return len(args[0])

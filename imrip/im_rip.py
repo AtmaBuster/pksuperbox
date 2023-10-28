@@ -1,5 +1,5 @@
 import run_script as scr
-import os
+import os, sys, shutil
 import os.path
 
 def list_files(path):
@@ -18,6 +18,7 @@ crcscr = {
 	0x84EE4776 : ('firered', 'Pokémon FireRed Version'),
 	0xD69C96CC : ('leafgreen', 'Pokémon LeafGreen Version'),
 	0xDAFFECEC : ('leafgreen', 'Pokémon LeafGreen Version'),
+	# ~ 0x926EE644 : ('brown', 'Pokémon Brown'),
 }
 crc_prio = ( # higher in list = first to run
 	0xDD88761C, 0x84EE4776, # firered
@@ -29,7 +30,8 @@ crc_prio = ( # higher in list = first to run
 	0x3CAB0ABA, # frigo
 	0xCE1B46EB, # reforged gold
 	0x5DF73EF7, # reforged silver
-	0x300699D8, # ruby desting reign of legends
+	# ~ 0x926EE644, # brown
+	0x300699D8, # ruby destiny reign of legends
 )
 
 def try_file(rom, hits):
@@ -47,7 +49,13 @@ def try_file(rom, hits):
 		hits.set(i)
 	print(f'Done. Got {new_mon_ct} new Pokémon sprites.')
 
-if __name__ == '__main__':
+def clean():
+	pth = '../assets/image/mon/'
+	dlist = [pth + f for f in os.listdir(pth)]
+	for p in dlist:
+		shutil.rmtree(p)
+
+def main():
 	fil = list_files('roms/')
 	fil_act = []
 	for filnam in fil:
@@ -64,3 +72,13 @@ if __name__ == '__main__':
 			try_file(filnam, hitlist)
 		print()
 		print('Finished all valid ROMs in this directory!')
+	print('Copying built-in images...')
+	shutil.copytree('builtin/mon/', '../assets/image/mon/', dirs_exist_ok=True)
+	print('Copied!')
+
+if __name__ == '__main__':
+	args = sys.argv[1:]
+	if len(args) == 1 and args[0] == 'clean':
+		clean()
+	else:
+		main()

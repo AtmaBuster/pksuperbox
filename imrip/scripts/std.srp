@@ -1,5 +1,11 @@
 @include "std_data.srp"
 
+def getFrontSprites1{table_base arr_banks ind}
+
+	return 0
+
+end
+
 def getFrontSprites2{table_sprite table_pal bank_offset table_base ind}
 	seek2 table_sprite + (6 * (ind - 1))
 	set dest_bank int{fread{1}}
@@ -49,6 +55,12 @@ def getFrontSprites3{table_sprite table_pal_n table_pal_s ind}
 	set spr_s make3{data_front, data_pal_s, 8}
 
 	return array{spr_n, spr_s}
+
+end
+
+def getIcon1{ }
+
+	return 0
 
 end
 
