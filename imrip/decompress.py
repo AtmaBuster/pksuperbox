@@ -9,6 +9,7 @@ PROFILING = False
 class LZ77:
 	def __init__(self, rom):
 		self.rom = rom
+		self.outbf = []
 	def decomp(self):
 		self._decomp()
 		return b''.join([struct.pack('B', x) for x in self.outbf])
@@ -60,6 +61,7 @@ class LZI:
 	LZ_REVERSE   = 0b1100_0000
 	def __init__(self, rom):
 		self.rom = rom
+		self.outbf = []
 	def decomp(self):
 		self._decomp()
 		return b''.join([struct.pack('B', x) for x in self.outbf])
@@ -99,7 +101,6 @@ class LZI:
 				if PROFILING: print(f'{cmd}   {cln}   {lookback}')
 			else:
 				if PROFILING: print(f'{cmd}   {cln}')
-			# ~ input()
 			if cmd == self.LZ_LITERAL:
 				for _ in range(cln):
 					self.outbf.append(readb(self.rom))
@@ -149,6 +150,172 @@ class LZI:
 			else:
 				print('???')
 
+class CompBoy:
+	def __init__(self, rom):
+		self.rom = rom
+		self.outbf = []
+		self.cur_byte = 0
+		self.cur_bit = 0
+	def decomp(self):
+		self._decomp()
+		return b''.join([struct.pack('B', x) for x in self.outbf])
+
+	def plb(self, n=1):
+		if n == 1:
+			if self.cur_bit == 0:
+				self.cur_bit = 8
+				self.cur_byte = readb(self.rom)
+			self.cur_bit -= 1
+			bt = (self.cur_byte & (1 << self.cur_bit)) >> self.cur_bit
+			return bt
+		else:
+			x = 0
+			for i in range(n):
+				b = self.plb()
+				x = (x << 1) | b
+			return x
+
+	def plz(self):
+		x = 0
+		n = 0
+		while True:
+			b = self.plb()
+			n += 1
+			x = (x << 1) | b
+			if b == 0:
+				break
+		return x, n
+
+	def get_bitplane(self, w, h):
+		self.bit_offset = 3
+		self.pos = 0
+		self.pos_cache = 0
+		self.pos_xy = [0, 0]
+		bf = [0] * 8 * w * h
+		wp = w * 8
+		hp = h * 8
+
+		def write_bits(a):
+			for _ in range(self.bit_offset):
+				a <<= 2
+			bf[self.pos] |= a
+
+		def move_to_next_pos():
+			if self.pos_xy[1] + 1 != hp:
+				self.pos_xy[1] += 1
+				self.pos += 1
+				return False
+			self.pos_xy[1] = 0
+			if self.bit_offset != 0:
+				self.bit_offset -= 1
+				self.pos = self.pos_cache
+				return False
+			self.bit_offset = 3
+			if self.pos_xy[0] + 8 != wp:
+				self.pos_xy[0] += 8
+				self.pos += 1
+				self.pos_cache = self.pos
+				return False
+			return True
+
+		cur_fun = self.plb()
+		while True:
+			if cur_fun == 0:
+				m, n = self.plz()
+				o = self.plb(n)
+				amt = m + o + 1
+
+				if PROFILING: print(f'RLE : 00 x {amt}\n    : {self.pos} -> {self.pos + amt}')
+
+				for _ in range(amt):
+					write_bits(0)
+					if move_to_next_pos():
+						return bf
+
+			else:
+				if PROFILING: print('dat : ', end='')
+				if PROFILING: pos_store = self.pos
+				while True:
+					bt = self.plb(2)
+					if bt == 0:
+						break
+					if PROFILING: print(f'{bt:0>2b} ', end='')
+					write_bits(bt)
+					if move_to_next_pos():
+						return bf
+				if PROFILING: print()
+				if PROFILING: print(f'    : {pos_store} -> {self.pos}')
+			cur_fun ^= 1
+
+	def xor_pln(self, bf1, _bf2):
+		bf2 = _bf2.copy()
+		for i in range(len(bf1)):
+			bf2[i] ^= bf1[i]
+		return bf2
+
+	def delta_pln(self, _bf, w, h):
+		ht = h
+		wi = w
+
+		bf = _bf.copy()
+		swap = lambda a: ((a << 4) & 0xF0) | ((a >> 4) & 0xF)
+
+		self.pos_xy = [0, 0]
+		self.pos = 0
+		self.pos_cache = 0
+		def diff_decode(last_bit, cur_byt):
+			v = 0
+			for _i in range(8):
+				i = 7 - _i
+				if cur_byt & (1 << i):
+					last_bit ^= 1
+				v |= (last_bit << i)
+			return v
+
+		last_bit = 0
+		while True:
+			cur_byt = diff_decode(last_bit, bf[self.pos])
+			last_bit = cur_byt & 1
+			bf[self.pos] = cur_byt
+			self.pos += h * 8
+			self.pos_xy[0] += 8
+			if self.pos_xy[0] != w * 8:
+				continue
+			last_bit = 0
+			self.pos_xy[0] = 0
+			self.pos_xy[1] += 1
+			if self.pos_xy[1] == h * 8:
+				break
+			self.pos_cache += 1
+			self.pos = self.pos_cache
+		return bf
+
+	def _decomp(self):
+		w = self.plb(4)
+		h = self.plb(4)
+		first_bitplane = self.plb()
+		bf1 = self.get_bitplane(w, h)
+		mode = self.plb()
+		if mode:
+			mode_1 = self.plb()
+			mode = mode * 2 + mode_1 - 1
+		bf2 = self.get_bitplane(w, h)
+
+		if mode == 0 or mode == 2:
+			bf2 = self.delta_pln(bf2, w, h)
+		bf1 = self.delta_pln(bf1, w, h)
+		if mode == 1 or mode == 2:
+			bf2 = self.xor_pln(bf1, bf2)
+
+		if first_bitplane == 0:
+			store = bf1.copy()
+			bf1 = bf2.copy()
+			bf2 = store.copy()
+
+		for b1, b2 in zip(bf1, bf2):
+			self.outbf.append(b2)
+			self.outbf.append(b1)
+
 def deLZ77(rom):
 	decomp = LZ77(rom)
 	return decomp.decomp()
@@ -157,9 +324,13 @@ def deLZI(rom):
 	decomp = LZI(rom)
 	return decomp.decomp()
 
+def deCompBoy(rom):
+	decomp = CompBoy(rom)
+	return decomp.decomp()
+
 if __name__ == '__main__':
 	import sys, romutil, re
-	if len(sys.argv) != 5 or sys.argv[3] not in ('lz77', 'gblz'):
+	if len(sys.argv) != 5 or sys.argv[3] not in ('lz77', 'lzi', 'compboy'):
 		print(f'usage: python {sys.argv[0]} filein address compmethod fileout')
 		exit()
 	fnin = sys.argv[1]
@@ -183,8 +354,10 @@ if __name__ == '__main__':
 	rom.seek(cadr)
 	if mthd == 'lz77':
 		dcmp = LZ77(rom)
-	else:
+	elif mthd == 'lzi':
 		dcmp = LZI(rom)
+	else:
+		dcmp = CompBoy(rom)
 	dat = dcmp.decomp()[:400]
 	import imutil
 	im = imutil.make_image_2(dat, ((248,248,248,255),(96,248,88,255),(248,80,48,255),(0,0,0,255)), 5, True)
