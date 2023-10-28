@@ -2,8 +2,8 @@
 
 set indhit list{}
 
-for i 1, 226
-#for i 112, 113
+for i 1, 5
+#for i 1, 226
 	set parent_data getdata{"nat_dex", "parent"}
 	if i >= len{parent_data}
 		set ind i
@@ -34,11 +34,8 @@ for i 1, 226
 			set spr_n center1{spr_n, 7}
 			set spr_n floodtp{spr_n, 0, 0}
 
-			#set spr_ico getIcon1{ }
-
 			outim spr_n fileout{"mon", ind2, "front_normal.png"}
 			outim spr_n fileout{"mon", ind2, "front_shiny.png"}
-			#outim spr_ico fileout{"mon", ind2, "icon.png"}
 
 		end
 	end

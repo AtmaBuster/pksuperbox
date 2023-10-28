@@ -58,12 +58,6 @@ def getFrontSprites3{table_sprite table_pal_n table_pal_s ind}
 
 end
 
-def getIcon1{ }
-
-	return 0
-
-end
-
 def getIcon2{table_sprite_i table_sprite ind}
 
 	seek2 table_sprite_i + (ind - 1)
@@ -177,9 +171,7 @@ def iterOverMons3H{addrs num_mons}
 
 				outim sprN fileout{"mon", ind2, "front_normal.png"}
 				outim sprS fileout{"mon", ind2, "front_shiny.png"}
-				if !has{reserved_icons, ind2}
-					outim sprI fileout{"mon", ind2, "icon.png"}
-				end
+				outim sprI fileout{"mon", ind2, "icon.png"}
 				outim sprFP fileout{"mon", ind2, "footprint.png"}
 			end
 		end

@@ -340,7 +340,7 @@ class Script:
 		'id': lambda r, a: f'{id(a[0]):0>16X}',
 	}
 	block_cmds = (
-		'if', 'for',
+		'if', 'for', 'while',
 	)
 	def __init__(self, fn):
 		lins = get_script_lins(fn)
@@ -382,8 +382,8 @@ class Script:
 			self.cmd_set(args, rom)
 		elif cmd == 'for':
 			self.cmd_for(args, rom)
-		# ~ elif cmd == 'seek':
-			# ~ self.cmd_seek(args, rom)
+		elif cmd == 'while':
+			self.cmd_while(args, rom)
 		elif cmd == 'seek3':
 			self.cmd_seek3(args, rom)
 		elif cmd == 'seek3@':
@@ -400,6 +400,8 @@ class Script:
 			self.cmd_outim(args, rom)
 		elif cmd == 'end':
 			self.cmd_end(args, rom)
+		elif cmd == 'break':
+			self.cmd_break(args, rom)
 		elif cmd == 'echo':
 			self.cmd_echo(args, rom)
 		elif cmd == 'push':
@@ -436,7 +438,15 @@ class Script:
 		var = self.varname(args[0])
 		vals = self.make_args_list(args[1:], rom)
 		self.vars[var] = vals[0]
-		self.block_stack.append(('for', var, vals[1], self.lini))
+		self.block_stack.append(('for', var, vals[1], self.lini, self.get_block_skip()))
+
+	def cmd_while(self, args, rom):
+		cond = self.resolve_value(args, rom)
+		if cond:
+			self.block_stack.append(('while', args, self.lini, self.get_block_skip()))
+		else:
+			self.skip_block()
+			self.lini += 1
 
 	def cmd_seek(self, args, rom):
 		pass
@@ -501,9 +511,26 @@ class Script:
 				self.block_stack.pop()
 		elif block_dat[0] == 'if':
 			self.block_stack.pop()
+		elif block_dat[0] == 'while':
+			cond = self.resolve_value(block_dat[1], rom)
+			if cond:
+				self.lini = block_dat[2]
+			else:
+				self.block_stack.pop()
 		else:
 			print('ERROR')
 			exit()
+
+	def cmd_break(self, args, rom):
+		while True:
+			block_dat = self.block_stack.pop()
+			if block_dat[0] in ('for', 'while'):
+				break
+		if block_dat[0] == 'for':
+			self.lini = block_dat[4]
+		elif block_dat[0] == 'while':
+			self.lini = block_dat[3]
+		self.lini += 1
 
 	def cmd_echo(self, args, rom):
 		val = self.resolve_value(args, rom)
@@ -545,6 +572,13 @@ class Script:
 	def cmd_purge(self, args, rom):
 		nam = self.varname(args[0])
 		del self.vars[nam]
+
+	def get_block_skip(self):
+		store = self.lini
+		self.skip_block()
+		pos = self.lini
+		self.lini = store
+		return pos
 
 	def skip_block(self):
 		cur_depth = 1
