@@ -2,8 +2,7 @@
 
 set indhit list{}
 
-for i 1, 5
-#for i 1, 226
+for i 1, 226
 	set parent_data getdata{"nat_dex", "parent"}
 	if i >= len{parent_data}
 		set ind i

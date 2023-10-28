@@ -1,5 +1,4 @@
-set flood_coords list{}
-#for i 0, 1048
-#	push flood_coords list{}
-#end
-push flood_coords list{0, 0}
+set flood_coords dict{}
+
+set flood_dryaz list{0, 0}
+set _ sdict{flood_coords, 1048, flood_dryaz}

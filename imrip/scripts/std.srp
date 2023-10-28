@@ -154,7 +154,12 @@ def iterOverMons3H{addrs num_mons}
 				set sprI getIcon3{table_icon, table_icon_pal_i, table_icon_pals, ind}
 				set sprFP getFootprint3{table_footprint, ind}
 
-				if ind2 < len{flood_coords}
+				#if ind2 < len{flood_coords}
+				#	set cur_flood flood_coords[ind2]
+				#else
+				#	set cur_flood list{}
+				#end
+				if indkey flood_coords ind2
 					set cur_flood flood_coords[ind2]
 				else
 					set cur_flood list{}

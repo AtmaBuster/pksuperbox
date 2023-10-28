@@ -132,6 +132,20 @@ def builtin_array(rom, args):
 def builtin_list(rom, args):
 	return [*args]
 
+def builtin_dict(rom, args):
+	assert len(args) == 0
+	return {}
+
+def builtin_sdict(rom, args):
+	assert len(args) == 3
+	d, k, v = args
+	d[k] = v
+
+def builtin_indkey(rom, args):
+	assert len(args) == 2
+	d, k = args
+	return k in d.keys()
+
 def builtin_checkhit(rom, args):
 	assert len(args) == 2
 	hit = args[0]
@@ -319,6 +333,9 @@ class Script:
 		'fileout':  builtin_fileout,
 		'array':    builtin_array,
 		'list':     builtin_list,
+		'dict':     builtin_dict,
+		'sdict':    builtin_sdict,
+		'indkey':   builtin_indkey,
 		'checkhit': builtin_checkhit,
 		'char':     builtin_char,
 		'bpp12':    builtin_bpp12,
