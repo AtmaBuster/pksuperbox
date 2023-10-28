@@ -2,7 +2,8 @@
 
 set indhit list{}
 
-for i 1, 225
+for i 1, 226
+#for i 112, 113
 	set parent_data getdata{"nat_dex", "parent"}
 	if i >= len{parent_data}
 		set ind i
@@ -14,12 +15,29 @@ for i 1, 225
 		if !checkhit{hitlist, ind2}
 			push indhit ind2
 
-			set spr_n getFrontSprites1{0, 0, 0}
+			# Brown sprites are uncompressed ??????
+			# Genuinely what did KBM mean by this?
 
-			set spr_ico getIcon1{ }
+			seek1 $FC336 + ((i - 1) * 28) + 10
+			set spr_size int{fread{1}} / $10
+			set spr_ptr int{fread{2}}
+			set _ fread{14}
+			set spr_bnk int{fread{1}}
 
-			#outim spr_n fileout{"mon", ind2, "front_normal.png"}
-			#outim spr_n fileout{"mon", ind2, "front_shiny.png"}
+			seek1 spr_bnk, spr_ptr
+			set data_front fread{$10 * 7 * 7}
+
+			#set data_pal bytes{$FF, $7F, $B5, $56, $6B, $2D, $00, $00}
+			set data_pal bytes{$FA, $73, $0E, $47, $AB, $1D, $64, $04}
+
+			set spr_n make1{data_front, data_pal, 7, 1}
+			set spr_n center1{spr_n, 7}
+			set spr_n floodtp{spr_n, 0, 0}
+
+			#set spr_ico getIcon1{ }
+
+			outim spr_n fileout{"mon", ind2, "front_normal.png"}
+			outim spr_n fileout{"mon", ind2, "front_shiny.png"}
 			#outim spr_ico fileout{"mon", ind2, "icon.png"}
 
 		end

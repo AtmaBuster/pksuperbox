@@ -18,7 +18,7 @@ crcscr = {
 	0x84EE4776 : ('firered', 'Pokémon FireRed Version'),
 	0xD69C96CC : ('leafgreen', 'Pokémon LeafGreen Version'),
 	0xDAFFECEC : ('leafgreen', 'Pokémon LeafGreen Version'),
-	# ~ 0x926EE644 : ('brown', 'Pokémon Brown'),
+	0x926EE644 : ('brown', 'Pokémon Brown'),
 }
 crc_prio = ( # higher in list = first to run
 	0xDD88761C, 0x84EE4776, # firered
@@ -30,7 +30,7 @@ crc_prio = ( # higher in list = first to run
 	0x3CAB0ABA, # frigo
 	0xCE1B46EB, # reforged gold
 	0x5DF73EF7, # reforged silver
-	# ~ 0x926EE644, # brown
+	0x926EE644, # brown
 	0x300699D8, # ruby destiny reign of legends
 )
 

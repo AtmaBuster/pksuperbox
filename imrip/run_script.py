@@ -99,21 +99,17 @@ def builtin_make2(rom, args):
 	t = args[3]
 	pal = imutil.pal_from_raw(pal_raw, False)
 	im_s = imutil.make_image_2(im_raw, pal, w, t)
-
-	# ~ im = Image.new('RGBA', (64, 64))
-	# ~ im.paste(pal[0], (0, 0, 64, 64))
-	# ~ im.paste(im_s, (32 - w * 4, 60 - w * 8))
-	# ~ im = im_s.copy()
-	# ~ ImageDraw.floodfill(im, (0, 0), (0, 0, 0, 0))
 	return im_s
 
 def builtin_center2(rom, args):
 	assert len(args) == 2
 	im_i = args[0]
 	w = args[1]
+	col_base = im_i.load()[0,0]
 	im = Image.new('RGBA', (64, 64))
-	im.paste((0, 0, 0, 255), (0, 0, 64, 64))
+	im.paste(col_base, (0, 0, 64, 64))
 	im.paste(im_i, (32 - w * 4, 60 - w * 8))
+	pxl = im.load()
 	return im
 
 def builtin_fileout(rom, args):
@@ -314,10 +310,12 @@ class Script:
 		'int':      builtin_int,
 		'make3':    builtin_make3,
 		'make2':    builtin_make2,
+		'make1':    builtin_make2,
 		'make1bpp': builtin_make1bpp,
 		'revbits':  builtin_revbits,
 		'swapbits': builtin_swapbits,
 		'center2':  builtin_center2,
+		'center1':  builtin_center2,
 		'fileout':  builtin_fileout,
 		'array':    builtin_array,
 		'list':     builtin_list,
@@ -390,13 +388,13 @@ class Script:
 			self.cmd_seek3(args, rom)
 		elif cmd == 'seek3@':
 			self.cmd_seek3at(args, rom)
-		elif cmd == 'seek2':
+		elif cmd == 'seek2' or cmd == 'seek1':
 			self.cmd_seek2(args, rom)
-		elif cmd == 'seek2ba':
+		elif cmd == 'seek2ba' or cmd == 'seek1ba':
 			self.cmd_seek2ba(args, rom)
-		elif cmd == 'seek2ab':
+		elif cmd == 'seek2ab' or cmd == 'seek1ab':
 			self.cmd_seek2ab(args, rom)
-		elif cmd == 'seek2@':
+		elif cmd == 'seek2@' or cmd == 'seek1@':
 			self.cmd_seek2at(args, rom)
 		elif cmd == 'outim':
 			self.cmd_outim(args, rom)
