@@ -81,6 +81,10 @@ class Globals:
 
 	def change_text_speed(self, diff):
 		self.text_speed_ind = min(max(self.text_speed_ind + diff, 0), len(TEXT_SPEEDS) - 1)
+
+	def set_text_speed(self, val):
+		self.text_speed_ind = val
+
 	def set_window_frame(self, val, game_obj):
 		frm_x = val
 		frm_y = game_obj['frame_row']
@@ -2263,10 +2267,6 @@ class Game:
 			else:
 				GL.vol_sfx = val
 		self.update_volume()
-		print(which, val, is_delta)
-		print(GL.vol_master)
-		print(GL.vol_music)
-		print(GL.vol_sfx)
 
 	def mainloop_options(self):
 		if self.scene_init:
@@ -2277,6 +2277,8 @@ class Game:
 			button_list = []
 			button_list.append( Button(4, 4, self.gfx('box_button_back'), lambda: self.pop_scene()) )
 			button_list.append( Button(79, 55, self.gfx('arrow_button_left'), lambda: GL.change_text_speed(-1)) )
+			for i in range(8):
+				button_list.append( Button(90 + i * 8, 55, (5, 14), lambda i=i: GL.set_text_speed(i)) )
 			button_list.append( Button(89 + 8 * len(TEXT_SPEEDS), 55, self.gfx('arrow_button_right'), lambda: GL.change_text_speed(1)) )
 			button_list.append( Button(14, 118, self.gfx('arrow_button_up'), lambda: self.change_game_data('frame_row', -1, 8)) )
 			button_list.append( Button(14, 138, self.gfx('arrow_button_down'), lambda: self.change_game_data('frame_row', 1, 8)) )
