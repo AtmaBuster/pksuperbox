@@ -1292,10 +1292,8 @@ class Game:
 			ish, num = mon.dex
 			wdex = int(ish == 1)
 			if bool(own_dex & (1 << i)):
-				print('O', wdex, i, num, mon.name)
 				self.dex[wdex][num] = DEX_SET_OWN
 			elif bool(seen_dex & (1 << i)):
-				print('S', wdex, i, num, mon.name)
 				self.dex[wdex][num] = DEX_SET_SEEN
 
 	def deffered_save_and_pop_scene(self):
@@ -1904,15 +1902,15 @@ class Game:
 		num_list = num_list.rawnums()
 		if i == 1:
 			# alpha
-			lout = self.filter_list_based_on_dex_status(num_list, 1)
+			lout = self.filter_list_based_on_dex_status(num_list, 0)
 			lout = list(sorted(lout, key=lambda x: pokedb.BASE_STATS[x].name))
 		elif i == 2:
 			# height
-			lout = self.filter_list_based_on_dex_status(num_list, 0)
+			lout = self.filter_list_based_on_dex_status(num_list, 1)
 			lout = list(sorted(lout, key=lambda x: int(textdb.dex(x)[7])))
 		elif i == 3:
 			# weight
-			lout = self.filter_list_based_on_dex_status(num_list, 0)
+			lout = self.filter_list_based_on_dex_status(num_list, 1)
 			lout = list(sorted(lout, key=lambda x: int(textdb.dex(x)[9])))
 		if rev:
 			lout = list(reversed(lout))
@@ -1925,6 +1923,62 @@ class Game:
 	def dex_set_sort_both(self, i, rev):
 		self['dexlist'][0], self['dexlistnums'][0] = self.dex_set_sort(i, rev, 0)
 		self['dexlist'][1], self['dexlistnums'][1] = self.dex_set_sort(i, rev, 1)
+
+	def dex_check(self, *args):
+		if len(args) == 2:
+			ish, num = args
+		else:
+			ish, num = args[0].dex
+		dex_i = int(ish == 1)
+		return self.dex[dex_i][num]
+
+	def dex_filter_by_mon_type(self, typ_tgt, dex_i):
+		dex_o = []
+		dexn_o = []
+		for ind,dexnum in zip(self['dexlist'][dex_i], self['dexlistnums'][dex_i]):
+			if ind is None: continue
+			mon = pokedb.BASE_STATS[ind]
+			if mon is None: continue
+			if not self.dex_check(mon)[1]: continue
+			typ = mon.typ
+			if typ[0] == typ_tgt or typ[1] == typ_tgt:
+				dex_o.append(ind)
+				dexn_o.append(dexnum)
+		self['dexlist'][dex_i] = dex_o
+		self['dexlistnums'][dex_i] = dexn_o
+
+	def dex_limit_dexi_to_known_range(self, dex_i):
+		dex = self['dexlist'][dex_i]
+		i_lo = 0
+		while i_lo < len(dex):
+			ind = dex[i_lo]
+			if not ind is None:
+				mon = pokedb.BASE_STATS[ind]
+				if not mon is None:
+					ish, num = mon.dex
+					if num > 0:
+						break
+					flg = self.dex_check(ish, num)
+					if flg[0]:
+						break
+			i_lo += 1
+		i_hi = len(dex) - 1
+		while i_hi > i_lo:
+			ind = dex[i_hi]
+			if not ind is None:
+				mon = pokedb.BASE_STATS[ind]
+				if not mon is None:
+					ish, num = mon.dex
+					flg = self.dex_check(ish, num)
+					if flg[0]:
+						break
+			i_hi -= 1
+		self['dexlist'][dex_i] = dex[i_lo:i_hi+1]
+		self['dexlistnums'][dex_i] = self['dexlistnums'][dex_i][i_lo:i_hi+1]
+
+	def dex_limit_to_known_range(self):
+		self.dex_limit_dexi_to_known_range(0)
+		self.dex_limit_dexi_to_known_range(1)
 
 	def dex_clear_sort(self):
 		self.dex_set_sort_both(0, False)
@@ -1964,6 +2018,7 @@ class Game:
 			self['dexlist'] = [None, None]
 			self['dexlistnums'] = [None, None]
 			self.dex_set_sort_both(0, False)
+			self.dex_limit_to_known_range()
 			self['TEST_sorti'] = 0
 			self['TEST_revsort'] = False
 
@@ -1999,6 +2054,11 @@ class Game:
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
 				self['TEST_revsort'] = not self['TEST_revsort']
 				self.dex_set_sort_both(self['TEST_sorti'], self['TEST_revsort'])
+				self['listind'] = 0
+				self.update_dex_listing()
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_s:
+				self.dex_set_sort_both(self['TEST_sorti'], self['TEST_revsort'])
+				self.dex_filter_by_mon_type(0, 0)
 				self['listind'] = 0
 				self.update_dex_listing()
 
