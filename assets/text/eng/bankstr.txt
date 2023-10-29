@@ -24,3 +24,13 @@ Music
 Special Thanks
 Pok#mon Super Box Credits
 Volume\n    Master\n    Music\n    Sound
+Quit to menu
+Save data
+Change wallpaper
+Change name
+Jump to box
+Swap box contents
+Filter boxes
+Manage box groups
+Sort boxes
+

@@ -1749,8 +1749,11 @@ class Game:
 			ind = self['formlist'][self['formind']][0]
 		dat = Container()
 		if ind is None:
-			dat.name = '??????????'
-			dat.names = ('??????????', '??????????', '??????????', '??????????', '??????????')
+			dat.names = ('??????????', '?????', '??????????', '??????????', '??????????', '??????????')
+			if GL.language == 1:
+				dat.name = '?????'
+			else:
+				dat.name = '??????????'
 			dat.nums = 'No. ???'
 			dat.spc = textdb.bs_dex_speciessign().format(textdb.bs_dex_unknownspecies())
 			dat.typ = (9, )
@@ -1766,9 +1769,16 @@ class Game:
 			dat.index = ind
 		else:
 			mon_base = pokedb.BASE_STATS[ind]
-			dat.name = mon_base.name
 			dexdat = textdb.dex(ind)
-			dat.names = dexdat[1:6]
+			dat.names = dexdat[:6]
+			if GL.language < 6:
+				l_name = dat.names[GL.language]
+				if l_name == '?' * len(l_name):
+					dat.name = mon_base.name
+				else:
+					dat.name = l_name
+			else:
+				dat.name = mon_base.name
 			num = mon_base.dex
 			if num[0] in (0, 2):
 				dat.nums = (num[1], False)
@@ -2178,8 +2188,8 @@ class Game:
 			egggp_str = ' / '.join([textdb.egggroup(x)[0] for x in dexdat.egggp])
 			self.win.blit(GL.font.render_line(egggp_str, TXT_COL_DARK), (270, 334))
 			self.win.blit(self.gfx('dex_flags'), (438, 292))
-			nams1 = (dexdat.name, dexdat.names[0], dexdat.names[1])
-			nams2 = (dexdat.names[2], dexdat.names[3], dexdat.names[4])
+			nams1 = (dexdat.names[0], dexdat.names[1], dexdat.names[2])
+			nams2 = (dexdat.names[3], dexdat.names[4], dexdat.names[5])
 			self.win.blit(GL.font.render_text('\n'.join(nams1), 16, TXT_COL_DARK), (458, 294))
 			self.win.blit(GL.font.render_text('\n'.join(nams2), 16, TXT_COL_DARK), (550, 294))
 			self.win.blit(GL.font.render_text(textdb.bs_dex_heightsign() + '\n' + textdb.bs_dex_weightsign(), 16, TXT_COL_DARK), (438, 68))
@@ -2305,9 +2315,9 @@ class Game:
 			button_list.append( Button(166, 224, self.gfx('arrow_button_right'), lambda: self.options_set_volume(2, 1, True)) )
 
 			self['buttons'] = button_list
-			self.text_boxes.add(TextBox, 4, 40, 21, 5, textdb.bs_options_textspeed(), (0, 6))
-			self.text_boxes.add(TextBox, 4, 88, 33, 9, textdb.bs_options_windowframe(), (0, 4))
-			self.text_boxes.add(TextBox, 180, 40, 11, 5, textdb.bs_options_fullscreen(), (0, 6))
+			self.text_boxes.add(TextBox, 4, 40, 21, 5, textdb.bs_options_textspeed(), (0, 0))
+			self.text_boxes.add(TextBox, 4, 88, 33, 9, textdb.bs_options_windowframe(), (0, 0))
+			self.text_boxes.add(TextBox, 180, 40, 11, 5, textdb.bs_options_fullscreen(), (0, 0))
 			self.text_boxes.add(TextBox, 4, 168, 23, 10, textdb.bs_options_volumes(), (0, 0))
 			self.text_boxes.write_all()
 			self['example_text'] = TextBox(276, 40, 16, 15, textdb.bs_options_teststring())
@@ -2564,28 +2574,28 @@ class Game:
 
 			self['cursor_pos'] = 5
 
-			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.box_open_need_to_save_box(), 'Quit to menu') )
-			self['buttons'].append( Button(56, 4, self.gfx('box_save_button'), lambda: self.save(), 'Save data') )
+			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.box_open_need_to_save_box(), textdb.bs_box_quittomenu()) )
+			self['buttons'].append( Button(56, 4, self.gfx('box_save_button'), lambda: self.save(), textdb.bs_box_savedata()) )
 
-			self['buttons'].append( Button(46, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), 'Change wallpaper') )
-			self['buttons'].append( Button(76, 87, self.gfx('box_jump'), lambda: None, 'Jump to box') )
-			self['buttons'].append( Button(140, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), 'Change name') )
+			self['buttons'].append( Button(46, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), textdb.bs_box_wallpaper()) )
+			self['buttons'].append( Button(76, 87, self.gfx('box_jump'), lambda: self.box_show_nyi_box(), textdb.bs_box_jumptobox()) )
+			self['buttons'].append( Button(140, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), textdb.bs_box_name()) )
 			self['buttons'].append( Button(32, 105, self.gfx('box_button_nav_left'), lambda: self.box_nav_left_right(0, -1)) )
 			self['buttons'].append( Button(46, 105, (124, 22), lambda: None) )
 			self['buttons'].append( Button(172, 105, self.gfx('box_button_nav_right'), lambda: self.box_nav_left_right(0, 1)) )
 
-			self['buttons'].append( Button(238, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), 'Change wallpaper') )
-			self['buttons'].append( Button(268, 87, self.gfx('box_jump'), lambda: None, 'Jump to box') )
-			self['buttons'].append( Button(332, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), 'Change name') )
+			self['buttons'].append( Button(238, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), textdb.bs_box_wallpaper()) )
+			self['buttons'].append( Button(268, 87, self.gfx('box_jump'), lambda: self.box_show_nyi_box(), textdb.bs_box_jumptobox()) )
+			self['buttons'].append( Button(332, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), textdb.bs_box_name()) )
 			self['buttons'].append( Button(224, 105, self.gfx('box_button_nav_left'), lambda: self.box_nav_left_right(1, -1)) )
 			self['buttons'].append( Button(238, 105, (124, 22), lambda: None) )
 			self['buttons'].append( Button(364, 105, self.gfx('box_button_nav_right'), lambda: self.box_nav_left_right(1, 1)) )
 
-			self['buttons'].append( Button(192, 178, self.gfx('box_button_swap'), lambda: self.box_swap_contents(), 'Swap box contents') )
+			self['buttons'].append( Button(192, 178, self.gfx('box_button_swap'), lambda: self.box_swap_contents(), textdb.bs_box_swapcontents()) )
 
-			self['buttons'].append( Button(28, 304, self.gfx('box_button_filter'), lambda: self.box_show_nyi_box(), 'Filter boxes') )
-			self['buttons'].append( Button(84, 304, self.gfx('box_button_groups'), lambda: self.box_show_nyi_box(), 'Manage box groups') )
-			self['buttons'].append( Button(140, 304, self.gfx('box_button_sort'), lambda: self.box_show_nyi_box(), 'Sort boxes') )
+			self['buttons'].append( Button(28, 304, self.gfx('box_button_filter'), lambda: self.box_show_nyi_box(), textdb.bs_box_filterboxes()) )
+			self['buttons'].append( Button(84, 304, self.gfx('box_button_groups'), lambda: self.box_show_nyi_box(), textdb.bs_box_managegroups()) )
+			self['buttons'].append( Button(140, 304, self.gfx('box_button_sort'), lambda: self.box_show_nyi_box(), textdb.bs_box_sortboxes()) )
 
 			slot_i = 0
 			for y in range(5):

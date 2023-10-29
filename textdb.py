@@ -11,7 +11,7 @@ def read_text_file(fn, enc=None):
 
 # data
 class DBs:
-	lang_dir = ('eng-us',)
+	lang_dir = ('eng','jpn','fre','ita','ger','spa')
 	def __init__(self):
 		self.BANKSTR  = None
 		self.DEX      = None
@@ -89,3 +89,12 @@ bs_credits_music       = bslambda()
 bs_credits_special     = bslambda()
 bs_credits_nameplate   = bslambda()
 bs_options_volumes     = bslambda()
+bs_box_quittomenu      = bslambda()
+bs_box_savedata        = bslambda()
+bs_box_wallpaper       = bslambda()
+bs_box_name            = bslambda()
+bs_box_jumptobox       = bslambda()
+bs_box_swapcontents    = bslambda()
+bs_box_filterboxes     = bslambda()
+bs_box_managegroups    = bslambda()
+bs_box_sortboxes       = bslambda()
