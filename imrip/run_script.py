@@ -102,10 +102,22 @@ def builtin_make2(rom, args):
 	return im_s
 
 def builtin_center2(rom, args):
-	assert len(args) == 2
+	assert len(args) in (2, 3)
 	im_i = args[0]
+	if len(args) == 2:
+		base_coord = (0, 0)
+	else:
+		sz = im_i.size
+		if args[2] == 'nw':
+			base_coord = (0, 0)
+		elif args[2] == 'sw':
+			base_coord = (0, sz[1] - 1)
+		elif args[2] == 'ne':
+			base_coord = (sz[0] - 1, 0)
+		elif args[2] == 'se':
+			base_coord = (sz[0] - 1, sz[1] - 1)
 	w = args[1]
-	col_base = im_i.load()[0,0]
+	col_base = im_i.load()[base_coord]
 	im = Image.new('RGBA', (64, 64))
 	im.paste(col_base, (0, 0, 64, 64))
 	im.paste(im_i, (32 - w * 4, 60 - w * 8))
@@ -668,6 +680,8 @@ class Script:
 			return last_result + nxt
 		elif x == '-':
 			nxt = self.get_value(None, queue, rom)
+			if last_result is None:
+				return -nxt
 			return last_result - nxt
 		elif x == '*':
 			nxt = self.get_value(None, queue, rom)

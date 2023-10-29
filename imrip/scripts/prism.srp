@@ -1,0 +1,59 @@
+@include "std.srp"
+
+set indhit list{}
+
+for i 1, 255
+	set parent_data getdata{"nat_dex", "parent"}
+	if i >= len{parent_data}
+		set ind i
+	else
+		set ind parent_data[i]
+	end
+	set ind2 getdata{"nat_dex"}[i]
+	if ind2 != 0 && ind2 != -1
+		if !checkhit{hitlist, ind2}
+			push indhit ind2
+
+			echo ind2
+
+			seek2 $118000 + (6 * (ind - 1))
+			seek2ba
+			set data_front lzi{}
+
+			seek2 $8C84 + (8 * ind)
+			set data_pal_n bytes{$FF, $7F} + fread{4} + bytes{$00, $00}
+			set data_pal_s bytes{$FF, $7F} + fread{4} + bytes{$00, $00}
+
+			seek2 $50BAB + (24 * (ind - 1)) + 17
+			set spr_size int{fread{1}} / $10
+
+			set data_front clip{data_front, spr_size * spr_size * $10}
+
+			set spr_n make2{data_front, data_pal_n, spr_size, 1}
+			set spr_s make2{data_front, data_pal_s, spr_size, 1}
+
+			if ind2 == 42
+				set spr_n center2{spr_n, spr_size, "sw"}
+				set spr_s center2{spr_s, spr_size, "sw"}
+			else
+				set spr_n center2{spr_n, spr_size}
+				set spr_s center2{spr_s, spr_size}
+			end
+
+			set spr_n floodtp{spr_n, 0, 0}
+			set spr_s floodtp{spr_s, 0, 0}
+
+			#set spr_fp getFootprint2{$F8FAA, ind}
+
+			#set spr_ico getIcon2{$8D20C, $8D309, ind}
+
+			outim spr_n fileout{"mon", ind2, "front_normal.png"}
+			outim spr_s fileout{"mon", ind2, "front_shiny.png"}
+			#outim spr_fp fileout{"mon", ind2, "footprint.png"}
+			#outim spr_ico fileout{"mon", ind2, "icon.png"}
+
+		end
+	end
+end
+
+return indhit

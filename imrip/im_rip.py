@@ -19,6 +19,7 @@ crcscr = {
 	0xD69C96CC : ('leafgreen', 'Pokémon LeafGreen Version'),
 	0xDAFFECEC : ('leafgreen', 'Pokémon LeafGreen Version'),
 	0x926EE644 : ('brown', 'Pokémon Brown'),
+	0xC97E574B : ('prism', 'Pokémon Prism'),
 }
 crc_prio = ( # higher in list = first to run
 	0xDD88761C, 0x84EE4776, # firered
@@ -27,11 +28,12 @@ crc_prio = ( # higher in list = first to run
 	0xEA87BD6E, # vega
 	0xFD6EB54C, # altair
 	0x4404DCB3, # sirius
-	0x3CAB0ABA, # frigo
+	0xC97E574B, # prism
+	0x926EE644, # brown
 	0xCE1B46EB, # reforged gold
 	0x5DF73EF7, # reforged silver
-	0x926EE644, # brown
 	0x300699D8, # ruby destiny reign of legends
+	0x3CAB0ABA, # frigo
 )
 
 def try_file(rom, hits):
