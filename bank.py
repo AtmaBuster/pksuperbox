@@ -29,9 +29,9 @@ class Globals:
 		self.frame_ct = 0
 
 		self.muted = False
-		self.vol_master = 1.0
-		self.vol_music = 1.0
-		self.vol_sfx = 1.0
+		self.vol_master = 10
+		self.vol_music = 10
+		self.vol_sfx = 10
 
 		self.language = 0
 
@@ -54,7 +54,12 @@ class Globals:
 	def get_mus_volume(self):
 		if self.muted:
 			return 0.0
-		return self.vol_master * self.vol_music
+		return (self.vol_master * self.vol_music) / 100
+
+	def get_sfx_volume(self):
+		if self.muted:
+			return 0.0
+		return (self.vol_master * self.vol_sfx) / 100
 
 	@property
 	def text_speed(self):
@@ -2238,6 +2243,31 @@ class Game:
 		GL.fullscreen = not GL.fullscreen
 		self.init_view()
 
+	def options_set_volume(self, which, val, is_delta):
+		if which == 0:
+			# master
+			if is_delta:
+				GL.vol_master = min(max(GL.vol_master + val, 0), 10)
+			else:
+				GL.vol_master = val
+		elif which == 1:
+			# master
+			if is_delta:
+				GL.vol_music = min(max(GL.vol_music + val, 0), 10)
+			else:
+				GL.vol_music = val
+		elif which == 2:
+			# master
+			if is_delta:
+				GL.vol_sfx = min(max(GL.vol_sfx + val, 0), 10)
+			else:
+				GL.vol_sfx = val
+		self.update_volume()
+		print(which, val, is_delta)
+		print(GL.vol_master)
+		print(GL.vol_music)
+		print(GL.vol_sfx)
+
 	def mainloop_options(self):
 		if self.scene_init:
 			bg_tile = self.gfx('options_bg_tile')
@@ -2256,10 +2286,27 @@ class Game:
 			button_list.append( Button(156, 116, (32, 32), lambda: GL.set_window_frame(3, self.current_data)) )
 			button_list.append( Button(196, 116, (32, 32), lambda: GL.set_window_frame(4, self.current_data)) )
 			button_list.append( Button(245, 53, self.gfx('options_checkbox_off'), lambda: self.toggle_fullscreen()) )
+
+			button_list.append( Button(68, 192, self.gfx('arrow_button_left'), lambda: self.options_set_volume(0, -1, True)) )
+			for i in range(11):
+				button_list.append( Button(79 + i*8, 192, self.gfx('options_meter_tick_off'), lambda i=i: self.options_set_volume(0, i, False)) )
+			button_list.append( Button(166, 192, self.gfx('arrow_button_right'), lambda: self.options_set_volume(0, 1, True)) )
+
+			button_list.append( Button(68, 208, self.gfx('arrow_button_left'), lambda: self.options_set_volume(1, -1, True)) )
+			for i in range(11):
+				button_list.append( Button(79 + i*8, 208, self.gfx('options_meter_tick_off'), lambda i=i: self.options_set_volume(1, i, False)) )
+			button_list.append( Button(166, 208, self.gfx('arrow_button_right'), lambda: self.options_set_volume(1, 1, True)) )
+
+			button_list.append( Button(68, 224, self.gfx('arrow_button_left'), lambda: self.options_set_volume(2, -1, True)) )
+			for i in range(11):
+				button_list.append( Button(79 + i*8, 224, self.gfx('options_meter_tick_off'), lambda i=i: self.options_set_volume(2, i, False)) )
+			button_list.append( Button(166, 224, self.gfx('arrow_button_right'), lambda: self.options_set_volume(2, 1, True)) )
+
 			self['buttons'] = button_list
 			self.text_boxes.add(TextBox, 4, 40, 21, 5, textdb.bs_options_textspeed(), (0, 6))
 			self.text_boxes.add(TextBox, 4, 88, 33, 9, textdb.bs_options_windowframe(), (0, 4))
 			self.text_boxes.add(TextBox, 180, 40, 11, 5, textdb.bs_options_fullscreen(), (0, 6))
+			self.text_boxes.add(TextBox, 4, 168, 23, 10, textdb.bs_options_volumes(), (0, 0))
 			self.text_boxes.write_all()
 			self['example_text'] = TextBox(276, 40, 16, 15, textdb.bs_options_teststring())
 			self.text_boxes.add(self['example_text'])
@@ -2277,7 +2324,7 @@ class Game:
 				self.pop_scene()
 				return 1
 
-			# ~ self.update_temp_offset(e)
+			self.update_temp_offset(e)
 
 			if e.type == pygame.MOUSEBUTTONDOWN:
 				if e.button == 1:
@@ -2309,9 +2356,6 @@ class Game:
 
 		self.text_boxes.update()
 		self.text_boxes.draw(self.win)
-		for btn in self['buttons']:
-			btn.draw(self.win)
-			# ~ self.win.blit(btn.surf, btn.rect.topleft)
 		if GL.fullscreen:
 			self.win.blit(self.gfx('options_checkbox_on'), (245, 53))
 		for i in range(len(TEXT_SPEEDS)):
@@ -2324,6 +2368,11 @@ class Game:
 		if GL.window_frame // 5 == self['frame_row']:
 			cur_x = 32 + (GL.window_frame % 5) * 40
 			self.win.blit(self.gfx('options_frame_cursor'), (cur_x, 112))
+		for btn in self['buttons']:
+			btn.draw(self.win)
+		self.win.blit(self.gfx('options_meter_tick_on'), (79 + GL.vol_master * 8, 192))
+		self.win.blit(self.gfx('options_meter_tick_on'), (79 + GL.vol_music * 8, 208))
+		self.win.blit(self.gfx('options_meter_tick_on'), (79 + GL.vol_sfx * 8, 224))
 		save_options()
 
 	def make_background_surf(self, tile):
