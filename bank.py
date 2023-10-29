@@ -239,7 +239,7 @@ class Font:
 		3,2,0,0,0,8,6,3,3,3,0,0,3,6,3,6,
 		7,4,7,7,7,7,7,7,7,7,3,3,8,8,4,6,
 		0,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,
-		6,6,6,6,6,6,6,6,6,6,6,3,0,3,0,0,
+		6,6,6,6,6,6,6,6,6,6,6,3,6,3,0,0,
 		0,6,6,6,6,6,5,6,6,2,4,6,3,6,6,6,
 		6,6,6,6,5,6,6,6,6,6,6,7,0,8,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -881,8 +881,6 @@ class BitField:
 	def __init__(self):
 		self.i = 0
 	def __getitem__(self, ind):
-		return True
-		# ~ if ind == 258: return True
 		return bool(self.i & (1 << ind))
 	def __setitem__(self, ind, val):
 		if val != 0 and val != 1:
@@ -937,6 +935,22 @@ class Dex:
 		self.i.fromlist(l[0])
 		self.j.fromlist(l[1])
 		self.k.fromlist(l[2])
+
+	def getall(self):
+		maxf = max(self.i.i, self.j.i, self.k.i)
+		pos = 0
+		lst = []
+		while (1 << pos) < maxf:
+			a = self.i[pos]
+			b = self.j[pos]
+			c = self.k[pos]
+			if a or b or c:
+				d = ['x','O'][a]
+				e = ['x','O'][b]
+				f = [' ','O'][c]
+				lst.append((pos, d, e, f))
+			pos += 1
+		return lst
 
 def prng32bit(x):
 	if x == 0x0B00B135:
@@ -1002,6 +1016,7 @@ class Game:
 		'dex_scroll_indicator': 'dex/scroll_indicator.png',
 		'pause_symbol': 'pause_sym.png',
 		'load_open_new': 'open_new.png',
+		'box_save_button': 'box/save_button.png',
 	}
 	def __init__(self):
 		pygame.mixer.init()
@@ -1247,6 +1262,7 @@ class Game:
 		if args.nosave:
 			self['changes_to_save'] = False
 			return
+		self.add_save_dex_to_bank_dex()
 		self.save_bank_data()
 		self.save_loaded_data()
 		self['changes_to_save'] = False
@@ -1266,6 +1282,7 @@ class Game:
 			self.data[box_i][0][slt_i] = chk.save()
 
 	def add_save_dex_to_bank_dex(self):
+		if self.data is None: return
 		if self['loaded_save'] is None: return
 		dex_listing = gamedb.get_game_info(self['loaded_save'].game, 'nat_dex')
 		_, seen_dex, own_dex = self['loaded_save'].pokedex_data
@@ -1275,8 +1292,10 @@ class Game:
 			ish, num = mon.dex
 			wdex = int(ish == 1)
 			if bool(own_dex & (1 << i)):
+				print('O', wdex, i, num, mon.name)
 				self.dex[wdex][num] = DEX_SET_OWN
 			elif bool(seen_dex & (1 << i)):
+				print('S', wdex, i, num, mon.name)
 				self.dex[wdex][num] = DEX_SET_SEEN
 
 	def deffered_save_and_pop_scene(self):
@@ -1370,10 +1389,23 @@ class Game:
 				GL.muted = not GL.muted
 				self.update_volume()
 			if e.key == pygame.K_F8: # DEBUG
-				self.add_save_dex_to_bank_dex()
+				if not self.dex is None:
+					self.dex[0].i.i = 0
+					self.dex[0].j.i = 0
+					self.dex[0].k.i = 0
+					self.dex[1].i.i = 0
+					self.dex[1].j.i = 0
+					self.dex[1].k.i = 0
+					self.save()
 			if e.key == pygame.K_F7: # DEBUG
-				gfx.cache = {}
-				self.current_gfx = {}
+				if not self.dex is None:
+					d1 = self.dex[0].getall()
+					d2 = self.dex[1].getall()
+					print('Dex data:')
+					for x in d1:
+						print(x)
+					for x in d2:
+						print(x)
 			if e.key == pygame.K_F6: # DEBUG
 				if self.scene != SCENE_LAYOUTTEST:
 					self.set_scene(SCENE_LAYOUTTEST)
@@ -1567,6 +1599,7 @@ class Game:
 
 			self['hoverfilename'] = None
 			self['hoverfile'] = None
+			self['hoverbox'] = None
 
 			self['buttons'] = []
 			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.loadscene_pop_scene()) )
@@ -1577,7 +1610,7 @@ class Game:
 				srf = make_game_button_surf(crc)
 				x = (i // 8) * 190 + 20
 				y = (i % 8) * 36 + 56
-				btn = Button(x, y, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn))
+				btn = Button(x, y, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn), fn)
 				btn.tag = fn
 				self['buttons'].append( btn )
 
@@ -1602,6 +1635,8 @@ class Game:
 			if btn.hover(self.mouse_pos):
 				tgt_fn = btn.tag
 				if tgt_fn is None: continue
+				if not btn.hover_text is None:
+					self['hoverbox'] = (make_hover_box(btn.hover_text), self.mouse_pos)
 				if tgt_fn != self['hoverfilename']:
 					self['hoverfilename'] = tgt_fn
 					self['hoverfile'] = save.load_save(self['hoverfilename'], False)
@@ -1609,6 +1644,7 @@ class Game:
 		else:
 			self['hoverfilename'] = None
 			self['hoverfile'] = None
+			self['hoverbox'] = None
 
 		if GL.frame_ct & 1:
 			for i in range(2):
@@ -1627,7 +1663,6 @@ class Game:
 		for btn in self['buttons']:
 			btn.draw(self.win)
 
-		# ~ 432, 216
 		if not self['hoverfile'] is None:
 			sav = self['hoverfile']
 			game_name_auto = GL.font.auto_line_text(sav.game_name, 196)
@@ -1645,6 +1680,11 @@ class Game:
 		elif not self['hoverfilename'] is None:
 			self.win.blit(GL.font.render_line('???', TXT_COL_DARK), (426, 220))
 
+		if not self['hoverbox'] is None and pygame.key.get_mods() & pygame.KMOD_SHIFT:
+			x, y = self['hoverbox'][1]
+			w, h = self['hoverbox'][0].get_rect().size
+			self.win.blit(self['hoverbox'][0], (x + 8, y - h // 2))
+
 		if not self.queue_scene_change is None:
 			return 1
 		if not self.file_dialog_dict is None:
@@ -1659,11 +1699,9 @@ class Game:
 	def get_dex_listing(self, min_i, max_i, hck):
 		lst = []
 		if hck:
-			dex = self.dex[1]
 			dexlst = self['dexlist'][1]
 			dexlstn = self['dexlistnums'][1]
 		else:
-			dex = self.dex[0]
 			dexlst = self['dexlist'][0]
 			dexlstn = self['dexlistnums'][0]
 		for i in range(min_i, max_i + 1):
@@ -1672,8 +1710,14 @@ class Game:
 				lst.append(('-' * 10, dexlstn[i], (False, False, False)))
 				continue
 			mon = pokedb.BASE_STATS[ind]
-			flg = dex[dexlst[i]]
+			ish, num = mon.dex
+			if ish == 1:
+				dex = self.dex[1]
+			else:
+				dex = self.dex[0]
+			flg = dex[num]
 			num = dexlstn[i]
+			# ~ print(ind, mon.name, flg, num)
 			if flg[0]:
 				nam = mon.name
 			else:
@@ -1931,9 +1975,6 @@ class Game:
 
 			self.scene_init = False
 
-		# ~ if not self['spindapid'] is None:
-			# ~ self['spindapid'] = (self['spindapid'] + 2_038_074_743) % 0x100000000
-			# ~ self.update_dex_listing()
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				return 0
@@ -2412,7 +2453,8 @@ class Game:
 
 			self['cursor_pos'] = 5
 
-			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.box_open_need_to_save_box(), 'Quit') )
+			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.box_open_need_to_save_box(), 'Quit to menu') )
+			self['buttons'].append( Button(56, 4, self.gfx('box_save_button'), lambda: self.save(), 'Save data') )
 
 			self['buttons'].append( Button(46, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), 'Change wallpaper') )
 			self['buttons'].append( Button(76, 87, self.gfx('box_jump'), lambda: None, 'Jump to box') )
