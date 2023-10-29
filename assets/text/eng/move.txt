@@ -455,7 +455,7 @@ Aqua Jet@A lunge at blinding speed that always goes first.@11
 Attack Order@The user calls out its underlings. High critical-hit ratio.@6
 Defend Order@The user calls out its underlings to raise its Defense and Sp. Def.@6
 Heal Order@The user calls out its underlings to heal up to half of its maximum HP.@6
-MOVE 457@-----@0
+Head Smash@-----@5
 Double Hit@Slams the foe twice with a long tail, a tentacle, or vines.@0
 Roar Of Time@A blast that even distorts time. Needs recharge afterward.@16
 Spacial Rend@Tears space around the foe. Has a high critical-hit ratio.@16
@@ -581,7 +581,7 @@ MOVE 579@-----@0
 MOVE 580@-----@0
 MOVE 581@-----@0
 MOVE 582@-----@0
-MOVE 583@-----@0
+Play Rough@-----@18
 Fairy Wind@-----@18
 Moonblast@-----@18
 MOVE 586@-----@0
@@ -979,3 +979,24 @@ Megaphone@A loud noise that lowers Sp. Atk.@0
 Rock Head@An attack that may cause flinching.@5
 Dark Beam@A negative ray that lowers the foes' accuracy.@17
 Heaven Beam@A beam of light that cuts the opponent's speed.@0
+Final Chance@-----@9
+Laughing Gas@-----@22
+Prism Spray@-----@25
+Power Ballad@-----@21
+Freeze Burn@-----@15
+Lava Pool@-----@10
+Metallurgy@-----@8
+Storm Front@-----@2
+Dust Devil@-----@5
+Mustard Gas@-----@22
+Nerve Gas@-----@22
+Spring Buds@-----@12
+Bass Tremor@-----@21
+Void Sphere@-----@0
+Crystal Bolt@-----@13
+Vaporize@-----@11
+Lewisite@-----@22
+Boil@-----@10
+Steel Eater@-----@3
+Ghost Hammer@-----@8
+Noise Pulse@-----@21

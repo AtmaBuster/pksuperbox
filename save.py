@@ -1105,7 +1105,8 @@ if __name__ == '__main__':
 	# ~ sav = load_save('frigo/Pokémon Frigo Returns By The Phantom - Ruby Hack.sav')
 	# ~ sav = load_save('rubydestiny/rd_rol.sav')
 	# ~ sav = load_save('em_e.sav')
-	sav = load_save('firered/firered_eng1.sav')
+	# ~ sav = load_save('firered/firered_eng1.sav')
+	sav = load_save('../roms/pokeprism.sav')
 
 	# ~ loc = gamedb.get_game_info(sav.game, 'A_player_gender')
 	# ~ sseek(save_f, loc, sav.sect_ptrs)
@@ -1118,22 +1119,24 @@ if __name__ == '__main__':
 	print_save_profile(sav)
 
 	save_f = open(sav.sav_path, 'rb+')
-	sav.unlock_full_dex()
+	sav.pokedex_data[1] = int('10' + '1' * 252, 2)
+	sav.pokedex_data[2] = int('10' + '1' * 252, 2)
 	sav.write_pokedex_data(save_f)
 
 	# ~ sav.box_data[0][0][0] = sav.box_data[0][0][6].copy()
 	# ~ sav.box_data[0][0][0].species = 308
 	# ~ sav.box_data[0][0][0].pid = 0
-	sav.box_data[0][0][0].pokerus = 0
+	# ~ sav.box_data[0][0][0].pokerus = 0
 	# ~ sav.box_data[0][0][1] = sav.box_data[0][0][0].copy()
 	# ~ sav.box_data[0][0][1].pid = 0xFFFFFFFF
-	sav.box_data[0][0][1].pokerus = 0xF0
+	# ~ sav.box_data[0][0][1].pokerus = 0xF0
 	# ~ sav.box_data[0][0][2] = sav.box_data[0][0][0].copy()
 	# ~ sav.box_data[0][0][2].pid = 57639070
-	sav.box_data[0][0][2].pokerus = 0x0F
+	# ~ sav.box_data[0][0][2].pokerus = 0x0F
 
-	sav.write_box_data(save_f)
-	sav.fix_all_checksums(save_f)
+	# ~ sav.write_box_data(save_f)
+	# ~ sav.fix_all_checksums(save_f)
+	sav.fix_checksum(save_f)
 
 	# ~ sav.box_data[0][0][2] = None
 	# ~ sav.box_data[0][0][0].species = 151

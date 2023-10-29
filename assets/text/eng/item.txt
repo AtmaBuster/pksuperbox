@@ -453,3 +453,112 @@ Power Wings@-----@1
 Energy Wall@-----@1
 Steel Shell@-----@1
 Skateboard@-----@5
+Coal@-----@1
+Poison Guard@-----@1
+Burn Guard@-----@1
+Freeze Guard@-----@1
+Cage Card 1@-----@5
+Rijon Pass@-----@5
+Ferry Ticket@-----@5
+Cage Card 2@-----@5
+Cage Card 3@-----@5
+Cage Card 4@-----@5
+Sleep Guard@-----@1
+Paralyze Guard@-----@1
+Silver Egg@-----@5
+Crystal Egg@-----@5
+Ruby Egg@-----@5
+Gold Egg@-----@5
+Confuse Guard@-----@1
+Emerald Egg@-----@5
+Prism Key@-----@5
+Red Orb@-----@5
+Green Orb@-----@5
+Mansion Key@-----@5
+Blue Orb@-----@5
+Sapphire Egg@-----@5
+Curo Shard@-----@1
+Bedroom Key@-----@5
+Megaphone@-----@1
+Cigarette@-----@1
+Cage Card 5@-----@5
+Cage Card 6@-----@5
+Eagulou Ball@-----@2
+Giant Rock@-----@1
+X Sp. Def@-----@1
+Cage Key@-----@1
+Reaper Cloth@-----@1
+Gold Token@-----@1
+Ore Case@-----@5
+Smelter@-----@5
+Eviolite@-----@1
+Hyper Share@-----@5
+Dynamite@-----@1
+Dawn Stone@-----@1
+Gold Dust@-----@1
+Park Ball@-----@2
+Iron Pickaxe@-----@5
+Shiny Stone@-----@1
+Green Flute@-----@1
+Orange Flute@-----@1
+Purple Flute@-----@1
+Shop Ticket@-----@5
+Mining Pick@-----@1
+Safe Goggles@-----@1
+Red Jewel@-----@5
+Blue Jewel@-----@5
+Brown Jewel@-----@5
+White Jewel@-----@5
+Prism Jewel@-----@5
+Big Nugget@-----@1
+Heat Rock@-----@1
+Damp Rock@-----@1
+Smooth Rock@-----@1
+Icy Rock@-----@1
+Light Clay@-----@1
+Keg of Beer@-----@1
+Fire Ring@-----@1
+Grass Ring@-----@1
+Water Ring@-----@1
+Thunder Ring@-----@1
+Shiny Ring@-----@1
+Dawn Ring@-----@1
+Dusk Ring@-----@1
+Moon Ring@-----@1
+Dusk Stone@-----@1
+Expert Belt@-----@1
+Trade Stone@-----@1
+Shiny Ball@-----@2
+Ore@-----@1
+Burger@-----@1
+Muscle Band@-----@1
+Fries@-----@1
+Fossil Case@-----@5
+Silk@-----@1
+Magmarizer@-----@1
+Electirizer@-----@1
+Prism Scale@-----@1
+Dubious Disc@-----@1
+Razor Claw@-----@1
+Razor Fang@-----@1
+Protector@-----@1
+Orange Apricorn@-----@1
+Cyan Apricorn@-----@1
+Grey Apricorn@-----@1
+Purple Apricorn@-----@1
+Shiny Apricorn@-----@1
+Wise Glasses@-----@1
+Mystery Ticket@-----@5
+Orhan Card@-----@5
+QR Scanner@-----@5
+Gas Mask@-----@5
+Fake ID@-----@5
+Fluffy Coat@-----@5
+Roof Card@-----@5
+Lab Card@-----@5
+Grapple Hook@-----@5
+Quick Ball@-----@2
+Dusk Ball@-----@2
+Time Machine@-----@5
+Token Tracker@-----@5
+Power Herb@-----@1

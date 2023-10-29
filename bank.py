@@ -2628,8 +2628,8 @@ class Game:
 			self.scene_init = False
 
 		for e in pygame.event.get():
-			if e.type == pygame.QUIT:
-				return 0
+			# ~ if e.type == pygame.QUIT:
+				# ~ return 0
 
 			self.handle_global_keys(e)
 			if self.input_locked: continue
