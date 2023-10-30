@@ -1910,9 +1910,9 @@ class Game:
 		num_list = pokedb.DEX_LISTS[dexi]
 		if i == 0:
 			# by num
-			lout = num_list.lst[1:]
+			lout = num_list.lst
 			nlst = []
-			for i in range(1, len(lout) + 1):
+			for i in range(len(lout) + 1):
 				nlst.append((i, dexi==1))
 			if rev:
 				lout = list(reversed(lout))
