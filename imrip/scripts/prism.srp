@@ -14,8 +14,6 @@ for i 1, 255
 		if !checkhit{hitlist, ind2}
 			push indhit ind2
 
-			echo ind2
-
 			seek2 $118000 + (6 * (ind - 1))
 			seek2ba
 			set data_front lzi{}
@@ -43,14 +41,33 @@ for i 1, 255
 			set spr_n floodtp{spr_n, 0, 0}
 			set spr_s floodtp{spr_s, 0, 0}
 
-			#set spr_fp getFootprint2{$F8FAA, ind}
+			# footprints are not edited!
+			#set spr_fp getFootprint2{$105237, ind}
 
-			#set spr_ico getIcon2{$8D20C, $8D309, ind}
+			seek2 $7371A + ((ind - 1) * 3)
+			seek2ba
+			set data_icon lzi{}
+			set data_icon clip{data_icon, $40}
+
+			seek2 $8E4BC + (ind - 1)
+			set pal_n int{fread{1}} / $10
+
+			set data_pal bytes{$FC, $43, $BF, $26}
+			set col_lo array{$FE, $89, $E7, $4F, $FF, $CE, $9F, $1A}[pal_n]
+			set col_hi array{$01, $7C, $0E, $0D, $00, $29, $03, $68}[pal_n]
+			set data_pal data_pal + bytes{col_lo, col_hi}
+			set data_pal data_pal + bytes{$00, $00}
+			set spr_ico make2{data_icon, data_pal, 2, 0}
+
+			set spr_i_f image{32, 32, $43FC}
+			set spr_ico paste{spr_ico, 8, 12, spr_i_f}
+
+			set spr_ico floodtp{spr_ico, 0, 0}
 
 			outim spr_n fileout{"mon", ind2, "front_normal.png"}
 			outim spr_s fileout{"mon", ind2, "front_shiny.png"}
 			#outim spr_fp fileout{"mon", ind2, "footprint.png"}
-			#outim spr_ico fileout{"mon", ind2, "icon.png"}
+			outim spr_ico fileout{"mon", ind2, "icon.png"}
 
 		end
 	end
