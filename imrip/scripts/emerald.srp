@@ -40,6 +40,35 @@ for i 1, 387
 			outim sprFP fileout{"mon", 270, "footprint.png"}
 			outim sprFP fileout{"mon", 271, "footprint.png"}
 		end
+		if ind == 133
+			outim sprN fileout{"mon", 1294, "front_normal.png"}
+			outim sprS fileout{"mon", 1294, "front_shiny.png"}
+			outim sprI fileout{"mon", 1294, "icon.png"}
+			outim sprFP fileout{"mon", 1294, "footprint.png"}
+			outim sprN fileout{"mon", 1295, "front_normal.png"}
+			outim sprS fileout{"mon", 1295, "front_shiny.png"}
+			outim sprI fileout{"mon", 1295, "icon.png"}
+			outim sprFP fileout{"mon", 1295, "footprint.png"}
+			outim sprN fileout{"mon", 1296, "front_normal.png"}
+			outim sprS fileout{"mon", 1296, "front_shiny.png"}
+			outim sprI fileout{"mon", 1296, "icon.png"}
+			outim sprFP fileout{"mon", 1296, "footprint.png"}
+			push indhit 1294
+			push indhit 1295
+			push indhit 1296
+		end
+		if ind == 236
+			outim sprN fileout{"mon", 1292, "front_normal.png"}
+			outim sprS fileout{"mon", 1292, "front_shiny.png"}
+			outim sprI fileout{"mon", 1292, "icon.png"}
+			outim sprFP fileout{"mon", 1292, "footprint.png"}
+			outim sprN fileout{"mon", 1293, "front_normal.png"}
+			outim sprS fileout{"mon", 1293, "front_shiny.png"}
+			outim sprI fileout{"mon", 1293, "icon.png"}
+			outim sprFP fileout{"mon", 1293, "footprint.png"}
+			push indhit 1292
+			push indhit 1293
+		end
 
 		if ind == 201
 			for ui 0, 28

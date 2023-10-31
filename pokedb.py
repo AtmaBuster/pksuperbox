@@ -1396,7 +1396,7 @@ class FormList:
 		return None
 
 MON_FORMS = (
-	FormList(False, ( 133,  0), (1294, 14), (1294, 15), (1294, 16), (1297, 12), (1298, 13), ), # Eevee
+	FormList(False, ( 133,  0), (1294, 14), (1295, 15), (1296, 16), (1297, 12), (1298, 13), ), # Eevee
 	FormList(False, ( 236,  7), (1279,  8), (1292, 14), (1293, 15), ), # Tyrogue
 	FormList(True,  ( 385,  0), ( 269,  9), ( 270, 10), ( 271, 11), ), # Castform
 	FormList(True,  ( 410,  0), ( 273,  1), ( 274,  2), ( 275,  3), ), # Deoxys
