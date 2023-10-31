@@ -253,6 +253,9 @@ class Save1:
 				if mon is None: continue
 				if mon.is_egg: continue
 				mon_dex = gamedb.get_dex_number(self.game, mon.species)
+				if mon_dex is None:
+					print('ERROR')
+					continue
 				old_own = self.pokedex_data[1] & (1 << (mon_dex - 1))
 				self.pokedex_data[1] |= (1 << (mon_dex - 1))
 				self.pokedex_data[2] |= (1 << (mon_dex - 1))
@@ -527,6 +530,9 @@ class Save2:
 				if mon is None: continue
 				if mon.is_egg: continue
 				mon_dex = gamedb.get_dex_number(self.game, mon.species)
+				if mon_dex is None:
+					print('ERROR')
+					continue
 				old_own = self.pokedex_data[1] & (1 << (mon_dex - 1))
 				self.pokedex_data[1] |= (1 << (mon_dex - 1))
 				self.pokedex_data[2] |= (1 << (mon_dex - 1))
@@ -951,6 +957,9 @@ class Save3:
 				if mon is None: continue
 				if mon.is_egg: continue
 				mon_dex = gamedb.get_dex_number(self.game, mon.species)
+				if mon_dex is None:
+					print('ERROR')
+					continue
 				old_own = self.pokedex_data[1] & (1 << (mon_dex - 1))
 				self.pokedex_data[1] |= (1 << (mon_dex - 1))
 				self.pokedex_data[2] |= (1 << (mon_dex - 1))

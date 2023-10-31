@@ -1304,7 +1304,7 @@ BASE_STATS = (
 	BaseStats(1239, 0, 1, 191,  'Aquarius',   11, 11, 31,  100, 80,  90,  65,  95,  100, 67,  0,   3, 2,  1 ),
 	BaseStats(1240, 0, 1, 192,  'Tangtrip',   12, 12, 127, 40,  40,  70,  40,  70,  45,  34,  0,   0, 15, 15),
 	BaseStats(1241, 0, 1, 193,  'Gelania',    12, 12, 127, 90,  85,  125, 75,  100, 60,  34,  0,   0, 7,  7 ),
-	BaseStats(1242, 1, 2, 164,  'Noctowl',    2,  2,  127, 100, 50,  50,  70,  76,  96,  15,  51,  0, 4,  4 ),
+	BaseStats(1242, 1, 0, 164,  'Noctowl',    2,  2,  127, 100, 50,  50,  70,  76,  96,  15,  51,  0, 4,  4 ),
 	BaseStats(1243, 0, 1, 194,  'Tripstar',   6,  2,  127, 55,  85,  40,  85,  35,  100, 68,  48,  4, 3,  3 ),
 	BaseStats(1244, 0, 1, 195,  'Tuhead',     6,  3,  127, 70,  90,  70,  40,  60,  70,  68,  15,  4, 3,  3 ),
 	BaseStats(1245, 0, 1, 196,  'Kotora',     13, 13, 127, 80,  55,  50,  40,  55,  60,  9,   0,   0, 5,  5 ),
@@ -1312,11 +1312,11 @@ BASE_STATS = (
 	BaseStats(1247, 0, 1, 198,  'Peticorn',   10, 10, 127, 40,  60,  40,  60,  50,  50,  50,  18,  0, 15, 15),
 	BaseStats(1248, 0, 1, 199,  'Bomsheal',   10, 11, 127, 65,  102, 67,  67,  112, 77,  0,   0,   0, 2,  5 ),
 	BaseStats(1249, 0, 1, 200,  'Belmitt',    12, 3,  127, 75,  90,  60,  90,  105, 60,  34,  0,   3, 7,  7 ),
-	BaseStats(1250, 1, 2, 186,  'Politoed',   11, 11, 127, 90,  75,  75,  70,  90,  100, 11,  6,   3, 2,  2 ),
-	BaseStats(1251, 1, 2, 187,  'Hoppip',     12, 2,  127, 35,  35,  40,  50,  35,  55,  34,  0,   3, 7,  6 ),
-	BaseStats(1252, 1, 2, 188,  'Skiploom',   12, 2,  127, 55,  45,  50,  80,  45,  65,  34,  0,   3, 7,  6 ),
-	BaseStats(1253, 1, 2, 189,  'Jumpluff',   12, 2,  127, 75,  55,  70,  110, 55,  85,  34,  0,   3, 7,  6 ),
-	BaseStats(1254, 1, 2, 190,  'Aipom',      0,  0,  127, 55,  70,  55,  85,  40,  55,  50,  53,  4, 5,  5 ),
+	BaseStats(1250, 1, 0, 186,  'Politoed',   11, 11, 127, 90,  75,  75,  70,  90,  100, 11,  6,   3, 2,  2 ),
+	BaseStats(1251, 1, 0, 187,  'Hoppip',     12, 2,  127, 35,  35,  40,  50,  35,  55,  34,  0,   3, 7,  6 ),
+	BaseStats(1252, 1, 0, 188,  'Skiploom',   12, 2,  127, 55,  45,  50,  80,  45,  65,  34,  0,   3, 7,  6 ),
+	BaseStats(1253, 1, 0, 189,  'Jumpluff',   12, 2,  127, 75,  55,  70,  110, 55,  85,  34,  0,   3, 7,  6 ),
+	BaseStats(1254, 1, 0, 190,  'Aipom',      0,  0,  127, 55,  70,  55,  85,  40,  55,  50,  53,  4, 5,  5 ),
 	BaseStats(1255, 0, 1, 201,  'Gupgold',    11, 11, 127, 40,  50,  50,  52,  30,  40,  33,  41,  0, 15, 15),
 	BaseStats(1256, 0, 1, 202,  'Corasun',    11, 11, 127, 35,  45,  45,  75,  65,  75,  0,   0,   0, 11, 12),
 	BaseStats(1257, 0, 1, 203,  'Anchorage',  11,  8, 127, 55,  80,  85,  85,  75,  85,  0,   0,   0, 11, 12),
@@ -1330,7 +1330,7 @@ BASE_STATS = (
 	BaseStats(1265, 0, 1, 211,  'Praxe',      6,  8,  127, 75,  140, 100, 55,  60,  70,  52,  0,   5, 3,  3 ),
 	BaseStats(1266, 0, 1, 212,  'Rinring',    17, 17, 254, 45,  55,  30,  85,  30,  45,  0,   0,   0, 5,  5 ),
 	BaseStats(1267, 0, 1, 213,  'Bellrun',    17, 17, 254, 80,  95,  40,  110, 40,  75,  0,   0,   0, 5,  5 ),
-	BaseStats(1268, 1, 2, 215,  'Sneasel',    17, 15, 127, 55,  95,  55,  115, 35,  75,  39,  51,  3, 5,  5 ),
+	BaseStats(1268, 1, 0, 215,  'Sneasel',    17, 15, 127, 55,  95,  55,  115, 35,  75,  39,  51,  3, 5,  5 ),
 	BaseStats(1269, 0, 1, 214,  'Numbpuff',   11, 13, 127, 90,  112, 100, 75,  85,  65,  0,   0,   0, 12, 12),
 	BaseStats(1270, 0, 1, 215,  'Nyanya',     0,  0,  127, 35,  40,  30,  85,  35,  35,  53,  0,   0, 15, 15),
 	BaseStats(1271, 0, 1, 216,  'Madame',     0,  2,  127, 67,  105, 70,  95,  65,  73,  51,  39,  0, 5,  4 ),
@@ -1338,11 +1338,11 @@ BASE_STATS = (
 	BaseStats(1273, 0, 1, 218,  'Pangshi',    7,  7,  127, 75,  100, 90,  48,  67,  77,  0,   0,   4, 5,  11),
 	BaseStats(1274, 0, 1, 219,  'Puddipup',   10, 10, 63,  50,  65,  40,  50,  65,  45,  22,  18,  5, 15, 15),
 	BaseStats(1275, 0, 1, 220,  'Rayleep',    11, 2,  127, 65,  40,  70,  70,  80,  140, 0,   0,   5, 2,  2 ),
-	BaseStats(1276, 1, 2, 230,  'Kingdra',    11, 16, 127, 75,  95,  95,  85,  95,  95,  33,  0,   0, 14, 2 ),
-	BaseStats(1277, 1, 2, 233,  'Porygon2',   0,  0,  255, 85,  80,  90,  60,  105, 95,  36,  0,   0, 10, 10),
+	BaseStats(1276, 1, 0, 230,  'Kingdra',    11, 16, 127, 75,  95,  95,  85,  95,  95,  33,  0,   0, 14, 2 ),
+	BaseStats(1277, 1, 0, 233,  'Porygon2',   0,  0,  255, 85,  80,  90,  60,  105, 95,  36,  0,   0, 10, 10),
 	BaseStats(1278, 0, 1, 221,  'Ballerine',  14, 14, 127, 20,  25,  45,  60,  70,  90,  43,  0,   0, 15, 15),
-	BaseStats(1279, 1, 2, 236,  'Tyrogue',    1,  1,  0,   35,  35,  35,  35,  35,  35,  62,  0,   0, 15, 15),
-	BaseStats(1280, 1, 2, 237,  'Hitmontop',  1,  1,  0,   50,  95,  95,  70,  35,  110, 22,  0,   0, 8,  8 ),
+	BaseStats(1279, 1, 0, 236,  'Tyrogue',    1,  1,  0,   35,  35,  35,  35,  35,  35,  62,  0,   0, 15, 15),
+	BaseStats(1280, 1, 0, 237,  'Hitmontop',  1,  1,  0,   50,  95,  95,  70,  35,  110, 22,  0,   0, 8,  8 ),
 	BaseStats(1281, 0, 1, 222,  'Chix',       0,  2,  127, 30,  65,  40,  60,  30,  30,  50,  48,  0, 15, 15),
 	BaseStats(1282, 0, 1, 223,  'Rai',        13, 13, 255, 90,  85,  75,  115, 115, 100, 47,  0,   5, 15, 15),
 	BaseStats(1283, 0, 1, 224,  'En',         10, 10, 255, 115, 115, 85,  100, 90,  75,  47,  0,   5, 15, 15),
@@ -1350,17 +1350,17 @@ BASE_STATS = (
 	BaseStats(1285, 0, 1, 226,  'Wolfan',     15, 15, 127, 70,  60,  50,  55,  70,  60,  0,   0,   0, 1,  5 ),
 	BaseStats(1286, 0, 1, 227,  'Warwolf',    15, 15, 127, 70,  90,  80,  100, 70,  85,  0,   0,   0, 1,  5 ),
 	BaseStats(1287, 0, 1, 228,  'Lickilord',  0,  0,  127, 110, 85,  95,  50,  80,  95,  20,  12,  0, 1,  1 ),
-	BaseStats(1288, 1, 2, 242,  'Blissey',    0,  0,  254, 255, 10,  10,  55,  75,  135, 30,  32,  4, 6,  6 ),
-	BaseStats(1289, 1, 2, 470,  'Leafeon',    12, 12, 31,  65,  60,  130, 95,  110, 65,  34,  0,   0, 5,  5 ),
-	BaseStats(1290, 1, 2, 184,  'Azumarill',  11, 11, 127, 100, 50,  80,  50,  50,  80,  47,  37,  4, 6,  2 ),
+	BaseStats(1288, 1, 0, 242,  'Blissey',    0,  0,  254, 255, 10,  10,  55,  75,  135, 30,  32,  4, 6,  6 ),
+	BaseStats(1289, 1, 0, 470,  'Leafeon',    12, 12, 31,  65,  60,  130, 95,  110, 65,  34,  0,   0, 5,  5 ),
+	BaseStats(1290, 1, 0, 184,  'Azumarill',  11, 11, 127, 100, 50,  80,  50,  50,  80,  47,  37,  4, 6,  2 ),
 	None, # Ghost
-	BaseStats(1292, 0, 0, 236,  'Tyrogue',    1,  1,  0,   35,  35,  35,  35,  35,  35,  62,  0,   0, 15, 15),
-	BaseStats(1293, 0, 0, 236,  'Tyrogue',    1,  1,  0,   35,  35,  35,  35,  35,  35,  62,  0,   0, 15, 15),
-	BaseStats(1294, 0, 0, 133,  'Eevee',      0,  0,  31,  55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
-	BaseStats(1295, 0, 0, 133,  'Eevee',      0,  0,  31,  55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
-	BaseStats(1296, 0, 0, 133,  'Eevee',      0,  0,  31,  55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
-	BaseStats(1297, 0, 0, 133,  'Eevee',      0,  0,  0,   55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
-	BaseStats(1298, 0, 0, 133,  'Eevee',      0,  0,  254, 55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
+	BaseStats(1292, 1, 0, 236,  'Tyrogue',    1,  1,  0,   35,  35,  35,  35,  35,  35,  62,  0,   0, 15, 15),
+	BaseStats(1293, 1, 0, 236,  'Tyrogue',    1,  1,  0,   35,  35,  35,  35,  35,  35,  62,  0,   0, 15, 15),
+	BaseStats(1294, 1, 0, 133,  'Eevee',      0,  0,  31,  55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
+	BaseStats(1295, 1, 0, 133,  'Eevee',      0,  0,  31,  55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
+	BaseStats(1296, 1, 0, 133,  'Eevee',      0,  0,  31,  55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
+	BaseStats(1297, 1, 0, 133,  'Eevee',      0,  0,  0,   55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
+	BaseStats(1298, 1, 0, 133,  'Eevee',      0,  0,  254, 55,  55,  50,  55,  45,  65,  50,  0,   0, 5,  5 ),
 	BaseStats(1299, 0, 1, 229,  'Angeallen',  16, 2,  255, 200, 200, 200, 200, 200, 200, 28,  0,   0, 15, 15),
 	BaseStats(1300, 0, 1, 230,  'Dark Lugia', 17, 14, 255, 220, 10,  100, 170, 150, 100, 46,  0,   5, 15, 15),
 	BaseStats(1301, 0, 1, 231,  'Baby Lugia', 14, 2,  255, 68,  45,  84,  80,  48,  102, 46,  0,   5, 15, 15),
@@ -1369,17 +1369,8 @@ BASE_STATS = (
 	BaseStats(1304, 0, 1, 234,  'Raiwato',    5,  13, 255, 100, 100, 100, 125, 100, 125, 0,   0,   5, 15, 15),
 	BaseStats(1305, 0, 1, 235,  'Fambaco',    7,  1,  255, 100, 100, 100, 100, 125, 125, 0,   0,   5, 15, 15),
 	BaseStats(1306, 0, 1, 236,  'Libabeel',   8,  3,  255, 125, 100, 125, 100, 100, 100, 0,   0,   5, 15, 15),
-	BaseStats(1307, 0, 1,   0,  'MissingNo.', 2,  0,  255, 33, 136, 0, 29, 6, 6, 0, 0, 0, 15, 15),
+	BaseStats(1307, 0, 2,   1,  'MissingNo.', 2,  0,  255, 33, 136, 0, 29, 6, 6, 0, 0, 0, 15, 15),
 )
-shared_mon_inds = {
-	236: (1292, 1293, ),
-	133: (1294, 1295, 1296, 1297, 1298, ),
-}
-def is_shared_ind(i):
-	for k, v in shared_mon_inds.items():
-		if i in v:
-			return k
-	return None
 
 class FormList:
 	def __init__(self, inter, *mons):
@@ -1405,10 +1396,12 @@ class FormList:
 		return None
 
 MON_FORMS = (
-	FormList(True,  ( 385,  9), ( 269, 10), ( 270, 11), ( 271, 12), ), # Castform
+	FormList(False, ( 133,  0), (1294, 14), (1294, 15), (1294, 16), (1297, 12), (1298, 13), ), # Eevee
+	FormList(False, ( 236,  7), (1279,  8), (1292, 14), (1293, 15), ), # Tyrogue
+	FormList(True,  ( 385,  0), ( 269,  9), ( 270, 10), ( 271, 11), ), # Castform
 	FormList(True,  ( 410,  0), ( 273,  1), ( 274,  2), ( 275,  3), ), # Deoxys
-	FormList(False, (1132,  4), (1133,  5), (1232,  6), ), # Asphere
 	FormList(False, ( 164,  7), (1242,  8), ), # Noctowl
+	FormList(False, ( 184,  7), (1290,  8), ), # Azumarill
 	FormList(False, ( 186,  7), (1250,  8), ), # Politoed
 	FormList(False, ( 187,  7), (1251,  8), ), # Hoppip
 	FormList(False, ( 188,  7), (1252,  8), ), # Skiploom
@@ -1417,11 +1410,10 @@ MON_FORMS = (
 	FormList(False, ( 215,  7), (1268,  8), ), # Sneasel
 	FormList(False, ( 230,  7), (1276,  8), ), # Kingdra
 	FormList(False, ( 233,  7), (1277,  8), ), # Porygon2
-	FormList(False, ( 236,  7), (1279,  8), ), # Tyrogue
 	FormList(False, ( 237,  7), (1280,  8), ), # Hitmontop
 	FormList(False, ( 242,  7), (1288,  8), ), # Blissey
 	FormList(False, ( 495,  7), (1289,  8), ), # Leafeon
-	FormList(False, ( 184,  7), (1290,  8), ), # Azumarill
+	FormList(False, (1132,  4), (1133,  5), (1232,  6), ), # Asphere
 )
 
 def has_forms(ind):
@@ -1451,45 +1443,108 @@ for i, base in enumerate(BASE_STATS):
 class DexList:
 	def __init__(self):
 		self.lst = [None]
+		self.lst_neg = []
+
+	def lim(self):
+		if len(self.lst_neg) > 0:
+			min_val = -len(self.lst_neg)
+		else:
+			min_val = 0
+			for x in self.lst:
+				if not x is None:
+					break
+				min_val += 1
+		return (min_val, len(self.lst))
 
 	def rawnums(self):
-		return [x for x in self.lst if not x is None]
+		l1 = [x for x in self.lst_neg if not x is None]
+		l2 = [x for x in self.lst if not x is None]
+		return l1 + l2
+
+	def get_list(self):
+		return self.lst_neg + self.lst
 
 	def __getitem__(self, ind):
+		if ind < 0:
+			if -ind > len(self.lst_neg):
+				return None
+			return self.lst_neg[-ind-1]
 		if ind >= len(self.lst):
 			return None
 		return self.lst[ind]
 
 	def __setitem__(self, ind, val):
-		while ind >= len(self.lst):
-			self.lst.append(None)
-		self.lst[ind] = val
+		if ind < 0:
+			while -ind >= len(self.lst_neg) + 1:
+				self.lst_neg.append(None)
+			if self.lst_neg[-ind-1] is None:
+				self.lst_neg[-ind-1] = [val]
+			else:
+				self.lst_neg[-ind-1].append(val)
+		else:
+			while ind >= len(self.lst):
+				self.lst.append(None)
+			if self.lst[ind] is None:
+				self.lst[ind] = [val]
+			else:
+				self.lst[ind].append(val)
 
 	def __len__(self):
 		return len(self.lst)
 
-def make_dex_lists():
-	dex_v = DexList()
-	dex_h = DexList()
+def make_dex_list():
+	dex_lists = {}
+	def set_dex(i, n, v):
+		if not i in dex_lists.keys():
+			dex_lists[i] = DexList()
+		dex_lists[i][n] = v
+	# ~ dex_v = DexList()
+	# ~ dex_h = DexList()
+	# Special
+	set_dex(0, 351, 385)
+	set_dex(0, 386, 410)
+	# ~ dex_v[351] = 385
+	# ~ dex_v[386] = 410
+	# ~ for mon in BASE_STATS[:20]:
+	# ~ for mon in BASE_STATS[:40]:
+	# ~ for mon in BASE_STATS[252:260]:
+	# ~ for mon in [*BASE_STATS[150:180], *BASE_STATS[1240:1250]]:
 	for mon in BASE_STATS:
 		if mon is None: continue
 		ind = mon.ind
-		dex_gp, dex_num = mon.dex
-		if dex_gp != 1:
-			# vanilla
-			if dex_gp == 2:
-				# regional
-				pass
-			else:
-				if is_shared_ind(ind): continue
+		if ind == 385 or ind == 410: continue
+		# ~ dex_gp, dex_num = mon.dex
+		# ~ if dex_gp == 1:
+			# ~ dex = dex_h
+		# ~ else:
+			# ~ dex = dex_v
+		# ~ dex[dex_gp][dex_num] = ind
+		set_dex(*mon.dex, ind)
+		# ~ if dex_gp != 1:
+			# ~ # vanilla
+			# ~ if dex_gp == 2:
+				# ~ # regional
+				# ~ pass
+			# ~ else:
+				# ~ if is_shared_ind(ind): continue
 				# ~ if not dex_v[dex_num] is None:
 					# ~ print('ERROR')
-				dex_v[dex_num] = ind
-		else:
-			# hack
-			dex_h[dex_num] = ind
-	return (dex_v, dex_h)
-DEX_LISTS = make_dex_lists()
+				# ~ dex_v[dex_num] = ind
+		# ~ else:
+			# ~ # hack
+			# ~ dex_h[dex_num] = ind
+	dex = []
+	for d_i in sorted(dex_lists.keys()):
+		cur_dex = dex_lists[d_i]
+		for i in range(*cur_dex.lim()):
+			dex.append(((i, d_i), cur_dex[i]))
+	# ~ for i in range(*dex_v.lim()):
+		# ~ dex.append(((i, 0), dex_v[i]))
+	# ~ for i in range(*dex_h.lim()):
+		# ~ if i < 3: print(dex_h[i])
+		# ~ dex.append(((i, 1), dex_h[i]))
+	return dex
+DEX_LIST = make_dex_list()
 
 class Hist:
 	def __init__(self):
@@ -1610,14 +1665,8 @@ if __name__ == '__main__':
 				if flg != [1, 1, 1, 1]:
 					logfile.write(f'{ind:>4} : {mon.name:<12} : {lll} : N-{flg[0]} : S-{flg[1]} : I-{flg[2]} : F-{flg[3]}\n')
 		else:
-			for k,v in shared_mon_inds.items():
-				if ind in v:
-					flg = check_mon_graphics(k)
-					schr = '*'
-					break
-			else:
-				flg = check_mon_graphics(ind)
-				schr = ' '
+			flg = check_mon_graphics(ind)
+			schr = ' '
 			if flg != [1, 1, 1, 1]:
 				logfile.write(f'{ind:>4} : {mon.name:<12} : {schr} : N-{flg[0]} : S-{flg[1]} : I-{flg[2]} : F-{flg[3]}\n')
 
@@ -1628,10 +1677,6 @@ if __name__ == '__main__':
 	for mon in BASE_STATS:
 		if mon is None: continue
 		ind = mon.ind
-		for k,v in shared_mon_inds.items():
-			if ind in v:
-				ind = k
-				break
 		dexdat = textdb.dex(ind)
 		nam = dexdat[0] == '?' * 10
 		nam2 = dexdat[0] != mon.name

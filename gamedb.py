@@ -1454,9 +1454,6 @@ get_item_index       = lambda g, i: easy_index_get  (g, i, 'item_list')
 get_item_index_r     = lambda g, i: easy_index_get_r(g, i, 'item_list')
 
 def get_dex_number(game, ind):
-	shr = pokedb.is_shared_ind(ind)
-	if shr and shr != ind:
-		return get_dex_number(game, shr)
 	nat_dex = get_game_info(game, 'nat_dex')
 	if not ind in nat_dex: return None
 	return nat_dex.index(ind)

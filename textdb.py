@@ -35,7 +35,7 @@ def load_dbs(lang):
 	DB.ITEM     = read_text_file(DB.lang_dir[lang] + '/item')
 	DB.TYPE     = read_text_file(DB.lang_dir[lang] + '/type')
 	DB.EGGGROUP = read_text_file(DB.lang_dir[lang] + '/egggroup')
-	DB.MONFORM  = read_text_file(DB.lang_dir[lang] + '/monform')
+	DB.MONFORM  = read_text_file(DB.lang_dir[lang] + '/monform', 'utf8')
 
 
 # getters
@@ -53,7 +53,7 @@ nature   = lambda i: getter(i, DB.NATURE,   ('Nature {}',))
 item     = lambda i: getter(i, DB.ITEM,     ('Item {}', '?????'))
 mtype    = lambda i: getter(i, DB.TYPE,     ('???',))
 egggroup = lambda i: getter(i, DB.EGGGROUP, ('???',))
-monform  = lambda i: getter(i, DB.MONFORM,  (0, '???'))
+monform  = lambda i: getter(i, DB.MONFORM,  ('???',))
 
 
 # bankstring lambdas

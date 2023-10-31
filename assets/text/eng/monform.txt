@@ -1,13 +1,17 @@
-410@Normal
-273@Attack
-274@Defense
-275@Speed
-1132@Altair
-1133@Sirius
-1232@Vega
--1@Regular
--1@Nihonian
-385@Normal
-269@Sunny
-270@Rainy
-271@Snowy
+Normal
+Attack
+Defense
+Speed
+Altair
+Sirius
+Vega
+Regular
+Nihonian
+Sunny
+Rainy
+Snowy
+Gento ♂
+Gento ♀
+Rijon-A
+Rijon-B
+Rijon-C

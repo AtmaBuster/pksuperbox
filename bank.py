@@ -50,6 +50,7 @@ class Globals:
 		self.game_icons = pygame.image.load('assets/image/game_icons.png')
 
 		self.show_hidden_button_rects = False
+		self.debug_dex = False
 
 	def get_mus_volume(self):
 		if self.muted:
@@ -308,23 +309,33 @@ class Font:
 			surf.blit(self.fw_nums, (x * 5, 0), pygame.Rect(ci * 5, 0, 5, 10))
 		return surf
 
-	def get_dex_num_str(self, i, hck):
+	def get_dex_num_str(self, dex_gp, i, include_no=True):
 		i_s = self.get_fw_num(i, 3)
-		n_s = self.render_line('No. ', TXT_COL_DARK)
+		if include_no:
+			n_s = self.render_line('No. ', TXT_COL_DARK)
+		else:
+			n_s = None
+			self.set_color(TXT_COL_DARK)
 		sz1 = i_s.get_rect().size
-		sz2 = n_s.get_rect().size
+		if n_s is None:
+			sz2 = (0, 13)
+		else:
+			sz2 = n_s.get_rect().size
 		h = sz2[1]
 		w = sz1[0] + sz2[0]
-		if hck:
-			w += self.cw('★')
-			n_x = sz2[0] + self.cw('★')
+		if dex_gp:
+			gp_chr = [None,'★','A'][dex_gp]
+			w += self.cw(gp_chr)
+			n_x = sz2[0] + self.cw(gp_chr)
 		else:
 			n_x = sz2[0]
 		so = pygame.Surface((w, h), pygame.SRCALPHA)
-		so.blit(n_s, (0, 0))
+		if not n_s is None:
+			so.blit(n_s, (0, 0))
 		so.blit(i_s, (n_x, 1))
-		if hck:
-			so.blit(self['★'], (sz2[0], 0))
+		# ~ print(dex_gp)
+		if dex_gp:
+			so.blit(self[gp_chr], (sz2[0], 0))
 		return so
 
 	def make_color_font(self, base_im, col_in, col_out):
@@ -508,9 +519,9 @@ class SpriteCache:
 			return self.load(typ, mon.species, ltr)
 		if mon.species == 308:
 			return self.load(typ, mon.species, mon.pid)
-		sh = pokedb.is_shared_ind(mon.species)
-		if not sh is None:
-			return self.load(typ, sh)
+		# ~ sh = pokedb.is_shared_ind(mon.species)
+		# ~ if not sh is None:
+			# ~ return self.load(typ, sh)
 		return self.load(typ, mon.species)
 
 	def load(self, typ, val, param=None):
@@ -923,6 +934,10 @@ class Dex:
 		self.j = BitField()
 		self.k = BitField()
 	def __getitem__(self, ind):
+		if GL.debug_dex:
+			return (True, True, True)
+		if ind in (269, 270, 271):
+			return self.__getitem__(385)
 		return (self.i[ind], self.j[ind], self.k[ind])
 	def __setitem__(self, ind, val):
 		if val == DEX_CLR:
@@ -960,6 +975,8 @@ class Dex:
 				lst.append((pos, d, e, f))
 			pos += 1
 		return lst
+
+flg_or = lambda x, y: (x[0] or y[0], x[1] or y[1], x[2] or y[2])
 
 def prng32bit(x):
 	if x == 0x0B00B135:
@@ -1232,15 +1249,14 @@ class Game:
 			for i in range(2000):
 				new_box = [None] * 30
 				data.append((new_box, f'Box {i+1}', i % 16))
-			return data, [Dex(), Dex()]
+			return data, Dex()
 
 		s = zlib.decompress(raw).decode('ascii')
 		data = json.loads(s)
 
 		box_data = self.iterate_over_bank_mons_FIX(data['box'])
-		dex_data = [Dex(), Dex()]
-		dex_data[0].fromlist(data['dex'][0])
-		dex_data[1].fromlist(data['dex'][1])
+		dex_data = Dex()
+		dex_data.fromlist(data['dex'])
 
 		return box_data, dex_data
 
@@ -1259,12 +1275,28 @@ class Game:
 					box[0][i] = saved
 		d = {
 			'box':self.data,
-			'dex':[self.dex[0].tolist(), self.dex[1].tolist()],
+			'dex':self.dex.tolist(),
 			'bag':[[],[],[],[],[]],
 		}
 		s = json.dumps(d, separators=(',',':'))
 		comp = zlib.compress(s.encode('ascii'))
 		write_file('save/bank.dat', comp, True)
+
+	def update_shiny_dex_flags(self):
+		# update from save box
+		if not self['loaded_save'] is None:
+			for box in self['loaded_save'].box_data[0]:
+				for mon in box:
+					if mon is None: continue
+					if not mon.shiny: continue
+					self.dex[mon.species] = DEX_SET_SHINY
+		# update from bank box
+		if not self.data is None:
+			for box in self.data:
+				for mon in box[0]:
+					if mon is None: continue
+					if not mon.shiny: continue
+					self.dex[mon.species] = DEX_SET_SHINY
 
 	def save(self):
 		save_options()
@@ -1272,6 +1304,7 @@ class Game:
 			self['changes_to_save'] = False
 			return
 		self.add_save_dex_to_bank_dex()
+		self.update_shiny_dex_flags()
 		self.save_bank_data()
 		self.save_loaded_data()
 		self['changes_to_save'] = False
@@ -1298,12 +1331,12 @@ class Game:
 		for i,ind in enumerate(dex_listing[1:]):
 			mon = pokedb.BASE_STATS[ind]
 			if mon is None: continue
-			ish, num = mon.dex
-			wdex = int(ish == 1)
+			# ~ ish, num = mon.dex
+			# ~ wdex = int(ish == 1)
 			if bool(own_dex & (1 << i)):
-				self.dex[wdex][num] = DEX_SET_OWN
+				self.dex[ind] = DEX_SET_OWN
 			elif bool(seen_dex & (1 << i)):
-				self.dex[wdex][num] = DEX_SET_SEEN
+				self.dex[ind] = DEX_SET_SEEN
 
 	def deffered_save_and_pop_scene(self):
 		self.save()
@@ -1397,21 +1430,14 @@ class Game:
 				self.update_volume()
 			if e.key == pygame.K_F8: # DEBUG
 				if not self.dex is None:
-					self.dex[0].i.i = 0
-					self.dex[0].j.i = 0
-					self.dex[0].k.i = 0
-					self.dex[1].i.i = 0
-					self.dex[1].j.i = 0
-					self.dex[1].k.i = 0
+					self.dex.i.i = 0
+					self.dex.j.i = 0
+					self.dex.k.i = 0
 					self.save()
 			if e.key == pygame.K_F7: # DEBUG
 				if not self.dex is None:
-					d1 = self.dex[0].getall()
-					d2 = self.dex[1].getall()
 					print('Dex data:')
-					for x in d1:
-						print(x)
-					for x in d2:
+					for x in self.dex.getall():
 						print(x)
 			if e.key == pygame.K_F6: # DEBUG
 				if self.scene != SCENE_LAYOUTTEST:
@@ -1424,6 +1450,21 @@ class Game:
 			if e.key == pygame.K_F3: # DEBUG
 				if not self.data is None:
 					print(self.data[0][0])
+			if e.key == pygame.K_F2: # DEBUG
+				GL.debug_dex = not GL.debug_dex
+			if e.key == pygame.K_F1: # DEBUG
+				print('F1  - $ Show this message')
+				print('F2  - $ Toggle debug dex')
+				print('F3  - $ Print loaded bank Box 1')
+				print('F4  - $ Print loaded save Box 1')
+				print('F5  - $ Toggle button rect vis.')
+				print('F6  - $ Go to layout test')
+				print('F7  - $ Print dex data')
+				print('F8  - $ Clear dex')
+				print('F9  - Toggle mute')
+				print('F10 - ---')
+				print('F11 - Toggle fullscreen')
+				print('F12 - Take screenshot')
 
 	def do_title_action(self, cur_val):
 		if cur_val == 0: # bank
@@ -1703,28 +1744,22 @@ class Game:
 
 				self.loadscene_load_game_and_open(file_path)
 
-	def get_dex_listing(self, min_i, max_i, hck):
+	def get_dex_listing(self, min_i, max_i):
 		lst = []
-		if hck:
-			dexlst = self['dexlist'][1]
-			dexlstn = self['dexlistnums'][1]
-		else:
-			dexlst = self['dexlist'][0]
-			dexlstn = self['dexlistnums'][0]
 		for i in range(min_i, max_i + 1):
-			ind = dexlst[i]
+			ind = self['dexlist'][i]
 			if ind is None:
-				lst.append(('-' * 10, dexlstn[i], (False, False, False)))
+				lst.append(('-' * 10, self['dexlistnums'][i], (False, False, False)))
 				continue
 			mon = pokedb.BASE_STATS[ind]
-			ish, num = mon.dex
-			if ish == 1:
-				dex = self.dex[1]
+			frm_lst, _ = self.dex_get_form_list(i)
+			if frm_lst is None or ind == 201 or ind == 385:
+				flg = self.dex[ind]
 			else:
-				dex = self.dex[0]
-			flg = dex[num]
-			num = dexlstn[i]
-			# ~ print(ind, mon.name, flg, num)
+				flg = (False, False, False)
+				for ind_act,_ in frm_lst.mon_dat:
+					flg = flg_or(flg, self.dex[ind_act])
+			num = self['dexlistnums'][i]
 			if flg[0]:
 				nam = mon.name
 			else:
@@ -1733,11 +1768,12 @@ class Game:
 		return lst
 
 	def get_mon_dex_data(self, _ind):
-		if _ind >= len(self['dexlist'][self['whichdex']]):
+		if _ind >= len(self['dexlist']):
 			ind = None
 			self['formlist'] = None
+			self['formlist_filter'] = None
 		else:
-			ind = self['dexlist'][self['whichdex']][_ind]
+			ind = self['dexlist'][_ind]
 			self.dex_update_form_list()
 		if ind == 201:
 			ltr = self['formlist'][self['formind']]
@@ -1779,11 +1815,7 @@ class Game:
 					dat.name = l_name
 			else:
 				dat.name = mon_base.name
-			num = mon_base.dex
-			if num[0] in (0, 2):
-				dat.nums = (num[1], False)
-			else:
-				dat.nums = (num[1], True)
+			dat.nums = mon_base.dex
 			dat.spc = textdb.bs_dex_speciessign().format(dexdat[6])
 			if mon_base.typ[0] == mon_base.typ[1]:
 				dat.typ = (mon_base.typ[0], )
@@ -1816,6 +1848,18 @@ class Game:
 			dat.index = ind
 		return dat
 
+	def dex_formind_delta(self, delta):
+		if self['formlist'] is None: return
+		f = self['formlist_filter']
+		if sum(f) in (0, 1): return
+		i = self['formind']
+		l = len(f)
+		while True:
+			i = (i + delta) % l
+			if f[i]:
+				break
+		self['formind'] = i
+
 	def dex_process_arrows(self, e):
 		clamp = False
 		if e.type == pygame.KEYDOWN:
@@ -1828,12 +1872,12 @@ class Game:
 			elif e.key == pygame.K_PAGEDOWN:
 				self['listind'] += 10
 			elif e.key == pygame.K_LEFT:
-				self['formind'] -= 1
+				self.dex_formind_delta(-1)
 				if not self['spindapid'] is None:
 					self['spindapid'] = (self['spindapid'] + 2_038_074_743) % 0x100000000
 					# ~ self['spindapid'] = 57_639_070 # <- dickhead
 			elif e.key == pygame.K_RIGHT:
-				self['formind'] += 1
+				self.dex_formind_delta(1)
 				if not self['spindapid'] is None:
 					self['spindapid'] = (self['spindapid'] - 2_038_074_743) % 0x100000000
 			else:
@@ -1850,36 +1894,53 @@ class Game:
 		else:
 			return
 		if clamp:
-			self['listind'] = min(max(self['listind'], 0), len(self['dexlist'][self['whichdex']]) - 1)
-		if len(self['dexlist'][self['whichdex']]) == 0:
+			self['listind'] = min(max(self['listind'], 0), len(self['dexlist']) - 1)
+		if len(self['dexlist']) == 0:
 			self['listind'] = 0
 		else:
-			self['listind'] = self['listind'] % len(self['dexlist'][self['whichdex']])
-		if self['listind'] >= len(self['dexlist'][self['whichdex']]):
+			self['listind'] = self['listind'] % len(self['dexlist'])
+		if self['listind'] >= len(self['dexlist']):
 			self['formlist'] = None
+			self['formlist_filter'] = None
 		else:
 			self.dex_update_form_list()
 		if self['formlist'] is None:
 			self['formind'] = 0
 		else:
-			self['formind'] %= len(self['formlist'])
+			if self['formind'] >= len(self['formlist']):
+				self['formind'] = 0
+			if not self['formlist_filter'][self['formind']]:
+				self.dex_formind_delta(1)
+			# ~ self['formind'] %= len(self['formlist'])
 		self.update_dex_listing()
 
-	def dex_update_form_list(self):
-		ind = self['dexlist'][self['whichdex']][self['listind']]
+	def dex_get_form_list(self, ind):
+		ind = self['dexlist'][ind]
 		frm_lst = None
 		if not ind is None:
 			frm_lst = pokedb.get_form_list(ind)
-		self['formlist'] = frm_lst
 		if frm_lst is None:
+			frm_filter = None
+		else:
+			if ind == 201:
+				frm_filter = [True] * len(frm_lst)
+			elif ind == 385:
+				frm_filter = [True] * len(frm_lst.mon_dat)
+			else:
+				frm_filter = [bool(self.dex[i[0]][0]) for i in frm_lst.mon_dat]
+		return frm_lst, frm_filter
+
+	def dex_update_form_list(self):
+		self['formlist'], self['formlist_filter'] = self.dex_get_form_list(self['listind'])
+		if self['formlist'] is None:
 			self['formbox'].visible = False
 		else:
-			self['formbox'].visible = True
+			self['formbox'].visible = sum(self['formlist_filter']) > 1
 
 	def update_dex_listing(self):
 		ind = self['listind']
-		dexct = len(self['dexlist'][self['whichdex']])
-		if ind - 10 < 1:
+		dexct = len(self['dexlist'])
+		if ind - 10 < 1 or dexct <= 21:
 			self['listmin'] = 0
 		elif ind + 10 >= dexct:
 			self['listmin'] = dexct - 21
@@ -1887,12 +1948,7 @@ class Game:
 			self['listmin'] = ind - 10
 		self['dexdata'] = self.get_mon_dex_data(self['listind'])
 		listmax = min(self['listmin'] + 20, dexct - 1)
-		self['listing'] = self.get_dex_listing(self['listmin'], listmax, self['whichdex'])
-
-	def dex_swap_dexes(self):
-		self['whichdex'] ^= 1
-		self['listind'] = 0
-		self.update_dex_listing()
+		self['listing'] = self.get_dex_listing(self['listmin'], listmax)
 
 	def dex_toggle_shiny(self):
 		self['showingshiny'] = not self['showingshiny']
@@ -1900,25 +1956,30 @@ class Game:
 	def filter_list_based_on_dex_status(self, lst, flgi):
 		lout = []
 		for ind in lst:
-			num = pokedb.BASE_STATS[ind].dex
-			flg = self.dex[int(num[0] == 1)][num[1]]
+			if ind[1] is None: continue
+			flg = [False, False, False]
+			for ind_act in ind[1]:
+				flg = flg_or(flg, self.dex[ind_act])
 			if flg[flgi]:
-				lout.append(ind)
+				lout.append(ind[1][0])
 		return lout
 
-	def dex_set_sort(self, i, rev, dexi):
-		num_list = pokedb.DEX_LISTS[dexi]
+	def _dex_set_sort(self, i, rev):
+		num_list = pokedb.DEX_LIST
 		if i == 0:
 			# by num
-			lout = num_list.lst
+			lout = []
 			nlst = []
-			for i in range(len(lout) + 1):
-				nlst.append((i, dexi==1))
+			for mon in num_list:
+				if mon[1] is None:
+					lout.append(None)
+				else:
+					lout.append(mon[1][0])
+				nlst.append(mon[0])
 			if rev:
 				lout = list(reversed(lout))
 				nlst = list(reversed(nlst))
 			return lout, nlst
-		num_list = num_list.rawnums()
 		if i == 1:
 			# alpha
 			lout = self.filter_list_based_on_dex_status(num_list, 0)
@@ -1936,48 +1997,42 @@ class Game:
 		nlst = []
 		for ind in lout:
 			mon = pokedb.BASE_STATS[ind]
-			nlst.append((mon.dex[1], mon.dex[0] == 1))
+			nlst.append((mon.dex[1], mon.dex[0]))
 		return lout, nlst
 
-	def dex_set_sort_both(self, i, rev):
-		self['dexlist'][0], self['dexlistnums'][0] = self.dex_set_sort(i, rev, 0)
-		self['dexlist'][1], self['dexlistnums'][1] = self.dex_set_sort(i, rev, 1)
+	def dex_set_sort(self, i, rev):
+		self['dexlist'], self['dexlistnums'] = self._dex_set_sort(i, rev)
 
-	def dex_check(self, *args):
-		if len(args) == 2:
-			ish, num = args
-		else:
-			ish, num = args[0].dex
-		dex_i = int(ish == 1)
-		return self.dex[dex_i][num]
+	def dex_check(self, ind):
+		return self.dex[ind]
 
-	def dex_filter_by_mon_type(self, typ_tgt, dex_i):
+	def dex_filter_by_mon_type(self, typ_tgt):
 		dex_o = []
 		dexn_o = []
-		for ind,dexnum in zip(self['dexlist'][dex_i], self['dexlistnums'][dex_i]):
+		for ind,dexnum in zip(self['dexlist'], self['dexlistnums']):
 			if ind is None: continue
 			mon = pokedb.BASE_STATS[ind]
 			if mon is None: continue
-			if not self.dex_check(mon)[1]: continue
+			if not self.dex_check(ind)[1]: continue
 			typ = mon.typ
 			if typ[0] == typ_tgt or typ[1] == typ_tgt:
 				dex_o.append(ind)
 				dexn_o.append(dexnum)
-		self['dexlist'][dex_i] = dex_o
-		self['dexlistnums'][dex_i] = dexn_o
+		self['dexlist'] = dex_o
+		self['dexlistnums'] = dexn_o
 
-	def dex_limit_dexi_to_known_range(self, dex_i):
-		dex = self['dexlist'][dex_i]
+	def dex_limit_to_known_range(self):
+		dex = self['dexlist']
 		i_lo = 0
 		while i_lo < len(dex):
 			ind = dex[i_lo]
 			if not ind is None:
 				mon = pokedb.BASE_STATS[ind]
 				if not mon is None:
-					ish, num = mon.dex
+					dex_gp, num = mon.dex
 					if num > 0:
 						break
-					flg = self.dex_check(ish, num)
+					flg = self.dex_check(ind)
 					if flg[0]:
 						break
 			i_lo += 1
@@ -1987,20 +2042,15 @@ class Game:
 			if not ind is None:
 				mon = pokedb.BASE_STATS[ind]
 				if not mon is None:
-					ish, num = mon.dex
-					flg = self.dex_check(ish, num)
+					flg = self.dex_check(ind)
 					if flg[0]:
 						break
 			i_hi -= 1
-		self['dexlist'][dex_i] = dex[i_lo:i_hi+1]
-		self['dexlistnums'][dex_i] = self['dexlistnums'][dex_i][i_lo:i_hi+1]
-
-	def dex_limit_to_known_range(self):
-		self.dex_limit_dexi_to_known_range(0)
-		self.dex_limit_dexi_to_known_range(1)
+		self['dexlist'] = dex[i_lo:i_hi+1]
+		self['dexlistnums'] = self['dexlistnums'][i_lo:i_hi+1]
 
 	def dex_clear_sort(self):
-		self.dex_set_sort_both(0, False)
+		self.dex_set_sort(0, False)
 
 	def dex_click_scroll_bar(self):
 		self['holdingscroll'] = True
@@ -2013,15 +2063,14 @@ class Game:
 			self['holdingscroll'] = False
 
 			self['shinytoggle'] = Button(260, 164, self.gfx('dex_shiny_button'), lambda: self.dex_toggle_shiny())
-			self['swapbutton'] = Button(4, 44, self.gfx('dex_button_swap'), lambda: self.dex_swap_dexes())
 			self['revertbutton'] = Button(4, 44, self.gfx('dex_button_swap'), lambda: self.dex_clear_sort())
 			button_list = []
 			button_list.append( Button(4, 4, self.gfx('box_button_back'), lambda: self.pop_scene()) )
 			button_list.append( Button(203, 13, (12, 334), lambda: self.dex_click_scroll_bar()) )
-			button_list.append(self['swapbutton'])
 			button_list.append(self['shinytoggle'])
 			button_list.append(self['revertbutton'])
 			self['buttons'] = button_list
+			self['hasfilter'] = False
 			self['revertbutton'].visible = False
 
 			self.text_boxes.add( TextFrame(56, 4, 21, 44) )
@@ -2034,9 +2083,9 @@ class Game:
 			self['formbox'] = TextFrame(292, 156, 16, 4)
 			self.text_boxes.add(self['formbox'])
 
-			self['dexlist'] = [None, None]
-			self['dexlistnums'] = [None, None]
-			self.dex_set_sort_both(0, False)
+			self['dexlist'] = None
+			self['dexlistnums'] = None
+			self.dex_clear_sort()
 			self.dex_limit_to_known_range()
 			self['TEST_sorti'] = 0
 			self['TEST_revsort'] = False
@@ -2061,23 +2110,23 @@ class Game:
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_q:
 				self['TEST_sorti'] -= 1
 				self['TEST_sorti'] %= 4
-				self.dex_set_sort_both(self['TEST_sorti'], self['TEST_revsort'])
+				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
 				self['listind'] = 0
 				self.update_dex_listing()
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
 				self['TEST_sorti'] += 1
 				self['TEST_sorti'] %= 4
-				self.dex_set_sort_both(self['TEST_sorti'], self['TEST_revsort'])
+				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
 				self['listind'] = 0
 				self.update_dex_listing()
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
 				self['TEST_revsort'] = not self['TEST_revsort']
-				self.dex_set_sort_both(self['TEST_sorti'], self['TEST_revsort'])
+				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
 				self['listind'] = 0
 				self.update_dex_listing()
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_s:
-				self.dex_set_sort_both(self['TEST_sorti'], self['TEST_revsort'])
-				self.dex_filter_by_mon_type(0, 0)
+				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
+				self.dex_filter_by_mon_type(0)
 				self['listind'] = 0
 				self.update_dex_listing()
 
@@ -2086,12 +2135,12 @@ class Game:
 				return 1
 
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_x:
-				self['listind'] = 325
+				self['listind'] = 784
 				self['formlist'] = None
 				self['formind'] = 0
 				self.update_dex_listing()
 			self.dex_process_arrows(e)
-					
+
 			if e.type == pygame.MOUSEBUTTONDOWN:
 				if e.button == 1:
 					# left click
@@ -2106,15 +2155,18 @@ class Game:
 		if self['holdingscroll']:
 			last_loc = self['listind']
 			pos_y = self.mouse_pos[1] - 8
-			t = (pos_y - 13) * (len(self['dexlist'][self['whichdex']]) - 1) // 317
-			loc = min(max(t, 0), len(self['dexlist'][self['whichdex']]) - 1)
+			t = (pos_y - 13) * (len(self['dexlist']) - 1) // 317
+			loc = min(max(t, 0), len(self['dexlist']) - 1)
 			self['listind'] = loc
 			if loc != last_loc:
 				self.dex_update_form_list()
 				if self['formlist'] is None:
 					self['formind'] = 0
 				else:
-					self['formind'] %= len(self['formlist'])
+					if self['formind'] >= len(self['formlist']):
+						self['formind'] = 0
+					if not self['formlist_filter'][self['formind']]:
+						self.dex_formind_delta(1)
 				self.update_dex_listing()
 
 		# draw dex data
@@ -2122,7 +2174,7 @@ class Game:
 		if isinstance(dexdat.nums, str):
 			flg = (False, False, False)
 		else:
-			flg = self.dex[int(dexdat.nums[1])][dexdat.nums[0]]
+			flg = self.dex[dexdat.index]
 		if not flg[0]:
 			self['formbox'].visible = False
 
@@ -2201,14 +2253,14 @@ class Game:
 			self.win.blit(GL.font.render_line(f'{dexdat.htwt[3] / 10} lbs.', TXT_COL_DARK), (540, 84))
 			entrylins = GL.font.auto_line_text(dexdat.entry, 184)
 			self.win.blit(GL.font.render_text(entrylins, 16, TXT_COL_DARK), (438, 126))
-			if not self['formlist'] is None:
-				if dexdat.index == 201:
-					form_str = self['formlist'][self['formind']]
-				else:
-					form_ind = self['formlist'][self['formind']][1]
-					form_name = textdb.monform(form_ind)[1]
-					form_str = textdb.bs_dex_formsign().format(form_name)
-				self.win.blit(GL.font.render_line(form_str, TXT_COL_DARK), (302, 166))
+		if self['formbox'].visible:
+			if dexdat.index == 201:
+				form_str = self['formlist'][self['formind']]
+			else:
+				form_ind = self['formlist'][self['formind']][1]
+				form_name = textdb.monform(form_ind)[0]
+				form_str = textdb.bs_dex_formsign().format(form_name)
+			self.win.blit(GL.font.render_line(form_str, TXT_COL_DARK), (302, 166))
 
 		# draw list data
 		sel_frame_y = 13 + (self['listind'] - self['listmin']) * 16
@@ -2216,7 +2268,7 @@ class Game:
 		for i,entr in enumerate(self['listing']):
 			nam, num, flg = entr
 			y = 15 + i * 16
-			self.win.blit(GL.font.get_dex_num_str(*num), (78, y))
+			self.win.blit(GL.font.get_dex_num_str(num[1], num[0]), (78, y))
 			if flg[0] and flg[1]:
 				self.win.blit(self.gfx('dex_own_icon'), (62, y))
 			x = 124
@@ -2228,10 +2280,12 @@ class Game:
 		for i in range(1,3):
 			pygame.draw.line(self.win, pygame.Color(184, 152, 88), (207+i, 13), (207+i, 346))
 		scroll_x = 203
-		if self['listind'] == 0:
+		if len(self['dexlist']) <= 1 or self['listind'] == 0:
 			scroll_y = 13
+		elif 317 // (len(self['dexlist']) - 1) == 0:
+			scroll_y = (self['listind'] - 1) * 317 // (len(self['dexlist']) - 2) + 14
 		else:
-			scroll_y = (self['listind'] - 1) * 317 // (len(self['dexlist'][self['whichdex']]) - 2) + 14
+			scroll_y = self['listind'] * 317 // (len(self['dexlist']) - 1) + 13
 		self.win.blit(self.gfx('dex_scroll_indicator'), (scroll_x, scroll_y))
 
 		return 1
@@ -2945,12 +2999,15 @@ class Game:
 					self.win.blit(self.get_type_icon(bas.typ[0]), (567, 35))
 					if bas.typ[0] != bas.typ[1]:
 						self.win.blit(self.get_type_icon(bas.typ[1]), (603, 35))
-					dex_gp, dex_num = bas.dex
-					if dex_gp == 1:
-						num_str = f'★{dex_num:0>3}'
-					else:
-						num_str = f'{dex_num:0>3}'
-					self.win.blit(GL.font.render_line(num_str, TXT_COL_DARK), (567, 5))
+					# ~ get_dex_num_str
+					# ~ dex_gp, dex_num = bas.dex
+					# ~ if dex_gp == 1:
+						# ~ num_str = f'★{dex_num:0>3}'
+					# ~ else:
+						# ~ num_str = f'{dex_num:0>3}'
+					# ~ self.win.blit(GL.font.render_line(num_str, TXT_COL_DARK), (567, 5))
+					# ~ print(bas.dex, GL.font.get_dex_num_str(*bas.dex, False))
+					self.win.blit(GL.font.get_dex_num_str(*bas.dex, False), (567, 5))
 					gnd = mon.gender
 					if gnd == 'male':
 						self.win.blit(GL.font.render_line('♂', TXT_COL_BLUE), (505, 3))
