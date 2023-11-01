@@ -1995,6 +1995,15 @@ class Game:
 			# weight
 			lout = self.filter_list_based_on_dex_status(num_list, 1)
 			lout = list(sorted(lout, key=lambda x: int(textdb.dex(x)[9])))
+		elif i >= 4 and i <= 9:
+			# by stat
+			stati = (0, 1, 2, 4, 5, 3)[i - 4]
+			lout = self.filter_list_based_on_dex_status(num_list, 1)
+			lout = list(sorted(lout, key=lambda x: pokedb.BASE_STATS[x].base_val[stati]))
+		elif i == 10:
+			# by BST
+			lout = self.filter_list_based_on_dex_status(num_list, 1)
+			lout = list(sorted(lout, key=lambda x: sum(pokedb.BASE_STATS[x].base_val)))
 		if rev:
 			lout = list(reversed(lout))
 		nlst = []
@@ -2097,7 +2106,7 @@ class Game:
 				if self.dex_get_dex_group_seen_any(self['cur_dex_filter']):
 					break
 		elif btn_i == 2: # sort
-			self['cur_sort'] = (self['cur_sort'] + 1) % 4
+			self['cur_sort'] = (self['cur_sort'] + 1) % 11
 		elif btn_i == 3: # type filter inc
 			self['cur_type_filter'] = self.dex_change_type_filter(self['cur_type_filter'], 1)
 		elif btn_i == 4: # type filter dec
