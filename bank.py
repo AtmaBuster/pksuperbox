@@ -765,7 +765,7 @@ class TextBoxList:
 			box.write_all()
 
 class Button:
-	def __init__(self, x, y, surf, action, hover_text=None):
+	def __init__(self, x, y, surf, action, action_sound=None, hover_text=None):
 		if isinstance(surf, pygame.Surface):
 			self.rect = surf.get_rect().move(x, y)
 			self.surf = surf
@@ -774,6 +774,7 @@ class Button:
 			self.surf = None
 		self.action_fun = action
 		self.visible = True
+		self.action_sound = action_sound
 		self.hover_text = hover_text
 		self.tag = None
 
@@ -790,6 +791,8 @@ class Button:
 	def action(self, pos):
 		if not self.visible: return
 		if pos == (-1, -1) or self.hover(pos):
+			if not self.action_sound is None:
+				pass # TODO
 			return self.action_fun()
 
 	def hover(self, pos):
@@ -1661,7 +1664,7 @@ class Game:
 				srf = make_game_button_surf(crc)
 				x = (i // 8) * 190 + 20
 				y = (i % 8) * 36 + 56
-				btn = Button(x, y, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn), fn)
+				btn = Button(x, y, srf, lambda fn=fn: self.loadscene_load_game_and_open(fn), hover_text=fn)
 				btn.tag = fn
 				self['buttons'].append( btn )
 
@@ -1731,10 +1734,7 @@ class Game:
 		elif not self['hoverfilename'] is None:
 			self.win.blit(GL.font.render_line('???', TXT_COL_DARK), (426, 220))
 
-		if not self['hoverbox'] is None and pygame.key.get_mods() & pygame.KMOD_SHIFT:
-			x, y = self['hoverbox'][1]
-			w, h = self['hoverbox'][0].get_rect().size
-			self.win.blit(self['hoverbox'][0], (x + 8, y - h // 2))
+		self.draw_hoverbox()
 
 		if not self.queue_scene_change is None:
 			return 1
@@ -2136,6 +2136,13 @@ class Game:
 		self['dexlist'] = lst_m
 		self['dexlistnums'] = lst_n
 
+	def draw_hoverbox(self):
+		if self['hoverbox'] is None:
+			return
+		x, y = self['hoverbox'][1]
+		w, h = self['hoverbox'][0].get_rect().size
+		self.win.blit(self['hoverbox'][0], (x + 8, y - h // 2))
+
 	def dex_apply_sort_settings(self):
 		if self['listind'] < len(self['dexlist']):
 			cur_selected_mon = self['dexlist'][self['listind']]
@@ -2171,15 +2178,15 @@ class Game:
 			self['buttons'].append( Button(203, 13, (12, 334), lambda: self.dex_click_scroll_bar()) )
 			self['buttons'].append(self['shinytoggle'])
 
-			self['buttons'].append( Button(12, 54, (32, 32), lambda: self.dex_sorting_button(0)) ) # revert
-			self['buttons'].append( Button(12, 90, (32, 32), lambda: self.dex_sorting_button(1)) ) # dex filter
-			self['buttons'].append( Button(12, 126, (32, 32), lambda: self.dex_sorting_button(2)) ) # sort
-			self['buttons'].append( Button(18, 222, (32, 32), lambda: self.dex_sorting_button(5)) ) # reverse
+			self['buttons'].append( Button(12, 54, (32, 32), lambda: self.dex_sorting_button(0), hover_text=textdb.bs_dex_clearsort()) ) # revert
+			self['buttons'].append( Button(12, 90, (32, 32), lambda: self.dex_sorting_button(1), hover_text=textdb.bs_dex_filtergrp()) ) # dex filter
+			self['buttons'].append( Button(12, 126, (32, 32), lambda: self.dex_sorting_button(2), hover_text=textdb.bs_dex_setsort()) ) # sort
+			self['buttons'].append( Button(18, 222, (32, 32), lambda: self.dex_sorting_button(5), hover_text=textdb.bs_dex_reversesort()) ) # reverse
 
-			self['buttons'].append( Button(2, 162, (24, 12), lambda: self.dex_sorting_button(3)) ) # type filter up 1
-			self['buttons'].append( Button(2, 206, (24, 12), lambda: self.dex_sorting_button(4)) ) # type filter down 1
-			self['buttons'].append( Button(26, 162, (24, 12), lambda: self.dex_sorting_button(6)) ) # type filter up 1
-			self['buttons'].append( Button(26, 206, (24, 12), lambda: self.dex_sorting_button(7)) ) # type filter down 1
+			self['buttons'].append( Button(2, 162, (24, 12), lambda: self.dex_sorting_button(3), hover_text=textdb.bs_dex_nexttype()) ) # type filter up 1
+			self['buttons'].append( Button(2, 206, (24, 12), lambda: self.dex_sorting_button(4), hover_text=textdb.bs_dex_prevtype()) ) # type filter down 1
+			self['buttons'].append( Button(26, 162, (24, 12), lambda: self.dex_sorting_button(6), hover_text=textdb.bs_dex_nexttype()) ) # type filter up 1
+			self['buttons'].append( Button(26, 206, (24, 12), lambda: self.dex_sorting_button(7), hover_text=textdb.bs_dex_prevtype()) ) # type filter down 1
 
 			self.text_boxes.add( TextFrame(56, 4, 21, 44) )
 			self.text_boxes.add( TextFrame(260, 4, 20, 20) )
@@ -2305,8 +2312,14 @@ class Game:
 				self.win.blit(self.get_type_icon(t2), pos2)
 		self.win.blit(self.get_dexbutton(0, 4), (12, 222))
 
+		got_box = False
 		for button in self['buttons']:
 			button.draw(self.win)
+			if button.hover(self.mouse_pos) and not button.hover_text is None:
+				self['hoverbox'] = (make_hover_box(button.hover_text), self.mouse_pos)
+				got_box = True
+		if not got_box:
+			self['hoverbox'] = None
 		self.text_boxes.draw(self.win)
 
 		if isinstance(dexdat.nums, str):
@@ -2414,6 +2427,8 @@ class Game:
 		else:
 			scroll_y = self['listind'] * 317 // (len(self['dexlist']) - 1) + 13
 		self.win.blit(self.gfx('dex_scroll_indicator'), (scroll_x, scroll_y))
+
+		self.draw_hoverbox()
 
 		return 1
 
@@ -2755,28 +2770,28 @@ class Game:
 
 			self['cursor_pos'] = 5
 
-			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.box_open_need_to_save_box(), textdb.bs_box_quittomenu()) )
-			self['buttons'].append( Button(56, 4, self.gfx('box_save_button'), lambda: self.save(), textdb.bs_box_savedata()) )
+			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.box_open_need_to_save_box(), hover_text=textdb.bs_box_quittomenu()) )
+			self['buttons'].append( Button(56, 4, self.gfx('box_save_button'), lambda: self.save(), hover_text=textdb.bs_box_savedata()) )
 
-			self['buttons'].append( Button(46, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), textdb.bs_box_wallpaper()) )
-			self['buttons'].append( Button(76, 87, self.gfx('box_jump'), lambda: self.box_show_nyi_box(), textdb.bs_box_jumptobox()) )
-			self['buttons'].append( Button(140, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), textdb.bs_box_name()) )
+			self['buttons'].append( Button(46, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_wallpaper()) )
+			self['buttons'].append( Button(76, 87, self.gfx('box_jump'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_jumptobox()) )
+			self['buttons'].append( Button(140, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_name()) )
 			self['buttons'].append( Button(32, 105, self.gfx('box_button_nav_left'), lambda: self.box_nav_left_right(0, -1)) )
 			self['buttons'].append( Button(46, 105, (124, 22), lambda: None) )
 			self['buttons'].append( Button(172, 105, self.gfx('box_button_nav_right'), lambda: self.box_nav_left_right(0, 1)) )
 
-			self['buttons'].append( Button(238, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), textdb.bs_box_wallpaper()) )
-			self['buttons'].append( Button(268, 87, self.gfx('box_jump'), lambda: self.box_show_nyi_box(), textdb.bs_box_jumptobox()) )
-			self['buttons'].append( Button(332, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), textdb.bs_box_name()) )
+			self['buttons'].append( Button(238, 87, self.gfx('box_button_paper'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_wallpaper()) )
+			self['buttons'].append( Button(268, 87, self.gfx('box_jump'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_jumptobox()) )
+			self['buttons'].append( Button(332, 87, self.gfx('box_button_name'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_name()) )
 			self['buttons'].append( Button(224, 105, self.gfx('box_button_nav_left'), lambda: self.box_nav_left_right(1, -1)) )
 			self['buttons'].append( Button(238, 105, (124, 22), lambda: None) )
 			self['buttons'].append( Button(364, 105, self.gfx('box_button_nav_right'), lambda: self.box_nav_left_right(1, 1)) )
 
-			self['buttons'].append( Button(192, 178, self.gfx('box_button_swap'), lambda: self.box_swap_contents(), textdb.bs_box_swapcontents()) )
+			self['buttons'].append( Button(192, 178, self.gfx('box_button_swap'), lambda: self.box_swap_contents(), hover_text=textdb.bs_box_swapcontents()) )
 
-			self['buttons'].append( Button(28, 304, self.gfx('box_button_filter'), lambda: self.box_show_nyi_box(), textdb.bs_box_filterboxes()) )
-			self['buttons'].append( Button(84, 304, self.gfx('box_button_groups'), lambda: self.box_show_nyi_box(), textdb.bs_box_managegroups()) )
-			self['buttons'].append( Button(140, 304, self.gfx('box_button_sort'), lambda: self.box_show_nyi_box(), textdb.bs_box_sortboxes()) )
+			self['buttons'].append( Button(28, 304, self.gfx('box_button_filter'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_filterboxes()) )
+			self['buttons'].append( Button(84, 304, self.gfx('box_button_groups'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_managegroups()) )
+			self['buttons'].append( Button(140, 304, self.gfx('box_button_sort'), lambda: self.box_show_nyi_box(), hover_text=textdb.bs_box_sortboxes()) )
 
 			slot_i = 0
 			for y in range(5):
@@ -3200,10 +3215,7 @@ class Game:
 		self.text_boxes.update()
 		self.text_boxes.draw(self.win)
 
-		if not self['hoverbox'] is None:
-			x, y = self['hoverbox'][1]
-			w, h = self['hoverbox'][0].get_rect().size
-			self.win.blit(self['hoverbox'][0], (x + 8, y - h // 2))
+		self.draw_hoverbox()
 
 		if not self['cur_sel_mon'] is None:
 			mon = poke.open_mon(self['cur_sel_mon'])

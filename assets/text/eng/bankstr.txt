@@ -33,4 +33,9 @@ Swap box contents
 Filter boxes
 Manage box groups
 Sort boxes
-
+Clear Sort/Filter
+Change Pok#dex Group
+Change Sort Mode
+Reverse Sort
+Next Type Filter
+Previous Type Filter
