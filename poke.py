@@ -114,6 +114,7 @@ class Mon:
 		self.ability_ind = 0
 		self.iv = [0, 0, 0, 0, 0, 0]
 		self.ribbons = []
+		self.extra = {}
 
 	def copy(self):
 		new_poke = Mon()
@@ -140,6 +141,8 @@ class Mon:
 		d['egg'] = self.is_egg
 		d['ab'] = (self.ability, self.ability_ind)
 		d['rib'] = self.ribbons
+		if self.extra != {}:
+			d['ex'] = self.extra
 		s = json.dumps(d, separators=(',',':'))
 		s_c = zlib.compress(s.encode('ascii'))
 		s_b = base64.b64encode(s_c).decode('ascii')
@@ -167,6 +170,7 @@ class Mon:
 		self.is_egg = d['egg']
 		self.ability, self.ability_ind = d['ab']
 		self.ribbons = d['rib']
+		self.extra = d.get('ex', {})
 
 	def update_game_inds(self):
 		self.species = gamedb.get_mon_index(self.game, self.species)
