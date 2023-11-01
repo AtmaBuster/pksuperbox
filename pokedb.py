@@ -1416,6 +1416,23 @@ MON_FORMS = (
 	FormList(False, (1132,  4), (1133,  5), (1232,  6), ), # Asphere
 )
 
+TYPE_FREQ = []
+def calc_type_freqs():
+	def inc(i):
+		while len(TYPE_FREQ) <= i:
+			TYPE_FREQ.append(0)
+		TYPE_FREQ[i] += 1
+	for mon in BASE_STATS:
+		if mon is None: continue
+		inc(mon.typ[0])
+		if mon.typ[0] != mon.typ[1]:
+			inc(mon.typ[1])
+calc_type_freqs()
+def get_type_freq(i):
+	if i >= len(TYPE_FREQ):
+		return 0
+	return TYPE_FREQ[i]
+
 def has_forms(ind):
 	for cls in MON_FORMS:
 		if cls.has_mon(ind):

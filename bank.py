@@ -936,6 +936,7 @@ class Dex:
 	def __getitem__(self, ind):
 		if GL.debug_dex:
 			return (True, True, True)
+			# ~ return (False, False, False)
 		if ind in (269, 270, 271):
 			return self.__getitem__(385)
 		return (self.i[ind], self.j[ind], self.k[ind])
@@ -1043,6 +1044,7 @@ class Game:
 		'pause_symbol': 'pause_sym.png',
 		'load_open_new': 'open_new.png',
 		'box_save_button': 'box/save_button.png',
+		'dex_button_set': 'dex/buttons.png',
 	}
 	def __init__(self):
 		pygame.mixer.init()
@@ -1194,6 +1196,7 @@ class Game:
 	def get_mark_icon(self, i): return self.gfx('box_markings').subsurface(pygame.Rect((i * 8, 0, 8, 8)))
 	def get_wallpaper(self, i): return self.gfx('box_wallpapers').subsurface(pygame.Rect((0, 116 * (i + 2), 156, 116)))
 	def get_nameplate(self, i): return self.gfx('box_nameplates').subsurface(pygame.Rect((0, 22 * (i + 2), 124, 22)))
+	def get_dexbutton(self, i,j): return self.gfx('dex_button_set').subsurface(pygame.Rect((32 * i, 32 * j, 32, 32)))
 
 	def waitframes(self, nframe):
 		if self.delay_timer == 0:
@@ -1768,7 +1771,7 @@ class Game:
 		return lst
 
 	def get_mon_dex_data(self, _ind):
-		if _ind >= len(self['dexlist']):
+		if _ind >= len(self['dexlist']) or _ind < 0:
 			ind = None
 			self['formlist'] = None
 			self['formlist_filter'] = None
@@ -2055,6 +2058,100 @@ class Game:
 	def dex_click_scroll_bar(self):
 		self['holdingscroll'] = True
 
+	def dex_change_type_filter(self, cur_flt_i, d):
+		TYPE_COUNT = len(pokedb.TYPE_FREQ)
+		print(cur_flt_i, ((cur_flt_i + d + 1) % (TYPE_COUNT + 1)) - 1)
+		if ((cur_flt_i + d + 1) % (TYPE_COUNT + 1)) - 1 == -1:
+			return -1
+		if cur_flt_i == -1:
+			nxt_flt_i = (cur_flt_i + d) % (TYPE_COUNT + 1)
+		else:
+			nxt_flt_i = (cur_flt_i + d) % TYPE_COUNT
+		while nxt_flt_i != cur_flt_i:
+			ct = pokedb.get_type_freq(nxt_flt_i)
+			if ct > 0:
+				return nxt_flt_i
+			nxt_flt_i = (nxt_flt_i + d) % TYPE_COUNT
+		return -1
+
+	def dex_get_dex_group_seen_any(self, grp):
+		for mon in pokedb.BASE_STATS:
+			if mon is None: continue
+			if mon.dex[0] != grp: continue
+			flg = self.dex[mon.ind]
+			if flg[0]:
+				return True
+		return False
+
+	def dex_sorting_button(self, btn_i):
+		if btn_i == 0: # revert
+			self['cur_dex_filter'] = -1
+			self['cur_sort'] = 0
+			self['cur_type_filter'] = -1
+			self['cur_type_filter2'] = -1
+		elif btn_i == 1: # dex filter
+			while True:
+				self['cur_dex_filter'] = ((self['cur_dex_filter'] + 2) % 4) - 1
+				if self['cur_dex_filter'] == -1:
+					break
+				if self.dex_get_dex_group_seen_any(self['cur_dex_filter']):
+					break
+		elif btn_i == 2: # sort
+			self['cur_sort'] = (self['cur_sort'] + 1) % 4
+		elif btn_i == 3: # type filter inc
+			self['cur_type_filter'] = self.dex_change_type_filter(self['cur_type_filter'], 1)
+		elif btn_i == 4: # type filter dec
+			self['cur_type_filter'] = self.dex_change_type_filter(self['cur_type_filter'], -1)
+		elif btn_i == 5: # reverse
+			self['rev_sort'] = not self['rev_sort']
+		elif btn_i == 6: # type filter inc
+			self['cur_type_filter2'] = self.dex_change_type_filter(self['cur_type_filter2'], 1)
+		elif btn_i == 7: # type filter dec
+			self['cur_type_filter2'] = self.dex_change_type_filter(self['cur_type_filter2'], -1)
+		self.dex_apply_sort_settings()
+		if btn_i == 0:
+			self['listind'] = 0
+		self.update_dex_listing()
+
+	def dex_set_selected_mon(self, ind):
+		if ind is None: return
+		for i,mon_ind in enumerate(self['dexlist']):
+			if mon_ind == ind:
+				self['listind'] = i
+				return
+		self['listind'] = 0
+
+	def dex_fix_list_ind(self):
+		if self['listind'] >= len(self['dexlist']):
+			self['listind'] = max(len(self['dexlist']) - 1, 0)
+
+	def dex_set_dex_filter(self, flt_i):
+		if flt_i == -1: return
+		lst_m = []
+		lst_n = []
+		for mon, num in zip(self['dexlist'], self['dexlistnums']):
+			if num[1] == flt_i:
+				lst_m.append(mon)
+				lst_n.append(num)
+		self['dexlist'] = lst_m
+		self['dexlistnums'] = lst_n
+
+	def dex_apply_sort_settings(self):
+		if self['listind'] < len(self['dexlist']):
+			cur_selected_mon = self['dexlist'][self['listind']]
+		else:
+			cur_selected_mon = None
+		self.dex_set_sort(self['cur_sort'], self['rev_sort'])
+		if self['cur_sort'] == 0:
+			self.dex_limit_to_known_range()
+		self.dex_set_dex_filter(self['cur_dex_filter'])
+		if self['cur_type_filter'] != -1:
+			self.dex_filter_by_mon_type(self['cur_type_filter'])
+		if self['cur_type_filter2'] != -1:
+			self.dex_filter_by_mon_type(self['cur_type_filter2'])
+		self.dex_set_selected_mon(cur_selected_mon)
+		self.dex_fix_list_ind()
+
 	def mainloop_dex(self):
 		if self.scene_init:
 			self.data, self.dex = self.open_bank_save()
@@ -2062,16 +2159,27 @@ class Game:
 			self['background'] = self.make_background_surf(bg_tile)
 			self['holdingscroll'] = False
 
+			self['cur_dex_filter'] = -1
+			self['cur_sort'] = 0
+			self['cur_type_filter'] = -1
+			self['cur_type_filter2'] = -1
+			self['rev_sort'] = False
+
 			self['shinytoggle'] = Button(260, 164, self.gfx('dex_shiny_button'), lambda: self.dex_toggle_shiny())
-			self['revertbutton'] = Button(4, 44, self.gfx('dex_button_swap'), lambda: self.dex_clear_sort())
-			button_list = []
-			button_list.append( Button(4, 4, self.gfx('box_button_back'), lambda: self.pop_scene()) )
-			button_list.append( Button(203, 13, (12, 334), lambda: self.dex_click_scroll_bar()) )
-			button_list.append(self['shinytoggle'])
-			button_list.append(self['revertbutton'])
-			self['buttons'] = button_list
-			self['hasfilter'] = False
-			self['revertbutton'].visible = False
+			self['buttons'] = []
+			self['buttons'].append( Button(4, 4, self.gfx('box_button_back'), lambda: self.pop_scene()) )
+			self['buttons'].append( Button(203, 13, (12, 334), lambda: self.dex_click_scroll_bar()) )
+			self['buttons'].append(self['shinytoggle'])
+
+			self['buttons'].append( Button(12, 54, (32, 32), lambda: self.dex_sorting_button(0)) ) # revert
+			self['buttons'].append( Button(12, 90, (32, 32), lambda: self.dex_sorting_button(1)) ) # dex filter
+			self['buttons'].append( Button(12, 126, (32, 32), lambda: self.dex_sorting_button(2)) ) # sort
+			self['buttons'].append( Button(18, 222, (32, 32), lambda: self.dex_sorting_button(5)) ) # reverse
+
+			self['buttons'].append( Button(2, 162, (24, 12), lambda: self.dex_sorting_button(3)) ) # type filter up 1
+			self['buttons'].append( Button(2, 206, (24, 12), lambda: self.dex_sorting_button(4)) ) # type filter down 1
+			self['buttons'].append( Button(26, 162, (24, 12), lambda: self.dex_sorting_button(6)) ) # type filter up 1
+			self['buttons'].append( Button(26, 206, (24, 12), lambda: self.dex_sorting_button(7)) ) # type filter down 1
 
 			self.text_boxes.add( TextFrame(56, 4, 21, 44) )
 			self.text_boxes.add( TextFrame(260, 4, 20, 20) )
@@ -2087,13 +2195,12 @@ class Game:
 			self['dexlistnums'] = None
 			self.dex_clear_sort()
 			self.dex_limit_to_known_range()
-			self['TEST_sorti'] = 0
-			self['TEST_revsort'] = False
 
 			self['listind'] = 0
 			self['whichdex'] = 0
 			self['formind'] = 0
 			self['formlist'] = None
+			self.dex_apply_sort_settings()
 			self.update_dex_listing()
 
 			self.scene_init = False
@@ -2107,33 +2214,13 @@ class Game:
 			if self.input_locked: continue
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_r:
 				textdb.load_dbs(0)
-			if e.type == pygame.KEYDOWN and e.key == pygame.K_q:
-				self['TEST_sorti'] -= 1
-				self['TEST_sorti'] %= 4
-				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
-				self['listind'] = 0
-				self.update_dex_listing()
-			if e.type == pygame.KEYDOWN and e.key == pygame.K_w:
-				self['TEST_sorti'] += 1
-				self['TEST_sorti'] %= 4
-				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
-				self['listind'] = 0
-				self.update_dex_listing()
-			if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
-				self['TEST_revsort'] = not self['TEST_revsort']
-				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
-				self['listind'] = 0
-				self.update_dex_listing()
-			if e.type == pygame.KEYDOWN and e.key == pygame.K_s:
-				self.dex_set_sort(self['TEST_sorti'], self['TEST_revsort'])
-				self.dex_filter_by_mon_type(0)
-				self['listind'] = 0
-				self.update_dex_listing()
 
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
 				self.pop_scene()
 				return 1
 
+			if e.type == pygame.KEYDOWN and e.key == pygame.K_z:
+				print(self['listind'])
 			if e.type == pygame.KEYDOWN and e.key == pygame.K_x:
 				self['listind'] = 784
 				self['formlist'] = None
@@ -2177,6 +2264,46 @@ class Game:
 			flg = self.dex[dexdat.index]
 		if not flg[0]:
 			self['formbox'].visible = False
+
+		if self['cur_dex_filter'] == -1 and \
+				self['cur_sort'] == 0 and \
+				self['cur_type_filter'] == -1 and \
+				self['cur_type_filter2'] == -1 and \
+				not self['rev_sort']:
+			self.win.blit(self.get_dexbutton(0, 0), (12, 54))
+		else:
+			self.win.blit(self.get_dexbutton(0, 1), (12, 54))
+		self.win.blit(self.get_dexbutton(1, self['cur_dex_filter'] + 1), (12, 90))
+		self.win.blit(self.get_dexbutton(2, self['cur_sort']), (12, 126))
+
+		self.win.blit(self.get_dexbutton(0, 2), ( 2, 162))
+		self.win.blit(self.get_dexbutton(0, 2), (26, 162))
+		self.win.blit(self.get_dexbutton(0, 3), ( 2, 206))
+		self.win.blit(self.get_dexbutton(0, 3), (26, 206))
+		self.win.blit(self.get_dexbutton(0, 5), ( 2, 174))
+		self.win.blit(self.get_dexbutton(0, 6), (34, 174))
+		# ~ self.win.blit(self.get_dexbutton(0, 0), (6, 174))
+		# ~ self.win.blit(self.get_dexbutton(0, 2), (12, 162))
+		# ~ self.win.blit(self.get_dexbutton(0, 3), (6, 206))
+		# ~ self.win.blit(self.get_dexbutton(0, 0), (30, 174))
+		# ~ self.win.blit(self.get_dexbutton(0, 3), (30, 206))
+
+		t1 = self['cur_type_filter']
+		t2 = self['cur_type_filter2']
+		if t1 == -1 and t2 != -1:
+			t1 = t2
+			t2 = -1
+
+		if t1 != -1:
+			pos1 = (10, 184)
+			pos2 = None
+			if t2 != -1:
+				pos1 = (4, 176)
+				pos2 = (16, 192)
+			self.win.blit(self.get_type_icon(t1), pos1)
+			if not pos2 is None:
+				self.win.blit(self.get_type_icon(t2), pos2)
+		self.win.blit(self.get_dexbutton(0, 4), (12, 222))
 
 		for button in self['buttons']:
 			button.draw(self.win)
@@ -2271,9 +2398,9 @@ class Game:
 			self.win.blit(GL.font.get_dex_num_str(num[1], num[0]), (78, y))
 			if flg[0] and flg[1]:
 				self.win.blit(self.gfx('dex_own_icon'), (62, y))
-			x = 124
-			if num[1]:
-				x += GL.font.cw('★')
+			x = 132
+			# ~ if num[1]:
+				# ~ x += GL.font.cw('★')
 			self.win.blit(GL.font.render_line(nam, TXT_COL_DARK), (x, y))
 
 		# ~ self.win.blit(GL.font.render_line(str(self['dexdata'].index), TXT_COL_DARK), (276, 20))
