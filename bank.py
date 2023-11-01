@@ -1734,7 +1734,8 @@ class Game:
 		elif not self['hoverfilename'] is None:
 			self.win.blit(GL.font.render_line('???', TXT_COL_DARK), (426, 220))
 
-		self.draw_hoverbox()
+		if pygame.key.get_mods() & pygame.KMOD_SHIFT:
+			self.draw_hoverbox()
 
 		if not self.queue_scene_change is None:
 			return 1
