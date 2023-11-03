@@ -36,12 +36,12 @@ GAME_CRC = {
 	0xD6DA8A1A : ('blue', False, '1.0', 'Pokémon Blue Version', 0),
 
 	0xC00418DD : ('crystalclear', False, '2.5.8', 'Shockslayer Presents Crystal Clear', 0),
-	0x0A7DE6E4 : ('sourcrystal', False, '0.9', 'Sour Crystal Not released yet lole', 0),
+	# ~ 0x0A7DE6E4 : ('sourcrystal', False, '0.9', 'Sour Crystal Not released yet lole', 0),
 
 	0xC97E574B : ('prism', False, '0.94.0237', 'Pokémon Prism', 0),
 	0xCE1B46EB : ('gs97reforged', False, '6.0b', 'Pokémon Gold 97: Reforged', 0),
 	0x5DF73EF7 : ('gs97reforged', False, '6.0b', 'Pokémon Silver 97: Reforged', 0),
-	0x8AE99362 : ('crystalleaf', False, '1.0', 'Pokémon CrystalLeaf Version', 0),
+	0x8AE99362 : ('crystalleaf', False, '1.4.1', 'Pokémon CrystalLeaf Version', 0),
 	0x300699D8 : ('rdestrol', False, '4.1', 'Pokémon Ruby Destiny: Reign of Legends', 0),
 	0xFD6EB54C : ('altair', False, '1.0', 'Pokémon Altair', 0),
 	0x4404DCB3 : ('sirius', False, '1.0', 'Pokémon Sirius', 0),
