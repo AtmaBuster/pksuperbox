@@ -12,3 +12,7 @@ icon.xcf
 assets/image/mon/*
 *.gbc
 screenshot/*
+bank.spec
+build/*
+dist/*
+release/*
