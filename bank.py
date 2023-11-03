@@ -3585,7 +3585,7 @@ if __name__ == '__main__':
 	arg_p = argparse.ArgumentParser()
 	arg_p.add_argument('--nosave', action='store_true')
 	arg_p.add_argument('--startbox', action='store_true')
-	arg_p.add_argument('--scale', type=int, default=1)
+	arg_p.add_argument('--scale', type=int, default=2)
 	args = arg_p.parse_args()
 
 	WIN_SCALE = args.scale
