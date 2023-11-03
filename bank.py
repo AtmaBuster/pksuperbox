@@ -6,8 +6,6 @@
 # ~ 23: Wood
 # ~ 24: Tri
 
-import pyperclip
-
 import pygame, threading, math, webbrowser
 import zlib, json, random, os, os.path, re, time
 import poke, save, argparse
@@ -1441,6 +1439,7 @@ class Game:
 			if e.key == pygame.K_F9:
 				GL.muted = not GL.muted
 				self.update_volume()
+			return
 			if e.key == pygame.K_F8: # DEBUG
 				if not self.dex is None:
 					self.dex.i.i = 0
