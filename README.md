@@ -2,6 +2,10 @@
  
 PK Super Box is an application to replicate the features of "Pokémon Bank" and "Pokémon Home", but for the generation 1-3 Pokémon games as well as ROM hacks.
 
+# Compatibility
+
+Releases will have a `.exe` file bundled in. There's no guarantee it will be compatible with anything other than the version of Windows that I run. Anybody should be able to run it from source, with the only dependency being `pygame`. The `im_rip.py` script also depends on `PIL`.
+
 # Supported games
 
 Currently supported games are:
