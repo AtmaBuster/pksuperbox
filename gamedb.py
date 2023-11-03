@@ -31,6 +31,7 @@ GAME_CRC = {
 	0x61641579 : ('ruby', False, '1.1', 'Pokémon Ruby Version', 3),
 	0xAEAC73E6 : ('ruby', False, '1.2', 'Pokémon Ruby Version', 3),
 	0xEE6F5188 : ('crystal', False, '1.0', 'Pokémon Crystal Version', 0),
+	0x3358E30A : ('crystal', False, '1.1', 'Pokémon Crystal Version', 0),
 	0x00000000 : ('red', False, '1.0', 'Pokémon Red Version', 0),
 	0xD6DA8A1A : ('blue', False, '1.0', 'Pokémon Blue Version', 0),
 
@@ -131,6 +132,7 @@ GAME_DATA = {
 			377,0
 		),
 
+		'A_map_id': 0x260A,
 		'A_player_name': 0x2598,
 		'A_player_tid': 0x2605,
 		'A_player_playtime': 0x2CED,
@@ -141,6 +143,9 @@ GAME_DATA = {
 		'A_cur_box_data': 0x30C0,
 		'box_data_size': 20,
 		'box_data_len': 0x462,
+		'valid_map_ids': (
+			41,58,64,68,81,89,133,140,141,154,171,174,182
+		),
 	},
 	'crystal': {
 		'gen': 2,
@@ -216,6 +221,7 @@ GAME_DATA = {
 			377,0
 		),
 
+		'A_map_id': 0x2843,
 		'A_player_name': 0x200B,
 		'A_player_gender': 0x3E3D,
 		'A_player_tid': 0x2009,
@@ -226,6 +232,11 @@ GAME_DATA = {
 		'A_box_name': 0x2703,
 		'A_cur_box': 0x2700,
 		'box_data_size': 20,
+		'valid_map_ids': (
+			0x0101,0x0203,0x0403,0x0506,0x0601,0x0704,0x0708,0x0801,
+			0x0A0A,0x0A0D,0x0B14,0x0B15,0x0C05,0x0E06,0x1002,0x110A,
+			0x1205,0x1303,0x1401,0x1511,0x1606,0x1709,0x1906,0x1A05,
+		),
 	},
 	'emerald': {
 		'gen': 3,
@@ -327,6 +338,7 @@ GAME_DATA = {
 			372,373,374,375,376
 		),
 
+		'A_map_id': (1, 0x004),
 		'A_player_name': (0, 0x000),
 		'A_player_gender': (0, 0x008),
 		'A_player_tid': (0, 0x00A),
@@ -340,6 +352,7 @@ GAME_DATA = {
 		'A_pokedex_nat2': (2, 0x402),
 		'A_pokedex_nat3': (2, 0x4A8),
 		'pokedex_nat_flags': 0, # RSE-type
+		'valid_map_ids': (),
 	},
 	'ruby': {
 		'gen': 3,
@@ -439,6 +452,7 @@ GAME_DATA = {
 			342,343,344,345,346,347,348
 		),
 
+		'A_map_id': (1, 0x004),
 		'A_player_name': (0, 0x000),
 		'A_player_gender': (0, 0x008),
 		'A_player_tid': (0, 0x00A),
@@ -452,6 +466,7 @@ GAME_DATA = {
 		'A_pokedex_nat2': (2, 0x3A6),
 		'A_pokedex_nat3': (2, 0x44C),
 		'pokedex_nat_flags': 0, # RSE-type
+		'valid_map_ids': (),
 	},
 	'firered': {
 		'gen': 3,
@@ -553,6 +568,7 @@ GAME_DATA = {
 			372,373,374
 		),
 
+		'A_map_id': (1, 0x004),
 		'A_player_name': (0, 0x000),
 		'A_player_gender': (0, 0x008),
 		'A_player_tid': (0, 0x00A),
@@ -566,6 +582,7 @@ GAME_DATA = {
 		'A_pokedex_nat2': (2, 0x068),
 		'A_pokedex_nat3': (2, 0x11C),
 		'pokedex_nat_flags': 1, # FRLG-type
+		'valid_map_ids': (),
 	},
 	'leafgreen': {
 		'gen': 3,
@@ -667,6 +684,7 @@ GAME_DATA = {
 			372,373,374
 		),
 
+		'A_map_id': (1, 0x004),
 		'A_player_name': (0, 0x000),
 		'A_player_gender': (0, 0x008),
 		'A_player_tid': (0, 0x00A),
@@ -680,6 +698,7 @@ GAME_DATA = {
 		'A_pokedex_nat2': (2, 0x068),
 		'A_pokedex_nat3': (2, 0x11C),
 		'pokedex_nat_flags': 1, # FRLG-type
+		'valid_map_ids': (),
 	},
 	'brown': {
 		'gen': 1,
@@ -756,9 +775,6 @@ GAME_DATA = {
 		# ~ ),
 		'landmark_list': (255,),
 
-		'A_player_name': 0x2598,
-		'A_player_tid': 0x2605,
-		'A_player_playtime': 0x2CED,
 		'A_pokedex_seen': 0x25AD,
 		'A_pokedex_own': 0x273C,
 	},
@@ -780,6 +796,7 @@ GAME_DATA = {
 			-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,255,
 		),
 
+		'A_map_id': 0x2836,
 		'A_player_playtime': 0x2052,
 		'A_pokedex_seen': 0x2A3A,
 		'A_pokedex_own': 0x2A1A,
@@ -876,6 +893,7 @@ GAME_DATA = {
 			540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,
 			555,556,557,558,559,560,9,10,400,561,562,563,0,0
 		),
+		'valid_map_ids': (),
 	},
 	'gs97reforged': {
 		'gen': 2,
@@ -960,10 +978,12 @@ GAME_DATA = {
 			377,377,0
 		),
 
+		'A_map_id': 0x2848,
 		'A_pokedex_seen': 0x2A4C,
 		'A_pokedex_own': 0x2A2C,
 		'A_box_name': 0x2707,
 		'A_cur_box': 0x2704,
+		'valid_map_ids': (),
 	},
 	'crystalclear': {
 		'gen': 2,

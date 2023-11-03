@@ -29,8 +29,15 @@ class Save1:
 			'player_tid': self.read_data_from_save(save_f, 'player_tid', 'h'),
 			'player_sid': None,
 			'player_playtime': self.read_data_from_save(save_f, 'player_playtime', 't'),
+			'player_mapid': self.read_data_from_save(save_f, 'map_id', 'b'),
 		}
 		self.game_data['player_sid'] = poke.name_hash(self.game_data['player_name']) ^ self.game_data['player_tid']
+
+		valid_ids = gamedb.get_game_info(self.game, 'valid_map_ids')
+		if len(valid_ids) == 0 or self.game_data['player_mapid'] in valid_ids:
+			self.in_valid_map = True
+		else:
+			self.in_valid_map = False
 
 		self.pokedex_data = self.get_pokedex_data(save_f)
 		if loadfull:
@@ -348,12 +355,19 @@ class Save2:
 			'player_tid': self.read_data_from_save(save_f, 'player_tid', 'h'),
 			'player_sid': None,
 			'player_playtime': self.read_data_from_save(save_f, 'player_playtime', 't'),
+			'player_mapid': self.read_data_from_save(save_f, 'map_id', 'h'),
 		}
 		if 'A_player_gender' in gamedb.GAME_DATA[self.game].keys():
 			self.game_data['player_gender'] = ('male','female')[self.read_data_from_save(save_f, 'player_gender', 'b')]
 		else:
 			self.game_data['player_gender'] = 'male'
 		self.game_data['player_sid'] = poke.name_hash(self.game_data['player_name']) ^ self.game_data['player_tid']
+
+		valid_ids = gamedb.get_game_info(self.game, 'valid_map_ids')
+		if len(valid_ids) == 0 or self.game_data['player_mapid'] in valid_ids:
+			self.in_valid_map = True
+		else:
+			self.in_valid_map = False
 
 		self.pokedex_data = self.get_pokedex_data(save_f)
 		if loadfull:
@@ -635,7 +649,15 @@ class Save3:
 			'player_tid': self.read_data_from_save(save_f, 'player_tid', 'h'),
 			'player_sid': self.read_data_from_save(save_f, 'player_sid', 'h'),
 			'player_playtime': self.read_data_from_save(save_f, 'player_playtime', 't'),
+			'player_mapid': self.read_data_from_save(save_f, 'map_id', 'h'),
 		}
+
+		valid_ids = gamedb.get_game_info(self.game, 'valid_map_ids')
+		if len(valid_ids) == 0 or self.game_data['player_mapid'] in valid_ids:
+			self.in_valid_map = True
+		else:
+			self.in_valid_map = False
+
 		self.pokedex_data = self.get_pokedex_data(save_f)
 		if self.pokedex_data is None:
 			self.valid = False

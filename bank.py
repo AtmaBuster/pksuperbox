@@ -640,7 +640,7 @@ class TextBox:
 		# w, h are in tiles
 		self.rect = pygame.Rect(x, y, w * 8, h * 8)
 		lins = txt.split('\n')
-		grps = [GL.font.auto_line_text(l, w * 8 - 22) for l in lins]
+		grps = [GL.font.auto_line_text(l, w * 8 - 22 - dxdy[0]) for l in lins]
 		self.text = '\n'.join(grps)
 		self.frame = TextFrame(x, y, w, h)
 		self.text_surf = pygame.Surface(self.rect.size, pygame.SRCALPHA)
@@ -650,6 +650,12 @@ class TextBox:
 		self.curc = 0
 		self.done_printing = False
 		self.visible = True
+
+	def set_text(self, txt):
+		lins = txt.split('\n')
+		grps = [GL.font.auto_line_text(l, self.rect.w - 22 - self.dxdy[0]) for l in lins]
+		self.text = '\n'.join(grps)
+		self.reset()
 
 	def reset(self):
 		self.text_surf = pygame.Surface(self.rect.size, pygame.SRCALPHA)
@@ -668,7 +674,7 @@ class TextBox:
 
 		cc = self.text[self.curc]
 		if cc == '\n':
-			self.curx = 11
+			self.curx = 11 + self.dxdy[0]
 			self.cury += 16
 		else:
 			self.text_surf.blit(GL.font.getc(cc, TXT_COL_DARK), (self.curx, self.cury))
@@ -1048,6 +1054,7 @@ class Game:
 		'load_open_new': 'open_new.png',
 		'box_save_button': 'box/save_button.png',
 		'dex_button_set': 'dex/buttons.png',
+		'warning_symbol': 'warning.png',
 	}
 	def __init__(self):
 		pygame.mixer.init()
@@ -1612,8 +1619,10 @@ class Game:
 
 	def loadscene_load_game(self, _fn):
 		fn = os.path.abspath(_fn)
+		# if not a valid save file, leave
 		if not save.is_valid(fn):
 			return False
+		# add file to history OR update timestamp
 		load_time = time.time()
 		for fdat in self['loadhistory']:
 			if fdat[0] == fn:
@@ -1623,6 +1632,13 @@ class Game:
 			rom_fil = save.get_rom_pair_file(fn)
 			crc = save.getcrc(rom_fil)
 			self['loadhistory'].append([fn, load_time, crc])
+		# if not saved in a valid map, do not load
+		sav = save.load_save(_fn, False)
+		if not sav.in_valid_map:
+			mapid = sav.game_data['player_mapid']
+			print(f'{mapid:0>4X}')
+			return False
+		# all good
 		self.filename_to_load = fn
 		return True
 
@@ -1648,6 +1664,10 @@ class Game:
 
 			self.text_boxes.add(TextFrame, 8, 48, 50, 38)
 			self.text_boxes.add(TextFrame, 416, 192, 27, 20)
+
+			self['warningbox'] = TextBox(416, 144, 27, 6, 'Test', (32, 2))
+			self['warningbox'].visible = False
+			self.text_boxes.add(self['warningbox'])
 
 			self['loadhistory'] = self.loadscene_get_history()
 
@@ -1731,8 +1751,22 @@ class Game:
 			self.win.blit(GL.font.render_text('Seen\nOwn', 16, TXT_COL_DARK), (448, 308))
 			self.win.blit(GL.font.render_line(str(by.bitct(sav.pokedex_data[1])), TXT_COL_DARK), (486, 308))
 			self.win.blit(GL.font.render_line(str(by.bitct(sav.pokedex_data[2])), TXT_COL_DARK), (486, 324))
+			if sav.in_valid_map:
+				self['warningbox'].visible = False
+			else:
+				self['warningbox'].visible = True
+				self['warningbox'].set_text('Must be saved inside a Pok#mon Center')
+				self['warningbox'].write_all()
 		elif not self['hoverfilename'] is None:
+			self['warningbox'].visible = True
+			self['warningbox'].set_text('Invalid File')
+			self['warningbox'].write_all()
 			self.win.blit(GL.font.render_line('???', TXT_COL_DARK), (426, 220))
+		else:
+			self['warningbox'].visible = False
+
+		if self['warningbox'].visible:
+			self.win.blit(self.gfx('warning_symbol'), (424, 152))
 
 		if pygame.key.get_mods() & pygame.KMOD_SHIFT:
 			self.draw_hoverbox()
