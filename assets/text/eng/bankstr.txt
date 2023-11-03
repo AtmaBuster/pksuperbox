@@ -39,3 +39,4 @@ Change Sort Mode
 Reverse Sort
 Next Type Filter
 Previous Type Filter
+Shiny particles

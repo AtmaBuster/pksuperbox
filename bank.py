@@ -168,15 +168,15 @@ def load_options():
 	if s is None:
 		return
 	d = json.loads(s)
-	GL.text_speed_ind = d['text_speed']
-	GL.window_frame = d['window_frame']
-	GL.fullscreen = d['fullscreen']
-	GL.muted = d['muted']
-	GL.vol_master = d['vol'][0]
-	GL.vol_music = d['vol'][1]
-	GL.vol_sfx = d['vol'][2]
-	GL.language = d['language']
-	GL.use_shiny_particles = d['shiny_particle']
+	GL.text_speed_ind = d.get('text_speed', 4)
+	GL.window_frame = d.get('window_frame', 0)
+	GL.fullscreen = d.get('fullscreen', False)
+	GL.muted = d.get('muted', False)
+	GL.vol_master = d.get('vol', (10, 10, 10))[0]
+	GL.vol_music = d.get('vol', (10, 10, 10))[1]
+	GL.vol_sfx = d.get('vol', (10, 10, 10))[2]
+	GL.language = d.get('language', 0)
+	GL.use_shiny_particles = d.get('shiny_particle', True)
 
 def save_options():
 	d = {}
@@ -2518,6 +2518,9 @@ class Game:
 				GL.vol_sfx = val
 		self.update_volume()
 
+	def options_toggle_shiny_particles(self):
+		GL.use_shiny_particles = not GL.use_shiny_particles
+
 	def mainloop_options(self):
 		if self.scene_init:
 			bg_tile = self.gfx('options_bg_tile')
@@ -2538,6 +2541,7 @@ class Game:
 			button_list.append( Button(156, 116, (32, 32), lambda: GL.set_window_frame(3, self.current_data)) )
 			button_list.append( Button(196, 116, (32, 32), lambda: GL.set_window_frame(4, self.current_data)) )
 			button_list.append( Button(245, 53, self.gfx('options_checkbox_off'), lambda: self.toggle_fullscreen()) )
+			button_list.append( Button(15, 262, self.gfx('options_checkbox_off'), lambda: self.options_toggle_shiny_particles()) )
 
 			button_list.append( Button(68, 192, self.gfx('arrow_button_left'), lambda: self.options_set_volume(0, -1, True)) )
 			for i in range(11):
@@ -2559,6 +2563,7 @@ class Game:
 			self.text_boxes.add(TextBox, 4, 88, 33, 9, textdb.bs_options_windowframe(), (0, 0))
 			self.text_boxes.add(TextBox, 180, 40, 11, 5, textdb.bs_options_fullscreen(), (0, 0))
 			self.text_boxes.add(TextBox, 4, 168, 23, 10, textdb.bs_options_volumes(), (0, 0))
+			self.text_boxes.add(TextBox, 4, 252, 15, 5, textdb.bs_options_shiny(), (20, 0))
 			self.text_boxes.write_all()
 			self['example_text'] = TextBox(276, 40, 16, 15, textdb.bs_options_teststring())
 			self.text_boxes.add(self['example_text'])
@@ -2608,8 +2613,6 @@ class Game:
 
 		self.text_boxes.update()
 		self.text_boxes.draw(self.win)
-		if GL.fullscreen:
-			self.win.blit(self.gfx('options_checkbox_on'), (245, 53))
 		for i in range(len(TEXT_SPEEDS)):
 			if GL.text_speed_ind == i:
 				tick = self.gfx('options_meter_tick_on')
@@ -2622,6 +2625,10 @@ class Game:
 			self.win.blit(self.gfx('options_frame_cursor'), (cur_x, 112))
 		for btn in self['buttons']:
 			btn.draw(self.win)
+		if GL.fullscreen:
+			self.win.blit(self.gfx('options_checkbox_on'), (245, 53))
+		if GL.use_shiny_particles:
+			self.win.blit(self.gfx('options_checkbox_on'), (15, 262))
 		self.win.blit(self.gfx('options_meter_tick_on'), (79 + GL.vol_master * 8, 192))
 		self.win.blit(self.gfx('options_meter_tick_on'), (79 + GL.vol_music * 8, 208))
 		self.win.blit(self.gfx('options_meter_tick_on'), (79 + GL.vol_sfx * 8, 224))
@@ -3162,14 +3169,15 @@ class Game:
 			if mon.is_egg:
 				spr = gfx.load('n', 'egg')
 			else:
-				if mon.shiny and GL.use_shiny_particles:
+				if mon.shiny:
 					spr = gfx.load_mon(mon, 's')
 					self.win.blit(self.gfx('status_frame_shiny'), (400, 0))
-					if not (mon.species == 130 and mon.met_location == 298 and mon.met_lv == 30):
-						if random.random() < 0.1:
-							prtx = random.randint(440, 480)
-							prty = random.randint(20, 30)
-							self.add_particle(ShinyParticle(prtx, prty))
+					if GL.use_shiny_particles:
+						if not (mon.species == 130 and mon.met_location == 298 and mon.met_lv == 30):
+							if random.random() < 0.1:
+								prtx = random.randint(440, 480)
+								prty = random.randint(20, 30)
+								self.add_particle(ShinyParticle(prtx, prty))
 				else:
 					spr = gfx.load_mon(mon, 'n')
 
