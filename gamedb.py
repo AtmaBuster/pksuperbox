@@ -48,6 +48,7 @@ GAME_CRC = {
 	0xC5A149BE : ('vega', True, '1.0', 'ポケットモンスターベガ', 0),
 	0x3CAB0ABA : ('frigo', False, '0.6', 'Pokémon Frigo Returns', 0),
 	0x926EE644 : ('brown', False, '2014', 'Pokémon Brown', 0),
+	0x32A408CC : ('clover', False, '1.3.3', 'Pokémon >Clover', 0),
 	# v these version do not save properly
 	# 0x8C9E6D72 : ('frigo', False, '0.7'),
 	# 0x3964EA6B : ('frigo', False, '0.8'),
@@ -1278,6 +1279,12 @@ GAME_DATA = {
 			-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 			-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,253,254,255
 		),
+	},
+	'clover': {
+		'gen': 3,
+		'is_hack': True,
+		'base_game': 'firered',
+		'index_map': {},
 	},
 	'vega': {
 		'gen': 3,

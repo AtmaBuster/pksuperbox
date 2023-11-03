@@ -183,6 +183,11 @@ class Mon:
 		if self.met_location == -1:
 			self.met_location = 0xFF
 
+	def apply_extras(self, *args):
+		if self.game == 'clover':
+			dat, sub = args
+			self.extra['hiddenability'] = bool(sub[0][10])
+
 	def get_origins_string(self):
 		if self.met_lv == -1:
 			return 'Unknown origins.'
@@ -380,7 +385,22 @@ class Mon:
 		pp_up_b = (self.pp_up[0] << 0) | (self.pp_up[1] << 2) | (self.pp_up[2] << 4) | (self.pp_up[3] << 6)
 		substructs[0] += by.eb(pp_up_b)
 		substructs[0] += by.eb(self.friendship)
-		substructs[0] += b'\x00\x00'
+		if self.game == 'clover':
+			if self.extra.get('hiddenability', False):
+				b1 = 1
+			else:
+				b1 = 0
+			if self.shiny:
+				b2 = 1
+			else:
+				b2 = 0
+			substructs[0] += by.eb(b1)
+			substructs[0] += by.eb(b2)
+		else:
+			substructs[0] += b'\x00\x00'
+		# ~ print(self.game)
+		# ~ import struct
+		# ~ substructs[0] += struct.pack('H', 0b0000_0001_0000_0000)
 
 		substructs[1] += by.eh(gamedb.get_move_index_r(self.game, self.moves[0]))
 		substructs[1] += by.eh(gamedb.get_move_index_r(self.game, self.moves[1]))
@@ -435,6 +455,7 @@ class Mon:
 		chk = by.sum_b(b''.join(substructs), 2)
 		b_out += by.eh(chk)
 		b_out += b'\x00\x00'
+		# ~ b_out += b'\xFF\xFF'
 
 		enc_key = self.pid ^ (self.sid * 0x10000 + self.tid)
 		for o in G3SUBORDER[self.pid % 24]:
@@ -653,7 +674,7 @@ def gen3_to_mon(dat):
 		if (ribbon_i >> i) & 1:
 			mon.ribbons.append(i + 5)
 
-	return mon
+	return mon, substructs
 
 def get_decoded_gen3_mon(dat):
 	enc_key = by.gw(dat, 0) ^ by.gw(dat, 4)

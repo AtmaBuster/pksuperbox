@@ -856,13 +856,71 @@ class Save3:
 				if cur_mon_raw == b'\x00' * 0x50:
 					cur_box.append(None)
 					continue
-				mon = poke.gen3_to_mon(cur_mon_raw)
+				mon, dec_sub = poke.gen3_to_mon(cur_mon_raw)
 				mon.game = self.game
+				mon.apply_extras(mon, dec_sub)
 				mon.update_game_inds()
 				cur_box.append(mon)
 			boxes.append(cur_box)
 		current_box = by.gw(raw, 0)
 		return (boxes, names, papers, current_box)
+
+	def profile_data(self, dat, sub):
+		import struct
+		dec1 = list(struct.unpack('IHH10sBB7sBHH', dat[:0x20]))
+		print(f'PID      : ${dec1.pop(0):0>8X}')
+		print(f'TID      : {dec1.pop(0)}')
+		print(f'SID      : {dec1.pop(0)}')
+		print(f'Nickname : {pokestr.dec3e(dec1.pop(0))}')
+		print(f'Lang     : {dec1.pop(0)}')
+		print(f'Flags    : %{dec1.pop(0):0>8b}')
+		print(f'OT Name  : {pokestr.dec3e(dec1.pop(0))}')
+		print(f'Marking  : %{dec1.pop(0):0>4b}')
+		print(f'Checksum : {dec1.pop(0)}')
+		print(f'Padding  : {dec1.pop(0)}')
+		dec2 = list(struct.unpack('HHIBBH', sub[0]))
+		print(f'Species  : {dec2.pop(0)}')
+		print(f'Item     : {dec2.pop(0)}')
+		print(f'EXP      : {dec2.pop(0)}')
+		print(f'PP Ups   : {dec2.pop(0)}')
+		print(f'Friend.  : {dec2.pop(0)}')
+		print(f'Padding  : {dec2.pop(0)}')
+		dec3 = list(struct.unpack('HHHHBBBB', sub[1]))
+		print(f'Moves[0] : {dec3.pop(0)}')
+		print(f'Moves[1] : {dec3.pop(0)}')
+		print(f'Moves[2] : {dec3.pop(0)}')
+		print(f'Moves[3] : {dec3.pop(0)}')
+		print(f'PP[0]    : {dec3.pop(0)}')
+		print(f'PP[1]    : {dec3.pop(0)}')
+		print(f'PP[2]    : {dec3.pop(0)}')
+		print(f'PP[3]    : {dec3.pop(0)}')
+		dec4 = list(struct.unpack('12B', sub[2]))
+		print(f'EV - HP  : {dec4.pop(0)}')
+		print(f'EV - Atk : {dec4.pop(0)}')
+		print(f'EV - Def : {dec4.pop(0)}')
+		print(f'EV - Spd : {dec4.pop(0)}')
+		print(f'EV - SAk : {dec4.pop(0)}')
+		print(f'EV - SDf : {dec4.pop(0)}')
+		print(f'Cond - 0 : {dec4.pop(0)}')
+		print(f'Cond - 1 : {dec4.pop(0)}')
+		print(f'Cond - 2 : {dec4.pop(0)}')
+		print(f'Cond - 3 : {dec4.pop(0)}')
+		print(f'Cond - 4 : {dec4.pop(0)}')
+		print(f'Cond - 5 : {dec4.pop(0)}')
+		dec5 = list(struct.unpack('BBHII', sub[3]))
+		print(f'Pokerus  : {dec5.pop(0)}')
+		print(f'Met Loc. : {dec5.pop(0)}')
+		print(f'Origins  : {dec5.pop(0):0>16b}')
+		print(f'IV Data  : {dec5.pop(0):0>32b}')
+		print(f'Ribbons  : {dec5.pop(0):0>32b}')
+		print()
+		assert len(dec1) == 0
+		assert len(dec2) == 0
+		assert len(dec3) == 0
+		assert len(dec4) == 0
+		assert len(dec5) == 0
+		# ~ print(part2)
+		# ~ print(substructs)
 
 	def write_box_data(self, save_f, target_game=None):
 		raw = by.ew(self.box_data[3])
@@ -1115,7 +1173,8 @@ if __name__ == '__main__':
 	# ~ sav = load_save('rubydestiny/rd_rol.sav')
 	# ~ sav = load_save('em_e.sav')
 	# ~ sav = load_save('firered/firered_eng1.sav')
-	sav = load_save('../roms/pokeprism.sav')
+	# ~ sav = load_save('../roms/pokeprism.sav')
+	sav = load_save('../roms/Clover v1.3.3.sav')
 
 	# ~ loc = gamedb.get_game_info(sav.game, 'A_player_gender')
 	# ~ sseek(save_f, loc, sav.sect_ptrs)
@@ -1128,9 +1187,10 @@ if __name__ == '__main__':
 	print_save_profile(sav)
 
 	save_f = open(sav.sav_path, 'rb+')
-	sav.pokedex_data[1] = int('10' + '1' * 252, 2)
-	sav.pokedex_data[2] = int('10' + '1' * 252, 2)
-	sav.write_pokedex_data(save_f)
+	# ~ sav.pokedex_data[0] = True
+	# ~ sav.pokedex_data[1] = int('1' * 386, 2)
+	# ~ sav.pokedex_data[2] = int('1' * 386, 2)
+	# ~ sav.write_pokedex_data(save_f)
 
 	# ~ sav.box_data[0][0][0] = sav.box_data[0][0][6].copy()
 	# ~ sav.box_data[0][0][0].species = 308
@@ -1143,9 +1203,10 @@ if __name__ == '__main__':
 	# ~ sav.box_data[0][0][2].pid = 57639070
 	# ~ sav.box_data[0][0][2].pokerus = 0x0F
 
-	# ~ sav.write_box_data(save_f)
-	# ~ sav.fix_all_checksums(save_f)
-	sav.fix_checksum(save_f)
+	sav.box_data[0][0][0].extra['hiddenability'] = True
+	sav.write_box_data(save_f)
+	sav.fix_all_checksums(save_f)
+	# ~ sav.fix_checksum(save_f)
 
 	# ~ sav.box_data[0][0][2] = None
 	# ~ sav.box_data[0][0][0].species = 151
