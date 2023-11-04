@@ -40,3 +40,7 @@ To use `im_rip.py`:
 1. Place your ROM files into `imrip/roms/`.
 2. Run `python im_rip.py`
 The script will extract the relevant images from the provided files for use in the app.
+
+# Disclaimer
+
+I am not responsible for any lost data from saving issues. I've done my best to prevent any issues, but something can always go wrong. Be careful, and back-up your files.
